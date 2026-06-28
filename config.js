@@ -1,4 +1,4 @@
-const SHOP_CONFIG = {
+var SHOP_CONFIG = {
   shopName: "Щасливі лапки",
   telegramUsername: "@shchaslyvi_lapky",
   phone: "+380975806999",
