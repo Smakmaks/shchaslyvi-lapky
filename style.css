@@ -227,6 +227,13 @@ ul, ol { list-style: none; }
   padding: 56px 0 48px;
   overflow: hidden;
 }
+@media (max-width: 600px) {
+  .hero {
+    background:
+      linear-gradient(to bottom, rgba(240,250,245,0.15) 0%, rgba(240,250,245,0.75) 65%, #F0FAF5 100%),
+      url('images/hero-mobile.jpeg') center 20% / cover no-repeat;
+  }
+}
 .hero-inner {
   display: flex;
   align-items: center;
