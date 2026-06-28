@@ -272,7 +272,10 @@ async function loadProducts() {
       throw new Error('Формат products.json не є масивом.');
     }
 
-    allProducts = data;
+    const hidden = (window.SHOP_CONFIG && window.SHOP_CONFIG.hiddenCategories) || [];
+    allProducts = hidden.length
+      ? data.filter(p => !hidden.includes(p.category))
+      : data;
 
     if (allProducts.length === 0) {
       showState('empty');
