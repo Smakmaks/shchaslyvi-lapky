@@ -475,6 +475,80 @@ function bindEvents() {
   });
 }
 
+// ─── Банерний слайдер ─────────────────────────────────
+function initBanners() {
+  const banners = (window.SHOP_CONFIG && window.SHOP_CONFIG.banners) || [];
+  const section = document.getElementById('banners');
+  const track   = document.getElementById('banner-track');
+  const dots    = document.getElementById('banner-dots');
+  const btnPrev = document.getElementById('banner-prev');
+  const btnNext = document.getElementById('banner-next');
+
+  if (!banners.length) { section.hidden = true; return; }
+  section.hidden = false;
+  if (banners.length === 1) { btnPrev.hidden = true; btnNext.hidden = true; }
+
+  let current = 0;
+  let timer;
+  let startX = 0;
+
+  banners.forEach((b, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'banner-slide';
+
+    const img = document.createElement('img');
+    img.src = b.image;
+    img.alt = b.title || `Банер ${i + 1}`;
+    img.loading = 'lazy';
+    slide.appendChild(img);
+
+    if (b.title) {
+      const cap = document.createElement('div');
+      cap.className = 'banner-caption';
+      cap.textContent = b.title;
+      slide.appendChild(cap);
+    }
+
+    if (b.link) {
+      slide.style.cursor = 'pointer';
+      slide.addEventListener('click', () => { window.location.href = b.link; });
+    }
+
+    track.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'banner-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Банер ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dots.appendChild(dot);
+  });
+
+  function goTo(idx) {
+    current = (idx + banners.length) % banners.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.querySelectorAll('.banner-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  function startAuto() { timer = setInterval(() => goTo(current + 1), 5000); }
+  function stopAuto()  { clearInterval(timer); }
+
+  btnPrev.addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+  btnNext.addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { stopAuto(); goTo(current + (diff > 0 ? 1 : -1)); startAuto(); }
+  }, { passive: true });
+
+  section.addEventListener('mouseenter', stopAuto);
+  section.addEventListener('mouseleave', startAuto);
+
+  startAuto();
+}
+
 // ─── Слайдер оголошень ────────────────────────────────
 function initAnnouncements() {
   const slides = (window.SHOP_CONFIG && window.SHOP_CONFIG.announcements) || [];
@@ -532,6 +606,7 @@ function initAnnouncements() {
 document.addEventListener('DOMContentLoaded', () => {
   applyConfig();
   initAnnouncements();
+  initBanners();
   bindEvents();
   loadProducts();
 });
