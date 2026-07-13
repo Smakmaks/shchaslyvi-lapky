@@ -15,6 +15,8 @@ let filteredProducts = []; // після фільтрів і пошуку
 let searchQuery = '';
 let selectedCategory = '';
 let sortOrder = 'name';
+let currentPage = 1;
+let perPage = 20;
 
 // ─── Посилання на DOM ─────────────────────────────────
 const $grid         = document.getElementById('products-grid');
@@ -29,6 +31,10 @@ const $sortSelect   = document.getElementById('sort-select');
 const $resetBtn     = document.getElementById('reset-filters-btn');
 const $scrollTopBtn = document.getElementById('scroll-top-btn');
 const $template     = document.getElementById('product-card-template');
+const $paginationTop = document.getElementById('pagination-top');
+const $paginationNav = document.getElementById('pagination-nav');
+const $paginationCount = document.getElementById('pagination-count');
+const $perPageSelect = document.getElementById('per-page-select');
 
 // ─── Ініціалізація конфігу ────────────────────────────
 function applyConfig() {
@@ -183,6 +189,69 @@ function renderCard(product) {
   return clone;
 }
 
+// ─── Пагінація ────────────────────────────────────────
+function renderPagination() {
+  const total = filteredProducts.length;
+  const totalPages = Math.ceil(total / perPage);
+
+  // Лічильник
+  const from = total === 0 ? 0 : (currentPage - 1) * perPage + 1;
+  const to   = Math.min(currentPage * perPage, total);
+  $paginationCount.textContent = total > 0
+    ? `Показано ${from}–${to} з ${total} товарів`
+    : '';
+
+  $paginationTop.hidden = total === 0;
+
+  // Кнопки сторінок
+  $paginationNav.innerHTML = '';
+  if (totalPages <= 1) {
+    $paginationNav.hidden = true;
+    return;
+  }
+  $paginationNav.hidden = false;
+
+  const makeBtn = (label, page, disabled = false, active = false) => {
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (active ? ' active' : '');
+    btn.textContent = label;
+    btn.disabled = disabled;
+    if (!disabled && !active) {
+      btn.addEventListener('click', () => goToPage(page));
+    }
+    return btn;
+  };
+
+  const makeDots = () => {
+    const s = document.createElement('span');
+    s.className = 'page-dots';
+    s.textContent = '…';
+    return s;
+  };
+
+  $paginationNav.appendChild(makeBtn('←', currentPage - 1, currentPage === 1));
+
+  // Показуємо: першу, останню, поточну ±1 та крапки між ними
+  const pages = new Set([1, totalPages, currentPage, currentPage - 1, currentPage + 1]
+    .filter(p => p >= 1 && p <= totalPages));
+  const sorted = [...pages].sort((a, b) => a - b);
+
+  let prev = 0;
+  for (const p of sorted) {
+    if (p - prev > 1) $paginationNav.appendChild(makeDots());
+    $paginationNav.appendChild(makeBtn(p, p, false, p === currentPage));
+    prev = p;
+  }
+
+  $paginationNav.appendChild(makeBtn('→', currentPage + 1, currentPage === totalPages));
+}
+
+function goToPage(page) {
+  currentPage = page;
+  renderProducts();
+  document.getElementById('catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 // ─── Відображення відфільтрованих товарів ────────────
 function renderProducts() {
   $grid.innerHTML = '';
@@ -190,17 +259,23 @@ function renderProducts() {
   if (filteredProducts.length === 0) {
     $grid.hidden = true;
     $empty.hidden = false;
+    $paginationTop.hidden = true;
+    $paginationNav.hidden = true;
     return;
   }
 
   $empty.hidden = true;
   $grid.hidden = false;
 
+  const start = (currentPage - 1) * perPage;
+  const pageProducts = filteredProducts.slice(start, start + perPage);
+
   const fragment = document.createDocumentFragment();
-  for (const product of filteredProducts) {
+  for (const product of pageProducts) {
     fragment.appendChild(renderCard(product));
   }
   $grid.appendChild(fragment);
+  renderPagination();
 }
 
 // ─── Фільтрація та сортування ────────────────────────
@@ -228,6 +303,7 @@ function applyFilters() {
   }
 
   filteredProducts = result;
+  currentPage = 1;
   renderProducts();
 }
 
@@ -347,6 +423,13 @@ function bindEvents() {
     sortOrder = 'name';
     $searchClear.hidden = true;
     applyFilters();
+  });
+
+  // Кількість товарів на сторінці
+  $perPageSelect.addEventListener('change', () => {
+    perPage = Number($perPageSelect.value);
+    currentPage = 1;
+    renderProducts();
   });
 
   // Кнопка "Вгору"

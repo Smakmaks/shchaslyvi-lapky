@@ -670,3 +670,78 @@ a.contact-value:hover { color: var(--color-primary); text-decoration: underline;
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ═══════════════════ ПАГІНАЦІЯ ════════════════════════ */
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.pagination-info {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+.per-page-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.per-page-label {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+.per-page-select {
+  width: auto;
+  min-width: 72px;
+}
+
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 32px;
+  padding-bottom: 8px;
+}
+.page-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+.page-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  cursor: default;
+}
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.page-dots {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  padding: 0 4px;
+  line-height: 40px;
+}
