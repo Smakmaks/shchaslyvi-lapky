@@ -671,6 +671,75 @@ a.contact-value:hover { color: var(--color-primary); text-decoration: underline;
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
+/* ═══════════════════ ANNOUNCEMENT BAR ════════════════ */
+.announce-bar {
+  position: relative;
+  background: var(--color-primary);
+  color: #fff;
+  height: 40px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.announce-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+.announce-slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0 48px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.announce-prev,
+.announce-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+  z-index: 2;
+}
+.announce-prev { left: 0; }
+.announce-next { right: 0; }
+.announce-prev:hover,
+.announce-next:hover { color: #fff; }
+.announce-dots {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+.announce-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.announce-dot.active { background: #fff; }
+
 /* ═══════════════════ ПАГІНАЦІЯ ════════════════════════ */
 .pagination-bar {
   display: flex;

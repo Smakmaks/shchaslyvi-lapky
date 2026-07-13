@@ -475,9 +475,63 @@ function bindEvents() {
   });
 }
 
+// ─── Слайдер оголошень ────────────────────────────────
+function initAnnouncements() {
+  const slides = (window.SHOP_CONFIG && window.SHOP_CONFIG.announcements) || [];
+  const bar    = document.getElementById('announce-bar');
+  const track  = document.getElementById('announce-track');
+  const dots   = document.getElementById('announce-dots');
+  const btnPrev = document.getElementById('announce-prev');
+  const btnNext = document.getElementById('announce-next');
+
+  if (!slides.length) { bar.hidden = true; return; }
+  if (slides.length === 1) {
+    btnPrev.hidden = true;
+    btnNext.hidden = true;
+  }
+
+  let current = 0;
+  let timer;
+
+  slides.forEach((text, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'announce-slide';
+    slide.textContent = text;
+    track.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'announce-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Оголошення ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dots.appendChild(dot);
+  });
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.querySelectorAll('.announce-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  function startAuto() {
+    timer = setInterval(() => goTo(current + 1), 4000);
+  }
+
+  function stopAuto() { clearInterval(timer); }
+
+  btnPrev.addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+  btnNext.addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+  bar.addEventListener('mouseenter', stopAuto);
+  bar.addEventListener('mouseleave', startAuto);
+
+  startAuto();
+}
+
 // ─── Старт ────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   applyConfig();
+  initAnnouncements();
   bindEvents();
   loadProducts();
 });
