@@ -497,9 +497,17 @@ function initBanners() {
     slide.className = 'banner-slide';
 
     const img = document.createElement('img');
-    img.src = b.image;
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
+    img.src = (isMobile && b.imageMobile) ? b.imageMobile : b.image;
     img.alt = b.title || `Банер ${i + 1}`;
     img.loading = 'lazy';
+
+    // Переключаємо фото при зміні розміру вікна
+    const mq = window.matchMedia('(max-width: 600px)');
+    mq.addEventListener('change', e => {
+      img.src = (e.matches && b.imageMobile) ? b.imageMobile : b.image;
+    });
+
     slide.appendChild(img);
 
     if (b.title) {

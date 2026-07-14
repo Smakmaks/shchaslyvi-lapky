@@ -8,15 +8,19 @@ var SHOP_CONFIG = {
   deliveryText: "Відправляємо замовлення Новою Поштою по Україні. Можлива відправка після повної оплати замовлення або за умови передплати 200 грн для покриття послуг перевізника. Доставка оплачується покупцем за тарифами Нової Пошти.",
   paymentText: "Оплата готівкою, переказом або іншим погодженим способом.",
 
-  // Рекламні банери (зображення). Додайте файли у папку images/banners/
+  // Рекламні банери. Папки: images/banners/ (desktop) та images/banners/mobile/ (mobile)
+  // imageMobile — необов'язкове, якщо не вказано — використовується image
   // title і link — необов'язкові
+  //
+  // Розміри:
+  //   Desktop : 1440 × 480 px
+  //   Mobile  :  900 × 400 px
   banners: [
-  { image: "images/banners/banner1.jpeg", title: "Щасливі лапки", link: "#catalog" },
-  { image: "images/banners/banner2.jpeg", title: "Якісні корми",    link: "#catalog" },
-  { image: "images/banners/banner3.jpeg", title: "Іграшки та аксесуари", link: "#catalog" },
-  { image: "images/banners/banner4.jpeg", title: "Догляд та турбота",    link: "#catalog" },
-  { image: "images/banners/banner5.jpeg", title: "Ми поруч для Вас", link: "#catalog" },
-
+    { image: "images/banners/banner1.jpeg", imageMobile: "images/banners/mobile/banner1.jpeg", title: "Щасливі лапки", link: "#catalog" },
+    { image: "images/banners/banner2.jpeg", imageMobile: "images/banners/mobile/banner2.jpeg", title: "Якісні корми", link: "#catalog" },
+    { image: "images/banners/banner3.jpeg", imageMobile: "images/banners/mobile/banner3.jpeg", title: "Іграшки та аксесуари", link: "#catalog" },
+    { image: "images/banners/banner4.jpeg", imageMobile: "images/banners/mobile/banner4.jpeg", title: "Догляд та турбота", link: "#catalog" },
+    { image: "images/banners/banner5.jpeg", imageMobile: "images/banners/mobile/banner5.jpeg", title: "Ми поруч для Вас", link: "#catalog" },
   ],
 
   // Рекламні оголошення у верхньому слайдері
