@@ -672,32 +672,44 @@ a.contact-value:hover { color: var(--color-primary); text-decoration: underline;
 }
 
 /* ═══════════════════ БАНЕРНИЙ СЛАЙДЕР ════════════════ */
+
+/*
+  РЕКОМЕНДОВАНІ РОЗМІРИ ЗОБРАЖЕНЬ ДЛЯ БАНЕРІВ:
+  ─────────────────────────────────────────────
+  Desktop : 1440 × 480 px  (співвідношення 3:1)
+  Mobile  :  900 × 400 px  (співвідношення 9:4)
+  Формат  : .jpg або .jpeg
+  Вага    : до 300 КБ (оптимізуйте через tinypng.com)
+*/
+
 .banner-slider-section {
-  background: #f5f5f5;
+  background: #000;
+  margin-top: 24px;
+  border-top: 3px solid var(--color-primary);
 }
 .banner-slider {
   position: relative;
   overflow: hidden;
+  /* фіксована висота = aspect-ratio 3:1 на desktop */
+  aspect-ratio: 3 / 1;
   max-height: 480px;
   line-height: 0;
 }
 .banner-track {
   display: flex;
-  transition: transform 0.5s ease;
   height: 100%;
+  transition: transform 0.5s ease;
 }
 .banner-slide {
   flex: 0 0 100%;
   position: relative;
-  cursor: pointer;
 }
 .banner-slide img {
   width: 100%;
   height: 100%;
-  max-height: 480px;
   object-fit: cover;
+  object-position: center;
   display: block;
-  line-height: 0;
 }
 .banner-caption {
   position: absolute;
@@ -756,10 +768,13 @@ a.contact-value:hover { color: var(--color-primary); text-decoration: underline;
   background: #fff;
   transform: scale(1.25);
 }
+
+/* Мобільний — aspect-ratio 9:4, відступ менший */
 @media (max-width: 600px) {
-  .banner-slider { max-height: 220px; }
-  .banner-slide img { max-height: 220px; }
-  .banner-caption { font-size: 14px; padding: 12px 16px; }
+  .banner-slider-section { margin-top: 16px; border-top-width: 2px; }
+  .banner-slider { aspect-ratio: 9 / 4; max-height: 260px; }
+  .banner-caption { font-size: 13px; padding: 10px 14px; }
+  .banner-btn { width: 36px; height: 36px; opacity: 1; }
 }
 
 /* ═══════════════════ ANNOUNCEMENT BAR ════════════════ */
