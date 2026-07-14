@@ -11,8 +11,12 @@ var SHOP_CONFIG = {
   // Рекламні банери (зображення). Додайте файли у папку images/banners/
   // title і link — необов'язкові
   banners: [
-    // { image: "images/banners/banner1.jpg", title: "Акція на корми", link: "#catalog" },
-    // { image: "images/banners/banner2.jpg", title: "Нові товари", link: "#catalog" },
+  { image: "images/banners/banner1.jpg", title: "Щасливі лапки", link: "#catalog" },
+  { image: "images/banners/banner2.jpg", title: "Якісні корми",    link: "#catalog" },
+  { image: "images/banners/banner3.jpg", title: "Іграшки та аксесуари", link: "#catalog" },
+  { image: "images/banners/banner4.jpg", title: "Догляд та турбота",    link: "#catalog" },
+  { image: "images/banners/banner5.jpg", title: "Ми поруч для Вас", link: "#catalog" },
+
   ],
 
   // Рекламні оголошення у верхньому слайдері
