@@ -21,6 +21,7 @@ var SHOP_CONFIG = {
     { image: "images/banners/banner3.jpeg", imageMobile: "images/banners/mobile/banner3.jpeg", title: "Іграшки та аксесуари", link: "#catalog" },
     { image: "images/banners/banner4.jpeg", imageMobile: "images/banners/mobile/banner4.jpeg", title: "Догляд та турбота", link: "#catalog" },
     { image: "images/banners/banner5.jpeg", imageMobile: "images/banners/mobile/banner5.jpeg", title: "Ми поруч для Вас", link: "#catalog" },
+    { image: "images/banners/banner6.jpeg", imageMobile: "images/banners/mobile/banner6.jpeg", title: "Смакмакс", link: "https://www.smakmaks.ua/product-category/sumishi-dlya-domashnih-desertiv-b2c/" },
   ],
 
   // Рекламні оголошення у верхньому слайдері
