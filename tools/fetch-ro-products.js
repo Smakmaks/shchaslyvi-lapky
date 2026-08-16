@@ -277,10 +277,15 @@ function normalizeProduct(raw, categoryMap) {
   }
 
   // ── Ціна ───────────────────────────────────────────────────────────────────
-  // RO App повертає ціни як об'єкт { "priceId": "1385.00", ... }
-  // Беремо першу ненульову ціну з об'єкта prices, або звичайне поле price
+  // RO App повертає ціни як масив об'єктів: [{ id: 648571, price: "1385.00" }, ...]
+  // Беремо першу ненульову ціну
   let price = 0;
-  if (raw.prices && typeof raw.prices === 'object') {
+  if (Array.isArray(raw.prices) && raw.prices.length > 0) {
+    const priceValues = raw.prices
+      .map(p => parseFloat(p.price) || 0)
+      .filter(v => v > 0);
+    price = priceValues[0] ?? 0;
+  } else if (raw.prices && typeof raw.prices === 'object') {
     const priceValues = Object.values(raw.prices)
       .map(v => parseFloat(v) || 0)
       .filter(v => v > 0);
