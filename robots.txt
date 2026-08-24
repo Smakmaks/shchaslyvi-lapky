@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smakmaks.github.io/shchaslyvi-lapky/sitemap.xml
