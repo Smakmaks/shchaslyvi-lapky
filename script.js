@@ -42,8 +42,9 @@ function applyConfig() {
 
   // Назва магазину
   const shopName = c.shopName || 'Зоомагазин';
-  document.title = `${shopName} — товари для улюбленців`;
-  document.getElementById('page-title').textContent = `${shopName} — товари для улюбленців`;
+  const pageTitle = `${shopName} — зоомагазин товарів для тварин у Дніпрі`;
+  document.title = pageTitle;
+  document.getElementById('page-title').textContent = pageTitle;
   const footerName = document.getElementById('footer-shop-name');
   if (footerName) footerName.textContent = shopName;
 
