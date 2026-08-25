@@ -1,6 +1,30 @@
 /* Блог — стилі-доповнення до style.css */
 
+/* На сторінках блогу немає гамбургер-меню, тож пункти навігації
+   мають лишатись видимими на будь-якій ширині екрана. */
+.header-nav {
+  display: flex !important;
+  flex-wrap: wrap;
+  margin-left: 0;
+}
 .header-nav a.is-active { color: var(--color-primary); }
+
+@media (max-width: 767px) {
+  .site-header { height: auto; }
+  .header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-block: 12px;
+    row-gap: 10px;
+  }
+  .header-nav {
+    order: 3;
+    width: 100%;
+    gap: 4px 14px;
+  }
+  .header-nav a { padding: 2px 0; font-size: 14px; }
+  .header-inner > a.btn-tg { margin-left: auto; }
+}
 
 .blog-article {
   max-width: 720px;
