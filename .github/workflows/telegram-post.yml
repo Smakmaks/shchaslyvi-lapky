@@ -21,7 +21,7 @@ jobs:
           TELEGRAM_CHANNEL: "@shchaslyvi_lapky_shop"
         run: python3 scripts/send_telegram_post.py
 
-      - name: Закомітити оновлений статус (sent: true)
+      - name: "Закомітити оновлений статус (sent: true)"
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
