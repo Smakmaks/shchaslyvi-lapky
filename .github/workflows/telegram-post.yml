@@ -1,0 +1,30 @@
+name: Публікація в Telegram-канал
+
+on:
+  schedule:
+    # 16:00 UTC = 19:00 Europe/Kyiv (EEST, літній час)
+    - cron: "0 16 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Надіслати сьогоднішній пост
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL: "@shchaslyvi_lapky_shop"
+        run: python3 scripts/send_telegram_post.py
+
+      - name: Закомітити оновлений статус (sent: true)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add telegram-posts.json
+          git diff --cached --quiet || git commit -m "chore: позначити пост як надісланий [skip ci]"
+          git push
