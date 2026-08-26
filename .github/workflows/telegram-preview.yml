@@ -1,0 +1,30 @@
+name: "Прев'ю поста в Telegram (особисто)"
+
+on:
+  schedule:
+    # 08:00 UTC = 11:00 Europe/Kyiv (EEST, літній час) — за ~8 год до публікації
+    - cron: "0 8 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Надіслати прев'ю адміну в особисті
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_ADMIN_CHAT_ID: "8345591938"
+        run: python3 scripts/send_telegram_preview.py
+
+      - name: "Закомітити позначку previewed"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add telegram-posts.json
+          git diff --cached --quiet || git commit -m "chore: позначити пост як показаний на прев'ю [skip ci]"
+          git push
