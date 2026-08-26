@@ -32,6 +32,13 @@ var SHOP_CONFIG = {
     "⭐ Якісні корми та аксесуари за доступними цінами"
   ],
 
+  // Соціальні мережі (залишити порожнім "" щоб сховати)
+  social: {
+    facebook: "https://www.facebook.com/share/1BcxUfZoMN/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/shchaslyvi.lapky?igsi=MXBwZnB0bDRid2didA%3D%3D&utm_source=qr",
+    tiktok: "https://www.tiktok.com/@shchaslyvi.lapky?_r=1&_t=ZS-99CVXV4dWqH"
+  },
+
   // Категорії які НЕ відображаються на сайті
   hiddenCategories: [
     "Запчастини",
