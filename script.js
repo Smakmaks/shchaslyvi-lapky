@@ -361,6 +361,14 @@ async function loadProducts() {
 
     populateCategories();
     filteredProducts = [...allProducts];
+
+    const urlSearch = new URLSearchParams(window.location.search).get('search');
+    if (urlSearch) {
+      searchQuery = urlSearch.trim();
+      $search.value = searchQuery;
+      $searchClear.hidden = !searchQuery;
+    }
+
     applyFilters();
     showState('products');
 
