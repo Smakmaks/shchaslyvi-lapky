@@ -2,8 +2,10 @@ name: Публікація в Telegram-канал
 
 on:
   schedule:
-    # 16:00 UTC = 19:00 Europe/Kyiv (EEST, літній час)
-    - cron: "0 16 * * *"
+    # 16:07 UTC ≈ 19:07 Europe/Kyiv (EEST, літній час).
+    # Не рівно на годину: GitHub Actions офіційно попереджає, що cron "0 * * * *"
+    # потрапляє в пікове навантаження і може відкладатись, тож зсунуто на +7 хв.
+    - cron: "7 16 * * *"
   workflow_dispatch: {}
 
 permissions:
