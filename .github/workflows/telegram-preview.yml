@@ -20,7 +20,7 @@ jobs:
       - name: Надіслати прев'ю адміну в особисті
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_ADMIN_CHAT_ID: "8345591938"
+          TELEGRAM_ADMIN_CHAT_ID: "348622460"
         run: python3 scripts/send_telegram_preview.py
 
       - name: "Закомітити позначку previewed"
