@@ -8,7 +8,7 @@
   </url>
   <url>
     <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/index.html</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -39,6 +39,36 @@
   <url>
     <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/yak-obraty-shleyku-dlya-sobaky.html</loc>
     <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/yak-obraty-doshchovyk-dlya-sobaky.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/dohlyad-za-sherstyu-pid-chas-lynky.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/vitaminy-dlya-imunitetu-vosseny.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/yak-obraty-tepli-lezhanky.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/svitlovidbyvna-amunitsiya.html</loc>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
