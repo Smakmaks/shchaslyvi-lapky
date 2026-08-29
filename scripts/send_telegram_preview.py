@@ -1,10 +1,13 @@
 """
 Надсилає адміну в особисті прев'ю поста, який буде опубліковано сьогодні о 19:00,
 щоб можна було внести корективи до фактичної публікації в канал.
-Запускається щодня вранці через GitHub Actions (.github/workflows/telegram-preview.yml).
+Запускається кожні 30 хв через GitHub Actions (.github/workflows/telegram-preview.yml) —
+GitHub Actions може відкладати денний cron на години, тому надійніше перевіряти
+часте вікно і надсилати щойно настав потрібний час, ніж покладатись на точний час крону.
 
-Використовує ту саму логіку вибору поста, що й send_telegram_post.py,
-але лише надсилає його адміну і позначає previewed: true (не sent).
+Надсилає лише якщо зараз >= PREVIEW_HOUR за Europe/Kyiv. Використовує ту саму
+логіку вибору поста, що й send_telegram_post.py, але лише надсилає його адміну
+і позначає previewed: true (не sent).
 """
 
 import json
@@ -18,6 +21,7 @@ from zoneinfo import ZoneInfo
 POSTS_FILE = os.path.join(os.path.dirname(__file__), "..", "telegram-posts.json")
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 ADMIN_CHAT_ID = os.environ.get("TELEGRAM_ADMIN_CHAT_ID")
+PREVIEW_HOUR = 11  # не надсилати раніше 11:00 за Europe/Kyiv
 
 
 def telegram_api(method, payload):
@@ -42,10 +46,15 @@ def main():
         print("::error::TELEGRAM_ADMIN_CHAT_ID секрет не заданий")
         sys.exit(1)
 
+    now_kyiv = datetime.now(ZoneInfo("Europe/Kyiv"))
+    if now_kyiv.hour < PREVIEW_HOUR:
+        print(f"Ще не {PREVIEW_HOUR}:00 за Києвом (зараз {now_kyiv.strftime('%H:%M')}) — чекаємо.")
+        return
+
     with open(POSTS_FILE, "r", encoding="utf-8") as f:
         posts = json.load(f)
 
-    today = datetime.now(ZoneInfo("Europe/Kyiv")).date().isoformat()
+    today = now_kyiv.date().isoformat()
 
     # Перший ще не опублікований і ще не показаний на прев'ю пост, дата якого вже настала
     due = [

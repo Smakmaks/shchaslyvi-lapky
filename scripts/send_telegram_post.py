@@ -1,12 +1,16 @@
 """
 Надсилає сьогоднішній запланований пост із telegram-posts.json у Telegram-канал.
-Запускається щодня через GitHub Actions (.github/workflows/telegram-post.yml).
+Запускається кожні 30 хв через GitHub Actions (.github/workflows/telegram-post.yml) —
+GitHub Actions може відкладати денний cron на години, тому надійніше перевіряти
+часте вікно і надсилати щойно настав потрібний час, ніж покладатись на точний час крону.
 
 Формат telegram-posts.json — список об'єктів:
   {"date": "YYYY-MM-DD", "text": "...", "image": "https://..." | null, "sent": false}
 
-Знаходить перший ще не надісланий запис з датою <= сьогодні (Europe/Kyiv),
-надсилає його через Telegram Bot API і позначає sent: true.
+Надсилає лише якщо зараз >= PUBLISH_HOUR за Europe/Kyiv — раніше цього часу
+скрипт нічого не робить, навіть якщо запуститься. Знаходить перший ще не
+надісланий запис з датою <= сьогодні, надсилає його через Telegram Bot API
+і позначає sent: true.
 """
 
 import json
@@ -20,6 +24,7 @@ from zoneinfo import ZoneInfo
 POSTS_FILE = os.path.join(os.path.dirname(__file__), "..", "telegram-posts.json")
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 CHANNEL = os.environ.get("TELEGRAM_CHANNEL", "@shchaslyvi_lapky_shop")
+PUBLISH_HOUR = 19  # не надсилати раніше 19:00 за Europe/Kyiv
 
 
 def telegram_api(method, payload):
@@ -41,10 +46,15 @@ def main():
         print("::error::TELEGRAM_BOT_TOKEN секрет не заданий")
         sys.exit(1)
 
+    now_kyiv = datetime.now(ZoneInfo("Europe/Kyiv"))
+    if now_kyiv.hour < PUBLISH_HOUR:
+        print(f"Ще не {PUBLISH_HOUR}:00 за Києвом (зараз {now_kyiv.strftime('%H:%M')}) — чекаємо.")
+        return
+
     with open(POSTS_FILE, "r", encoding="utf-8") as f:
         posts = json.load(f)
 
-    today = datetime.now(ZoneInfo("Europe/Kyiv")).date().isoformat()
+    today = now_kyiv.date().isoformat()
 
     # Перший ще не надісланий пост, дата якого вже настала
     due = [p for p in posts if not p.get("sent") and p["date"] <= today]
