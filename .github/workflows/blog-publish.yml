@@ -1,0 +1,37 @@
+name: Публікація статей блогу за розкладом
+
+on:
+  schedule:
+    # Перевірка о 09:15 за Києвом у вересні (06:15 UTC) та резервна
+    # перевірка через 15 хвилин на випадок затримки GitHub Actions.
+    - cron: "15,30 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scheduled-blog-publishing
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Отримати заплановані статті
+        run: git fetch origin scheduled-blog-september
+
+      - name: Опублікувати статті, час яких настав
+        run: python3 scripts/publish_scheduled_blog.py
+
+      - name: Зберегти опубліковані матеріали
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog sitemap.xml
+          git diff --cached --quiet || git commit -m "Публікація статті блогу за розкладом"
+          git push
