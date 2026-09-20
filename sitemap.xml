@@ -144,4 +144,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://smakmaks.github.io/shchaslyvi-lapky/blog/yak-chytaty-sklad-lasoshchiv.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
