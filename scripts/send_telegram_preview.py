@@ -71,7 +71,19 @@ def main():
 
     caption = f"🔍 ПРЕВ'Ю — сьогодні о 19:00 буде опубліковано в канал:\n\n{post['text']}"
 
-    if post.get("image"):
+    if post.get("video"):
+        result = telegram_api(
+            "sendVideo",
+            {
+                "chat_id": ADMIN_CHAT_ID,
+                "video": post["video"],
+                "caption": caption,
+                "supports_streaming": True,
+                "width": post.get("video_width", 720),
+                "height": post.get("video_height", 1280),
+            },
+        )
+    elif post.get("image"):
         result = telegram_api(
             "sendPhoto",
             {"chat_id": ADMIN_CHAT_ID, "photo": post["image"], "caption": caption},

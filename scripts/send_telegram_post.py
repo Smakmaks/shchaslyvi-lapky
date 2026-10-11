@@ -65,7 +65,19 @@ def main():
     post = sorted(due, key=lambda p: p["date"])[0]
     print(f"Надсилаю пост за {post['date']}...")
 
-    if post.get("image"):
+    if post.get("video"):
+        result = telegram_api(
+            "sendVideo",
+            {
+                "chat_id": CHANNEL,
+                "video": post["video"],
+                "caption": post["text"],
+                "supports_streaming": True,
+                "width": post.get("video_width", 720),
+                "height": post.get("video_height", 1280),
+            },
+        )
+    elif post.get("image"):
         result = telegram_api(
             "sendPhoto",
             {
