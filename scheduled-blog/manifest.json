@@ -1,0 +1,56 @@
+[
+  {
+    "publish_at": "2026-10-13T09:15:00+03:00",
+    "source": "scheduled-blog/articles/yak-obraty-korm-dlya-sterylizovanykh-kotiv.html",
+    "destination": "blog/yak-obraty-korm-dlya-sterylizovanykh-kotiv.html",
+    "slug": "yak-obraty-korm-dlya-sterylizovanykh-kotiv",
+    "eyebrow": "Годування · Коти",
+    "title": "Корм для стерилізованих котів: на що звернути увагу",
+    "description": "Чому після стерилізації змінюється раціон кота, на що дивитись на упаковці й приклади кормів для стерилізованих котів із каталогу «Щасливих лапок»."
+  },
+  {
+    "publish_at": "2026-10-15T09:15:00+03:00",
+    "source": "scheduled-blog/articles/vologyy-korm-dlya-kota-koly-i-yak.html",
+    "destination": "blog/vologyy-korm-dlya-kota-koly-i-yak.html",
+    "slug": "vologyy-korm-dlya-kota-koly-i-yak",
+    "eyebrow": "Годування · Коти",
+    "title": "Вологий корм для кота: коли й як давати",
+    "description": "Чим вологий корм відрізняється від сухого, як поєднувати їх у раціоні кота та як зберігати відкриті пауче — з прикладами з каталогу «Щасливих лапок»."
+  },
+  {
+    "publish_at": "2026-10-20T09:15:00+03:00",
+    "source": "scheduled-blog/articles/yak-kupaty-sobaku-vdoma.html",
+    "destination": "blog/yak-kupaty-sobaku-vdoma.html",
+    "slug": "yak-kupaty-sobaku-vdoma",
+    "eyebrow": "Догляд · Собаки і коти",
+    "title": "Як купати собаку вдома: покроково",
+    "description": "Як часто купати собаку, яку воду та шампунь обрати, як висушити шерсть — покрокова інструкція й приклади засобів із каталогу «Щасливих лапок»."
+  },
+  {
+    "publish_at": "2026-10-21T09:15:00+03:00",
+    "source": "scheduled-blog/articles/yak-pidstrygaty-kigti-kotu-i-sobaci.html",
+    "destination": "blog/yak-pidstrygaty-kigti-kotu-i-sobaci.html",
+    "slug": "yak-pidstrygaty-kigti-kotu-i-sobaci",
+    "eyebrow": "Догляд · Коти і собаки",
+    "title": "Як підстригати кігті коту й собаці без стресу",
+    "description": "Навіщо потрібне підстригання кігтів, який інструмент обрати і як стригти без стресу — поради та кусачки з каталогу «Щасливих лапок»."
+  },
+  {
+    "publish_at": "2026-10-25T09:15:00+02:00",
+    "source": "scheduled-blog/articles/yak-obraty-lotok-dlya-kota.html",
+    "destination": "blog/yak-obraty-lotok-dlya-kota.html",
+    "slug": "yak-obraty-lotok-dlya-kota",
+    "eyebrow": "Догляд · Коти",
+    "title": "Як обрати лоток для кота: розмір, тип і місце",
+    "description": "Розмір, тип і розташування лотка для кота, корисні аксесуари — поради та приклади з каталогу «Щасливих лапок»."
+  },
+  {
+    "publish_at": "2026-10-31T09:15:00+02:00",
+    "source": "scheduled-blog/articles/gelovin-z-ulyublentsem-bezpeka.html",
+    "destination": "blog/gelovin-z-ulyublentsem-bezpeka.html",
+    "slug": "gelovin-z-ulyublentsem-bezpeka",
+    "eyebrow": "Сезон · Коти і собаки",
+    "title": "Гелловін з улюбленцем: як зробити свято безпечним",
+    "description": "Безпечний Гелловін для кота чи собаки: костюми, солодощі, гості й темні прогулянки — поради та товари з каталогу «Щасливих лапок»."
+  }
+]
