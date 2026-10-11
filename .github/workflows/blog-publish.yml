@@ -2,9 +2,10 @@ name: Публікація статей блогу за розкладом
 
 on:
   schedule:
-    # Перевірка о 09:15 за Києвом у вересні (06:15 UTC) та резервна
-    # перевірка через 15 хвилин на випадок затримки GitHub Actions.
-    - cron: "15,30 6 * * *"
+    # Перевірка о 09:15 за Києвом: 06:15 UTC влітку (до 25.10) і 07:15 UTC
+    # взимку, плюс резервна перевірка через 15 хвилин на випадок затримки
+    # GitHub Actions. Скрипт публікує лише статті, час яких уже настав.
+    - cron: "15,30 6,7 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -23,10 +24,14 @@ jobs:
           fetch-depth: 0
 
       - name: Отримати заплановані статті
-        run: git fetch origin scheduled-blog-september
+        run: |
+          git fetch origin scheduled-blog-september
+          git fetch origin scheduled-blog-october
 
       - name: Опублікувати статті, час яких настав
-        run: python3 scripts/publish_scheduled_blog.py
+        run: |
+          python3 scripts/publish_scheduled_blog.py
+          python3 scripts/publish_scheduled_blog.py --source-ref origin/scheduled-blog-october
 
       - name: Зберегти опубліковані матеріали
         run: |
