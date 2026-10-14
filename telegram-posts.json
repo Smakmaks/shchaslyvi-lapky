@@ -254,7 +254,8 @@
     "video": "https://smakmaks.github.io/shchaslyvi-lapky/videos/shchaslyvi-terrier.mp4",
     "video_width": 720,
     "video_height": 1280,
-    "sent": false
+    "sent": false,
+    "previewed": true
   },
   {
     "date": "2026-10-12",
