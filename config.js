@@ -40,6 +40,11 @@ var SHOP_CONFIG = {
     tiktok: "https://www.tiktok.com/@shchaslyvi.lapky?_r=1&_t=ZS-99CVXV4dWqH"
   },
 
+  // Категорії які показуються ПЕРШИМИ у фільтрі (решта — за алфавітом)
+  priorityCategories: [
+    "Одяг та лежанки"
+  ],
+
   // Категорії які НЕ відображаються на сайті
   hiddenCategories: [
     "Запчастини",

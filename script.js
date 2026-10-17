@@ -333,7 +333,16 @@ function populateCategories() {
     allProducts
       .map(p => p.category)
       .filter(Boolean)
-  )].sort((a, b) => a.localeCompare(b, 'uk'));
+  )];
+  const priority = (window.SHOP_CONFIG && window.SHOP_CONFIG.priorityCategories) || [];
+  cats.sort((a, b) => {
+    const ia = priority.indexOf(a);
+    const ib = priority.indexOf(b);
+    if (ia !== -1 && ib !== -1) return ia - ib;
+    if (ia !== -1) return -1;
+    if (ib !== -1) return 1;
+    return a.localeCompare(b, 'uk');
+  });
 
   for (const cat of cats) {
     const opt = document.createElement('option');
