@@ -52,33 +52,39 @@ function applyConfig() {
   const tg = c.telegramUsername ? c.telegramUsername.replace(/^@/, '') : null;
   const tgUrl = tg ? `https://t.me/${tg}` : '#';
 
-  document.getElementById('header-tg-btn').href   = tgUrl;
-  document.getElementById('mobile-tg-btn').href   = tgUrl;
-  document.getElementById('hero-tg-btn').href      = tgUrl;
-  document.getElementById('contacts-tg-btn').href  = tgUrl;
+  ['header-tg-btn','mobile-tg-btn','hero-tg-btn','contacts-tg-btn'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.href = tgUrl;
+  });
 
   // Контакти
   const phone = c.phone || '';
   const $phone = document.getElementById('contact-phone');
-  if (phone) {
-    $phone.textContent = phone;
-    $phone.href = `tel:${phone.replace(/\s/g, '')}`;
-  } else {
-    $phone.textContent = 'Уточнити в Telegram';
-    $phone.href = tgUrl;
+  if ($phone) {
+    if (phone) {
+      $phone.textContent = phone;
+      $phone.href = `tel:${phone.replace(/\s/g, '')}`;
+    } else {
+      $phone.textContent = 'Уточнити в Telegram';
+      $phone.href = tgUrl;
+    }
   }
 
   const $tgContact = document.getElementById('contact-tg');
-  if (tg) {
-    $tgContact.textContent = `@${tg}`;
-    $tgContact.href = tgUrl;
-  } else {
-    $tgContact.textContent = 'Вказати в config.js';
+  if ($tgContact) {
+    if (tg) {
+      $tgContact.textContent = `@${tg}`;
+      $tgContact.href = tgUrl;
+    } else {
+      $tgContact.textContent = 'Вказати в config.js';
+    }
   }
 
   const address = [c.city, c.address].filter(Boolean).join(', ');
-  document.getElementById('contact-address').textContent = address || '—';
-  document.getElementById('contact-hours').textContent   = c.workingHours || '—';
+  const $addr = document.getElementById('contact-address');
+  if ($addr) $addr.textContent = address || '—';
+  const $hours = document.getElementById('contact-hours');
+  if ($hours) $hours.textContent = c.workingHours || '—';
 
   // Соціальні мережі
   const socialIcons = {
@@ -99,13 +105,16 @@ function applyConfig() {
   const $contactsSocial = document.getElementById('contacts-social');
   if ($contactsSocial) $contactsSocial.innerHTML = socialLinks;
 
-  // Доставка й оплата
+  // Доставка й оплата (елементи можуть бути відсутні в новому дизайні)
   if (c.deliveryText) {
-    document.getElementById('benefit-delivery-text').textContent   = c.deliveryText;
-    document.getElementById('delivery-text-content').textContent   = c.deliveryText;
+    const $dbt = document.getElementById('benefit-delivery-text');
+    if ($dbt) $dbt.textContent = c.deliveryText;
+    const $dtc = document.getElementById('delivery-text-content');
+    if ($dtc) $dtc.textContent = c.deliveryText;
   }
   if (c.paymentText) {
-    document.getElementById('payment-text-content').textContent = c.paymentText;
+    const $ptc = document.getElementById('payment-text-content');
+    if ($ptc) $ptc.textContent = c.paymentText;
   }
 }
 
