@@ -25,6 +25,13 @@ var SHOP_CONFIG = {
     { image: "images/banners/banner7.png", imageMobile: "images/banners/mobile/banner7.png", title: "", link: "https://www.smakmaks.ua/product-category/profesiyni-sumishi-dlya-kyurtosh-kalacha-horeca/" },
   ],
 
+  // Промо-банер зверху сторінки (встанови порожнім "" щоб сховати)
+  promoBanner: {
+    text: "🎁 Акція тижня: корм Farmina N&D −15% до 25 жовтня",
+    linkText: "Переглянути →",
+    linkHref: "#catalog"
+  },
+
   // Рекламні оголошення у верхньому слайдері
   announcements: [
     "🐾 Широкий асортимент товарів для котів і собак",

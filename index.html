@@ -7,11 +7,9 @@
   <link rel="canonical" href="https://smakmaks.github.io/shchaslyvi-lapky/" />
   <title id="page-title">Щасливі лапки — зоомагазин товарів для тварин у Дніпрі</title>
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="apple-touch-icon" href="images/favicon.png" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Щасливі лапки" />
   <meta property="og:locale" content="uk_UA" />
@@ -21,68 +19,346 @@
   <meta property="og:image" content="https://smakmaks.github.io/shchaslyvi-lapky/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Щасливі лапки — зоомагазин товарів для тварин у Дніпрі" />
   <meta name="twitter:description" content="Корми, ласощі, наповнювачі, амуніція та іграшки для котів і собак. Замовлення через Telegram, доставка по всій Україні." />
   <meta name="twitter:image" content="https://smakmaks.github.io/shchaslyvi-lapky/images/og-image.jpg" />
 
-  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+  /* ── ТЕМИ ── */
+  :root {
+    --bg:#111111;--bg2:#191919;--bg3:#222222;--card:#1A1A1A;
+    --border:#272727;--border2:#333333;
+    --fg:#F0F0F0;--fg2:#777777;--fg3:#444444;
+    --lime:#C6F135;--lime2:#A8D41A;
+    --radius:12px;
+    --f-head:'Syne',sans-serif;
+    --f-body:'DM Sans',system-ui,sans-serif;
+    color-scheme:dark;
+  }
+  :root.light {
+    --bg:#FAFAF8;--bg2:#F2F1EE;--bg3:#E8E7E3;--card:#FFFFFF;
+    --border:#E0DED9;--border2:#CCCAC4;
+    --fg:#1A1A1A;--fg2:#666666;--fg3:#BBBBBB;
+    --lime:#7AB800;--lime2:#5F9200;
+    color-scheme:light;
+  }
+
+  /* ── BASE ── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;overflow-x:hidden;transition:background .3s,color .3s}
+  a{text-decoration:none;color:inherit}
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+  .fade-up.visible{opacity:1;transform:none}
+  .fade-up:nth-child(2){transition-delay:.08s}
+  .fade-up:nth-child(3){transition-delay:.16s}
+  .fade-up:nth-child(4){transition-delay:.24s}
+  .fade-up:nth-child(5){transition-delay:.32s}
+  .fade-up:nth-child(6){transition-delay:.40s}
+
+  /* ── UTILITIES ── */
+  .wrap{max-width:1100px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  .hl-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);padding:5px 12px;border-radius:20px;border:1px solid color-mix(in srgb,var(--lime) 25%,transparent);background:color-mix(in srgb,var(--lime) 8%,transparent)}
+  .hl-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--lime)}
+  .sec-kicker{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);margin-bottom:12px}
+  .sec-title{font-family:var(--f-head);font-size:clamp(26px,4vw,38px);font-weight:800;line-height:1.1;color:var(--fg);text-wrap:balance}
+  .sec-sub{font-size:15px;color:var(--fg2);line-height:1.65;max-width:500px}
+  .btn-lime{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#0A0A0A;padding:14px 26px;border-radius:10px;font-size:15px;font-weight:700;transition:.15s;cursor:pointer;border:none}
+  .btn-lime:hover{background:var(--lime2);transform:translateY(-2px)}
+  .btn-outline2{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--fg);padding:14px 26px;border-radius:10px;font-size:15px;font-weight:500;transition:.15s;cursor:pointer;background:transparent}
+  .btn-outline2:hover{background:var(--bg3);transform:translateY(-2px)}
+  .link-more{font-size:13px;font-weight:500;color:var(--fg2);display:flex;align-items:center;gap:6px;transition:color .15s}
+  .link-more:hover{color:var(--lime)}
+
+  /* ── PROMO BAR ── */
+  #promo-bar{background:var(--lime);color:#0A0A0A;padding:10px 16px;text-align:center;font-size:13px;font-weight:600;position:relative}
+  #promo-bar a{color:#0A0A0A;text-decoration:underline;text-underline-offset:2px}
+  #promo-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:18px;cursor:pointer;color:#0A0A0A;line-height:1;padding:2px 6px}
+
+  /* ── NAV ── */
+  .site-header{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);z-index:100;transition:background .3s}
+  .header-inner{display:flex;align-items:center;gap:32px;height:64px}
+  .logo{font-family:var(--f-head);font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--fg);white-space:nowrap;flex-shrink:0;display:flex;align-items:center}
+  .logo-img{display:none}
+  .logo-text{display:block}
+  .logo-text .dot{color:var(--lime)}
+  .header-nav{display:flex;gap:4px;flex:1}
+  .header-nav a{font-size:13px;font-weight:500;color:var(--fg2);padding:7px 14px;border-radius:8px;transition:background .15s,color .15s}
+  .header-nav a:hover{color:var(--fg);background:var(--bg3)}
+  .header-right{display:flex;gap:10px;align-items:center;flex-shrink:0;margin-left:auto}
+  .theme-toggle{width:36px;height:36px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--fg2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}
+  .theme-toggle:hover{background:var(--bg3)}
+  .theme-icon-dark{display:block}.theme-icon-light{display:none}
+  :root.light .theme-icon-dark{display:none}:root.light .theme-icon-light{display:block}
+  .btn-tg-nav{display:flex;align-items:center;gap:7px;background:var(--lime);color:#0A0A0A;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;transition:background .15s;white-space:nowrap}
+  .btn-tg-nav:hover{background:var(--lime2)}
+  .burger-btn{display:none;flex-direction:column;gap:5px;background:none;border:1px solid var(--border2);border-radius:8px;padding:8px;cursor:pointer}
+  .burger-btn span{display:block;width:18px;height:2px;background:var(--fg);border-radius:1px}
+  .mobile-menu{position:fixed;inset:64px 0 0;background:var(--bg);z-index:99;padding:20px 16px;display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--border)}
+  .mobile-menu[hidden]{display:none}
+  .mobile-menu__link{font-size:16px;color:var(--fg2);padding:12px 16px;border-radius:8px;transition:background .15s}
+  .mobile-menu__link:hover{background:var(--bg3);color:var(--fg)}
+  .mobile-menu__tg{margin-top:12px;justify-content:center}
+
+  /* ── HERO ── */
+  .hero{padding-block:80px 0;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--lime) 7%,transparent) 0%,transparent 70%);pointer-events:none}
+  .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:end}
+  .hero-content{padding-bottom:80px}
+  .hero-eyebrow{margin-bottom:28px}
+  .hero-title{font-family:var(--f-head);font-size:clamp(38px,6vw,68px);font-weight:800;line-height:1.0;letter-spacing:-.02em;color:var(--fg);margin-bottom:24px;text-wrap:balance}
+  .hero-title .hi{color:var(--lime)}
+  .hero-title .italic{font-style:italic;font-weight:600}
+  .hero-desc{font-size:17px;color:var(--fg2);max-width:440px;line-height:1.65;margin-bottom:36px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+  .hero-stats{display:flex;gap:32px}
+  .hero-stat .num{font-family:var(--f-head);font-size:26px;font-weight:800;color:var(--fg);line-height:1}
+  .hero-stat .lbl{font-size:12px;color:var(--fg2);margin-top:4px}
+  .hero-stat .num .acc{color:var(--lime)}
+  .hero-right{position:relative;display:flex;flex-direction:column;gap:10px;padding-bottom:80px;align-self:end}
+  .pet-profile-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative}
+  .pet-profile-card::before{content:'';position:absolute;inset:-1px;border-radius:17px;z-index:-1;background:linear-gradient(135deg,color-mix(in srgb,var(--lime) 20%,transparent),transparent 60%)}
+  .ppc-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .ppc-avatar{width:44px;height:44px;border-radius:12px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+  .ppc-name{font-family:var(--f-head);font-size:15px;font-weight:700;color:var(--fg)}
+  .ppc-meta{font-size:12px;color:var(--fg2);margin-top:2px}
+  .ppc-status{margin-left:auto;font-size:11px;font-weight:600;color:var(--lime);background:color-mix(in srgb,var(--lime) 10%,transparent);padding:4px 10px;border-radius:20px}
+  .ppc-items{display:flex;flex-direction:column;gap:8px}
+  .ppc-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--bg3);border-radius:8px;padding:10px 12px}
+  .ppc-item-name{font-size:12px;color:var(--fg)}
+  .ppc-item-sub{font-size:11px;color:var(--fg2);margin-top:1px}
+  .ppc-item-price{font-size:13px;font-weight:700;color:var(--lime);white-space:nowrap}
+  .ppc-match{font-size:11px;font-weight:600;color:var(--lime);display:flex;align-items:center;gap:5px;margin-top:12px}
+  .notif-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+  .notif-icon{width:36px;height:36px;border-radius:10px;background:color-mix(in srgb,var(--lime) 10%,transparent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .notif-text{font-size:12px;color:var(--fg2);line-height:1.5}
+  .notif-text strong{color:var(--fg);display:block;font-size:13px;margin-bottom:2px}
+  .hero-badge{position:absolute;top:-16px;right:-16px;background:var(--lime);color:#0A0A0A;border-radius:12px;padding:12px 16px;font-size:12px;font-weight:700;line-height:1.3;transform:rotate(2deg)}
+
+  /* ── TICKER ── */
+  .ticker{border-block:1px solid var(--border);overflow:hidden;height:42px;display:flex;align-items:center;background:var(--bg2)}
+  .ticker-track{display:flex;white-space:nowrap;animation:ticker 28s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--fg2);padding:0 32px}
+  .ticker-dot{color:var(--lime);font-size:16px}
+  @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ── SECTIONS ── */
+  .hp-section{padding-block:72px;border-bottom:1px solid var(--border)}
+
+  /* ── CAT GRID ── */
+  .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:40px}
+  .cat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 14px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s,transform .2s;position:relative;overflow:hidden}
+  .cat-card:hover{border-color:color-mix(in srgb,var(--lime) 40%,transparent);background:color-mix(in srgb,var(--lime) 4%,var(--card));transform:translateY(-3px)}
+  .cat-emoji{font-size:28px;margin-bottom:10px;display:block}
+  .cat-name{font-size:13px;font-weight:600;color:var(--fg)}
+  .cat-count{font-size:11px;color:var(--fg2);margin-top:3px}
+  .cat-card.featured{border-color:color-mix(in srgb,var(--lime) 30%,transparent)}
+  .cat-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--lime)}
+
+  /* ── CATALOG OVERRIDE ── */
+  .catalog{padding-block:0 72px;border-bottom:1px solid var(--border)}
+  .catalog .container,.catalog .wrap{max-width:1100px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  .catalog-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px;padding-top:48px}
+
+  /* ── PET PROFILE ── */
+  .pet-section{padding-block:80px;border-bottom:1px solid var(--border)}
+  .pet-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .pet-steps{display:flex;flex-direction:column;margin-top:32px}
+  .pet-step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:.2s}
+  .pet-step:last-child{border-bottom:none}
+  .pet-step:hover .step-icon{background:color-mix(in srgb,var(--lime) 12%,transparent);border-color:color-mix(in srgb,var(--lime) 30%,transparent)}
+  .step-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;transition:.2s}
+  .step-num{font-family:var(--f-head);font-size:11px;font-weight:700;color:var(--fg2);letter-spacing:.08em}
+  .step-title2{font-size:15px;font-weight:600;color:var(--fg);margin:4px 0}
+  .step-desc{font-size:13px;color:var(--fg2);line-height:1.6}
+  .pet-demo{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:16px;position:relative}
+  .pet-demo::before{content:'';position:absolute;inset:-1px;border-radius:21px;z-index:-1;background:linear-gradient(135deg,color-mix(in srgb,var(--lime) 18%,transparent),transparent 50%)}
+  .demo-header{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+  .demo-avatar{width:48px;height:48px;border-radius:14px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:24px}
+  .demo-name{font-family:var(--f-head);font-size:16px;font-weight:700}
+  .demo-sub2{font-size:12px;color:var(--fg2);margin-top:3px}
+  .demo-tag{margin-left:auto;font-size:11px;font-weight:600;color:var(--lime);background:color-mix(in srgb,var(--lime) 10%,transparent);padding:5px 12px;border-radius:20px}
+  .demo-recs{display:flex;flex-direction:column;gap:8px}
+  .demo-rec{background:var(--bg3);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+  .demo-rec-icon{font-size:20px;flex-shrink:0}
+  .demo-rec-name{font-size:13px;font-weight:500;color:var(--fg)}
+  .demo-rec-sub{font-size:11px;color:var(--fg2);margin-top:2px}
+  .demo-rec-price{margin-left:auto;font-size:14px;font-weight:700;color:var(--lime)}
+  .demo-warn{background:color-mix(in srgb,#E05252 10%,transparent);border:1px solid color-mix(in srgb,#E05252 25%,transparent);border-radius:10px;padding:10px 14px;font-size:12px;color:#E08080;display:flex;gap:8px;align-items:flex-start}
+  .demo-notifs{display:flex;flex-direction:column;gap:6px}
+  .demo-notif{background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--fg2);display:flex;align-items:center;gap:8px}
+  .demo-notif .lime{color:var(--lime);font-weight:600}
+  .demo-sub-lbl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2);margin-bottom:8px}
+
+  /* ── SUBSCRIPTION ── */
+  .sub-section{padding-block:80px;border-bottom:1px solid var(--border)}
+  .sub-inner{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:56px;overflow:hidden;position:relative}
+  .sub-inner::before{content:'';position:absolute;right:-60px;top:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--lime) 10%,transparent) 0%,transparent 70%)}
+  .sub-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+  .sub-kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  .sub-title{font-family:var(--f-head);font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.1;margin-bottom:16px}
+  .sub-desc2{font-size:15px;color:var(--fg2);max-width:460px;line-height:1.65;margin-bottom:28px}
+  .sub-features{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+  .sub-feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--fg2)}
+  .sub-feat .check{color:var(--lime);font-size:16px}
+  .sub-box{text-align:center;flex-shrink:0;position:relative;z-index:1}
+  .sub-circle{width:160px;height:160px;border-radius:50%;border:2px solid color-mix(in srgb,var(--lime) 30%,transparent);display:flex;align-items:center;justify-content:center;flex-direction:column;background:color-mix(in srgb,var(--lime) 6%,transparent)}
+  .sub-circle .pct{font-family:var(--f-head);font-size:48px;font-weight:800;color:var(--lime);line-height:1}
+  .sub-circle .pct-lbl{font-size:13px;color:var(--fg2);margin-top:4px}
+  .sub-circle-note{font-size:12px;color:var(--fg3);margin-top:10px}
+
+  /* ── REVIEWS ── */
+  .reviews-wrap{position:relative;margin-top:40px;overflow:hidden}
+  .reviews-track{display:flex;gap:16px;transition:transform .4s cubic-bezier(.25,.1,.25,1)}
+  .review-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;min-width:calc(33.333% - 11px);flex-shrink:0}
+  .review-stars{display:flex;gap:3px}
+  .star{color:var(--lime);font-size:14px}
+  .review-text{font-size:14px;color:var(--fg2);line-height:1.65;flex:1;font-style:italic}
+  .review-author{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--border)}
+  .review-ava{width:36px;height:36px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:16px}
+  .review-name{font-size:13px;font-weight:600;color:var(--fg)}
+  .review-pet{font-size:11px;color:var(--fg2);margin-top:1px}
+  .reviews-controls{display:flex;align-items:center;gap:12px;margin-top:24px}
+  .rev-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--border2);background:transparent;color:var(--fg2);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .rev-btn:hover{background:var(--bg3);color:var(--fg)}
+  .rev-dots{display:flex;gap:6px}
+  .rev-dot{width:6px;height:6px;border-radius:3px;background:var(--border2);transition:.3s;cursor:pointer}
+  .rev-dot.active{width:20px;background:var(--lime)}
+
+  /* ── SOCIAL ── */
+  .social-section{padding-block:72px;border-bottom:1px solid var(--border)}
+  .social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+  .soc-post{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,border-color .2s;cursor:pointer;position:relative}
+  .soc-post:hover{transform:translateY(-3px);border-color:var(--border2)}
+  .soc-img{height:160px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative}
+  .soc-network{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:rgba(0,0,0,.5);color:#fff;backdrop-filter:blur(8px)}
+  .soc-body{padding:12px}
+  .soc-text{font-size:12px;color:var(--fg2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .soc-meta{font-size:11px;color:var(--fg3);margin-top:6px}
+  .social-links{display:flex;gap:12px;margin-top:32px;justify-content:center;flex-wrap:wrap}
+  .soc-link{display:flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--fg2);padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;transition:.15s}
+  .soc-link:hover{border-color:var(--lime);color:var(--lime)}
+
+  /* ── BLOG ── */
+  .blog-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:40px}
+  .blog-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;color:inherit;cursor:pointer}
+  .blog-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+  .blog-img{background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:40px}
+  .blog-img.big{height:220px}.blog-img.sm{height:120px}
+  .blog-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:8px}
+  .blog-cat{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+  .blog-title{font-size:15px;font-weight:600;color:var(--fg);line-height:1.4}
+  .blog-title.sm{font-size:13px}
+  .blog-date{font-size:12px;color:var(--fg3);margin-top:auto}
+  .blog-read{font-size:12px;color:var(--lime);font-weight:600}
+
+  /* ── CTA ── */
+  .cta-section{padding-block:80px;text-align:center;border-bottom:1px solid var(--border)}
+  .cta-inner{max-width:640px;margin:0 auto}
+  .cta-title{font-family:var(--f-head);font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.1;margin-bottom:16px}
+  .cta-title .hi{color:var(--lime)}
+  .cta-sub{font-size:16px;color:var(--fg2);margin-bottom:32px;line-height:1.65}
+  .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn-tg-cta{display:inline-flex;align-items:center;gap:10px;background:#2AABEE;color:#fff;padding:15px 28px;border-radius:10px;font-size:15px;font-weight:700;transition:.15s}
+  .btn-tg-cta:hover{background:#1A9BD8;transform:translateY(-2px)}
+  .cta-note{font-size:13px;color:var(--fg3);margin-top:16px}
+
+  /* ── FOOTER ── */
+  .site-footer{border-top:1px solid var(--border);padding-block:40px;background:var(--bg)}
+  .footer-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:32px}
+  .footer-logo-wrap{font-family:var(--f-head);font-size:15px;font-weight:800;color:var(--fg)}
+  .footer-logo-wrap span{color:var(--lime)}
+  .footer-tagline{font-size:12px;color:var(--fg2);margin-top:4px}
+  .footer-links-nav{display:flex;gap:20px;justify-content:center}
+  .footer-links-nav a{font-size:13px;color:var(--fg3);transition:color .15s}
+  .footer-links-nav a:hover{color:var(--fg2)}
+  .footer-right{text-align:right}
+  .footer-socials{display:flex;gap:10px;justify-content:flex-end;margin-bottom:8px}
+  .footer-social-icon{width:32px;height:32px;border-radius:8px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--fg2);transition:.15s}
+  .footer-social-icon:hover{border-color:var(--lime);color:var(--lime)}
+  .footer-copy{font-size:12px;color:var(--fg3)}
+  .scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:var(--lime);color:#0A0A0A;border:none;border-radius:12px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:50}
+  .scroll-top[hidden]{display:none}
+  .scroll-top:hover{background:var(--lime2);transform:translateY(-2px)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr}.hero-right{display:none}
+    .cat-grid{grid-template-columns:repeat(3,1fr)}
+    .pet-inner{grid-template-columns:1fr}.pet-demo{display:none}
+    .sub-grid{grid-template-columns:1fr}.sub-box{display:none}
+    .review-card{min-width:calc(50% - 8px)}
+    .social-grid{grid-template-columns:repeat(2,1fr)}
+    .blog-grid{grid-template-columns:1fr}
+    .header-nav{display:none}
+    .footer-inner{grid-template-columns:1fr;gap:24px;text-align:center}
+    .footer-links-nav{flex-wrap:wrap}
+    .footer-right{text-align:center}.footer-socials{justify-content:center}
+    .burger-btn{display:flex}
+  }
+  @media(max-width:600px){
+    .hero{padding-block:48px 0}.hero-content{padding-bottom:48px}
+    .cat-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-stats{gap:20px;flex-wrap:wrap}
+    .sub-inner{padding:32px 24px}
+    .review-card{min-width:100%}
+    .social-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  </style>
 </head>
 <body>
 
-  <!-- ═══════════════════ ANNOUNCEMENT BAR ═══════════════════ -->
-  <div class="announce-bar" id="announce-bar" role="region" aria-label="Оголошення">
-    <div class="announce-track" id="announce-track"></div>
-    <button class="announce-prev" id="announce-prev" aria-label="Попереднє оголошення">&#8249;</button>
-    <button class="announce-next" id="announce-next" aria-label="Наступне оголошення">&#8250;</button>
-    <div class="announce-dots" id="announce-dots"></div>
-  </div>
+  <!-- ═══ PROMO BAR ═══ -->
+  <div id="promo-bar"></div>
 
-  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <!-- ═══ HEADER ═══ -->
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="wrap header-inner">
       <a href="#" class="logo" aria-label="Головна сторінка">
-        <img src="images/logo.png" alt="Щасливі лапки — зоомагазин" class="logo-img" width="120" height="40" />
+        <span class="logo-text">Щасливі<span class="dot">.</span>лапки</span>
       </a>
 
       <nav class="header-nav" aria-label="Основна навігація">
         <a href="#catalog">Каталог</a>
+        <a href="#pet-profile">Профіль тварини</a>
+        <a href="#subscription">Підписка</a>
         <a href="blog/index.html">Блог</a>
-        <a href="#benefits">Про нас</a>
-        <a href="#delivery">Доставка</a>
         <a href="#contacts">Контакти</a>
       </nav>
 
-      <a href="#" id="header-tg-btn" class="btn btn-tg" aria-label="Написати в Telegram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.718.942z"/>
-        </svg>
-        <span>Telegram</span>
-      </a>
-
-      <button class="burger-btn" id="burger-btn" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeBtn" aria-label="Перемкнути тему">
+          <span class="theme-icon-dark">🌙</span>
+          <span class="theme-icon-light">☀️</span>
+        </button>
+        <a href="#" id="header-tg-btn" class="btn-tg-nav" aria-label="Написати в Telegram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.607c-.15.668-.543.83-1.1.517l-3.033-2.234-1.463 1.41c-.162.162-.297.297-.608.297l.216-3.072 5.593-5.052c.243-.216-.054-.336-.378-.12L7.093 14.82l-2.993-.935c-.65-.203-.663-.65.135-.963l11.684-4.502c.54-.199 1.011.127.843.828z"/></svg>
+          Замовити
+        </a>
+        <button class="burger-btn" id="burger-btn" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile menu -->
     <nav class="mobile-menu" id="mobile-menu" aria-label="Мобільне меню" hidden>
       <a href="#catalog" class="mobile-menu__link">Каталог</a>
+      <a href="#pet-profile" class="mobile-menu__link">Профіль тварини</a>
+      <a href="#subscription" class="mobile-menu__link">Підписка</a>
       <a href="blog/index.html" class="mobile-menu__link">Блог</a>
-      <a href="#benefits" class="mobile-menu__link">Про нас</a>
-      <a href="#delivery" class="mobile-menu__link">Доставка</a>
       <a href="#contacts" class="mobile-menu__link">Контакти</a>
-      <a href="#" id="mobile-tg-btn" class="btn btn-tg mobile-menu__tg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.718.942z"/>
-        </svg>
+      <a href="#" id="mobile-tg-btn" class="btn-tg-nav mobile-menu__tg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.607c-.15.668-.543.83-1.1.517l-3.033-2.234-1.463 1.41c-.162.162-.297.297-.608.297l.216-3.072 5.593-5.052c.243-.216-.054-.336-.378-.12L7.093 14.82l-2.993-.935c-.65-.203-.663-.65.135-.963l11.684-4.502c.54-.199 1.011.127.843.828z"/></svg>
         Написати в Telegram
       </a>
     </nav>
@@ -90,34 +366,66 @@
 
   <main id="main-content">
 
-    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <!-- ═══ HERO ═══ -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="container hero-inner">
+      <div class="wrap hero-inner">
         <div class="hero-content">
-          <p class="hero-badge">🐾 Все для ваших улюбленців</p>
-          <h1 id="hero-heading" class="hero-title">
-            Якісні товари<br />
-            для ваших<br />
-            <span class="hero-accent">улюбленців</span>
+          <div class="hero-eyebrow fade-up"><span class="hl-tag">Зоомагазин у Дніпрі</span></div>
+          <h1 id="hero-heading" class="hero-title fade-up">
+            Все для твоїх<br><span class="hi">улюбленців</span> —<br><span class="italic">з душею</span>
           </h1>
-          <p class="hero-desc">
-            Корми, іграшки, аксесуари для котів і собак.<br />
-            Швидке замовлення через Telegram — без реєстрації та зайвих кліків.
-          </p>
-          <div class="hero-actions">
-            <a href="#catalog" class="btn btn-primary btn-lg">Переглянути каталог</a>
-            <a href="#" id="hero-tg-btn" class="btn btn-tg btn-lg">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.718.942z"/>
-              </svg>
-              Замовити в Telegram
-            </a>
+          <p class="hero-desc fade-up">2085 товарів, персональний підбір корму та нагадування у Telegram. Знаємо ім'я твоєї тварини, її алергії та коли потрібен новий корм.</p>
+          <div class="hero-actions fade-up">
+            <a class="btn-lime" href="#catalog">Відкрити каталог →</a>
+            <a class="btn-outline2" href="#pet-profile">Профіль улюбленця</a>
+          </div>
+          <div class="hero-stats fade-up">
+            <div class="hero-stat"><div class="num"><span class="acc">2085</span></div><div class="lbl">товарів у каталозі</div></div>
+            <div class="hero-stat"><div class="num"><span class="acc">−7%</span></div><div class="lbl">знижка за підписку</div></div>
+            <div class="hero-stat"><div class="num"><span class="acc">1 день</span></div><div class="lbl">доставка по Дніпру</div></div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-badge">✓ Корм<br>підібрано</div>
+          <div class="pet-profile-card">
+            <div class="ppc-top">
+              <div class="ppc-avatar">🐱</div>
+              <div><div class="ppc-name">Мурка</div><div class="ppc-meta">Британська · 3 роки · стерилізована</div></div>
+              <div class="ppc-status">Активна</div>
+            </div>
+            <div class="ppc-items">
+              <div class="ppc-item"><div><div class="ppc-item-name">Farmina N&D Grain Free Adult</div><div class="ppc-item-sub">1.5 кг · підходить ✓</div></div><div class="ppc-item-price">1 295 ₴</div></div>
+              <div class="ppc-item"><div><div class="ppc-item-name">Savory Sterilised Індичка</div><div class="ppc-item-sub">2 кг · підходить ✓</div></div><div class="ppc-item-price">1 265 ₴</div></div>
+            </div>
+            <div class="ppc-match">✦ Підібрано під Мурку · без зернових · без курки</div>
+          </div>
+          <div class="notif-card">
+            <div class="notif-icon">🔔</div>
+            <div class="notif-text"><strong>Нагадування від Щасливих лапок</strong>Мурці скоро закінчується корм. Поповнити запас?</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════ БАНЕРНИЙ СЛАЙДЕР ═══════════ -->
+    <!-- ═══ TICKER ═══ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Доставка Новою Поштою по всій Україні</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Підписка на корм — знижка 7%</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Акція: Farmina N&D −15% до 25 жовтня</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> 2085 товарів у каталозі</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Замовлення через Telegram — без реєстрації</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Профіль улюбленця — персональний підбір</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Доставка Новою Поштою по всій Україні</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Підписка на корм — знижка 7%</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Акція: Farmina N&D −15% до 25 жовтня</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> 2085 товарів у каталозі</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Замовлення через Telegram — без реєстрації</span>
+        <span class="ticker-item"><span class="ticker-dot">✦</span> Профіль улюбленця — персональний підбір</span>
+      </div>
+    </div>
+
+    <!-- ═══ БАНЕРНИЙ СЛАЙДЕР (з config.js) ═══ -->
     <section class="banner-slider-section" id="banners" aria-label="Рекламні банери" hidden>
       <div class="banner-slider">
         <div class="banner-track" id="banner-track"></div>
@@ -131,68 +439,45 @@
       </div>
     </section>
 
-    <!-- ═══════════════════ ПЕРЕВАГИ ═══════════════════ -->
-    <section class="benefits" id="benefits" aria-labelledby="benefits-heading">
-      <div class="container">
-        <h2 id="benefits-heading" class="section-title">Чому обирають нас</h2>
-        <div class="benefits-grid">
-          <article class="benefit-card">
-            <div class="benefit-icon" aria-hidden="true">🐱</div>
-            <h3 class="benefit-title">Для котів і собак</h3>
-            <p class="benefit-desc">Широкий асортимент товарів для домашніх улюбленців будь-якого виду та породи.</p>
-          </article>
-          <article class="benefit-card">
-            <div class="benefit-icon" aria-hidden="true">💬</div>
-            <h3 class="benefit-title">Консультація</h3>
-            <p class="benefit-desc">Допоможемо підібрати корм, іграшку або аксесуар — просто напишіть у Telegram.</p>
-          </article>
-          <article class="benefit-card">
-            <div class="benefit-icon" aria-hidden="true">🚚</div>
-            <h3 class="benefit-title">Доставка</h3>
-            <p class="benefit-desc" id="benefit-delivery-text">Доставка по місту або самовивіз за домовленістю.</p>
-          </article>
-          <article class="benefit-card">
-            <div class="benefit-icon" aria-hidden="true">⚡</div>
-            <h3 class="benefit-title">Швидке замовлення</h3>
-            <p class="benefit-desc">Знайшли товар — натисніть кнопку, і готовий текст відразу відкриється в Telegram.</p>
-          </article>
+    <!-- ═══ КАТЕГОРІЇ ═══ -->
+    <section class="hp-section" id="catalog" aria-labelledby="catalog-cats-heading">
+      <div class="wrap">
+        <p class="sec-kicker fade-up">Каталог</p>
+        <h2 id="catalog-cats-heading" class="sec-title fade-up">Магазин для котів і собак</h2>
+        <div class="cat-grid">
+          <div class="cat-card featured fade-up"><span class="cat-emoji">👕</span><div class="cat-name">Одяг та лежанки</div><div class="cat-count">134 товари</div></div>
+          <div class="cat-card featured fade-up"><span class="cat-emoji">🦮</span><div class="cat-name">Амуніція</div><div class="cat-count">89 товарів</div></div>
+          <div class="cat-card fade-up"><span class="cat-emoji">🥣</span><div class="cat-name">Сухі корми</div><div class="cat-count">410 товарів</div></div>
+          <div class="cat-card fade-up"><span class="cat-emoji">🥫</span><div class="cat-name">Вологі корми</div><div class="cat-count">320 товарів</div></div>
+          <div class="cat-card fade-up"><span class="cat-emoji">🎾</span><div class="cat-name">Іграшки</div><div class="cat-count">112 товарів</div></div>
+          <div class="cat-card fade-up"><span class="cat-emoji">🍖</span><div class="cat-name">Ласощі</div><div class="cat-count">98 товарів</div></div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════ КАТАЛОГ ═══════════════════ -->
-    <section class="catalog" id="catalog" aria-labelledby="catalog-heading">
-      <div class="container">
-        <h2 id="catalog-heading" class="section-title">Каталог товарів</h2>
+    <!-- ═══ КАТАЛОГ ТОВАРІВ (динамічний) ═══ -->
+    <section class="catalog" aria-labelledby="catalog-heading">
+      <div class="wrap">
+        <div class="catalog-header">
+          <div>
+            <p class="sec-kicker">Всі товари</p>
+            <h2 id="catalog-heading" class="sec-title" style="font-size:clamp(20px,3vw,28px)">Повний каталог</h2>
+          </div>
+        </div>
 
-        <!-- Пошук + фільтри -->
         <div class="catalog-controls">
           <div class="search-wrap">
             <label for="search-input" class="sr-only">Пошук товарів</label>
-            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-            </svg>
-            <input
-              type="search"
-              id="search-input"
-              class="search-input"
-              placeholder="Пошук за назвою товару..."
-              aria-label="Пошук товарів"
-              autocomplete="off"
-            />
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="search" id="search-input" class="search-input" placeholder="Пошук за назвою товару..." aria-label="Пошук товарів" autocomplete="off" />
             <button class="search-clear" id="search-clear" aria-label="Очистити пошук" hidden>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M18 6L6 18M6 6l12 12"/>
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
           </div>
-
           <div class="filters-row">
             <div class="filter-wrap">
               <label for="category-filter" class="sr-only">Фільтр за категорією</label>
-              <select id="category-filter" class="filter-select" aria-label="Фільтр за категорією">
-                <option value="">Всі категорії</option>
-              </select>
+              <select id="category-filter" class="filter-select" aria-label="Фільтр за категорією"><option value="">Всі категорії</option></select>
             </div>
             <div class="filter-wrap">
               <label for="sort-select" class="sr-only">Сортування</label>
@@ -205,31 +490,23 @@
           </div>
         </div>
 
-        <!-- Статус завантаження -->
         <div id="loading-state" class="state-box" role="status" aria-live="polite">
           <div class="spinner" aria-hidden="true"></div>
           <p>Завантажуємо товари...</p>
         </div>
-
-        <!-- Помилка завантаження -->
         <div id="error-state" class="state-box state-box--error" role="alert" hidden>
           <div class="state-icon" aria-hidden="true">⚠️</div>
           <p id="error-message"></p>
           <p class="state-hint" hidden>Якщо ви відкрили файл напряму з папки — сайт потрібно запустити через локальний сервер або GitHub Pages.</p>
         </div>
-
-        <!-- Порожній результат пошуку -->
         <div id="empty-state" class="state-box" role="status" aria-live="polite" hidden>
           <div class="state-icon" aria-hidden="true">🔍</div>
           <p>За вашим запитом нічого не знайдено.</p>
           <button class="btn btn-outline" id="reset-filters-btn">Скинути фільтри</button>
         </div>
 
-        <!-- Панель пагінації (зверху) -->
         <div id="pagination-top" class="pagination-bar" hidden>
-          <div class="pagination-info">
-            <span id="pagination-count"></span>
-          </div>
+          <div class="pagination-info"><span id="pagination-count"></span></div>
           <div class="per-page-wrap">
             <label for="per-page-select" class="per-page-label">Показувати:</label>
             <select id="per-page-select" class="filter-select per-page-select">
@@ -240,136 +517,183 @@
           </div>
         </div>
 
-        <!-- Сітка товарів -->
-        <div
-          id="products-grid"
-          class="products-grid"
-          role="list"
-          aria-label="Список товарів"
-          aria-live="polite"
-          hidden
-        ></div>
-
-        <!-- Навігація по сторінках -->
+        <div id="products-grid" class="products-grid" role="list" aria-label="Список товарів" aria-live="polite" hidden></div>
         <nav id="pagination-nav" class="pagination-nav" aria-label="Навігація по сторінках" hidden></nav>
-
       </div>
     </section>
 
-    <!-- ═══════════════════ ДОСТАВКА Й ОПЛАТА ═══════════════════ -->
-    <section class="delivery" id="delivery" aria-labelledby="delivery-heading">
-      <div class="container">
-        <h2 id="delivery-heading" class="section-title">Доставка й оплата</h2>
-        <div class="delivery-grid">
-          <article class="delivery-card">
-            <div class="delivery-icon" aria-hidden="true">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
-            </div>
-            <h3>Доставка</h3>
-            <p id="delivery-text-content">Доставка по місту або самовивіз за домовленістю.</p>
-          </article>
-          <article class="delivery-card">
-            <div class="delivery-icon" aria-hidden="true">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
-              </svg>
-            </div>
-            <h3>Оплата</h3>
-            <p id="payment-text-content">Оплата готівкою, переказом або іншим погодженим способом.</p>
-          </article>
-          <article class="delivery-card">
-            <div class="delivery-icon" aria-hidden="true">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-              </svg>
-            </div>
-            <h3>Замовлення</h3>
-            <p>Написати в Telegram — найшвидший спосіб оформити замовлення. Відповідаємо протягом дня.</p>
-          </article>
+    <!-- ═══ ПРОФІЛЬ ТВАРИНИ ═══ -->
+    <section class="pet-section" id="pet-profile" aria-labelledby="pet-heading">
+      <div class="wrap pet-inner">
+        <div>
+          <p class="sec-kicker fade-up">Ключова функція</p>
+          <h2 id="pet-heading" class="sec-title fade-up" style="margin-bottom:14px">Профіль улюбленця</h2>
+          <p class="sec-sub fade-up">Один раз заповнюєш картку тварини — і каталог підлаштовується під неї. Несумісні товари позначаються, підходящі — виходять першими.</p>
+          <div class="pet-steps">
+            <div class="pet-step fade-up"><div class="step-icon">📋</div><div><div class="step-num">01</div><div class="step-title2">Картка тварини</div><div class="step-desc">Ім'я, порода, вік, алергії — одна форма на 2 хвилини.</div></div></div>
+            <div class="pet-step fade-up"><div class="step-icon">✨</div><div><div class="step-num">02</div><div class="step-title2">Персональний каталог</div><div class="step-desc">Товари відфільтровані під тварину. Несумісні — позначені ⚠️.</div></div></div>
+            <div class="pet-step fade-up"><div class="step-icon">🔔</div><div><div class="step-num">03</div><div class="step-title2">Нагадування у Telegram</div><div class="step-desc">"Корм закінчується", "час на дорослий корм", "пора щеплення".</div></div></div>
+            <div class="pet-step fade-up"><div class="step-icon">🐾</div><div><div class="step-num">04</div><div class="step-title2">Кілька тварин</div><div class="step-desc">Котик і собака в одному акаунті — окремі профілі, один кошик.</div></div></div>
+          </div>
+        </div>
+        <div class="pet-demo fade-up">
+          <div class="demo-header">
+            <div class="demo-avatar">🐱</div>
+            <div><div class="demo-name">Мурка</div><div class="demo-sub2">Британська · 3 роки · стерилізована · без зернових</div></div>
+            <div class="demo-tag">Активна</div>
+          </div>
+          <div class="demo-sub-lbl">Рекомендовано для Мурки</div>
+          <div class="demo-recs">
+            <div class="demo-rec"><div class="demo-rec-icon">🥣</div><div><div class="demo-rec-name">Farmina N&D Grain Free</div><div class="demo-rec-sub">Без зернових · стерилізовані кішки</div></div><div class="demo-rec-price">1 295 ₴</div></div>
+            <div class="demo-rec"><div class="demo-rec-icon">🥫</div><div><div class="demo-rec-name">Savory Sterilised Індичка</div><div class="demo-rec-sub">2 кг · підходить ✓</div></div><div class="demo-rec-price">1 265 ₴</div></div>
+          </div>
+          <div class="demo-warn">⚠️ <span>Royal Canin Kitten <strong style="color:#E08080">не підходить</strong> — містить зернові</span></div>
+          <div class="demo-sub-lbl">Нагадування</div>
+          <div class="demo-notifs">
+            <div class="demo-notif">🔔 <span><span class="lime">Сьогодні</span> — корм закінчується через 3 дні</span></div>
+            <div class="demo-notif">📅 <span><span class="lime">15 листопада</span> — щеплення від сказу</span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════ КОНТАКТИ ═══════════════════ -->
-    <section class="contacts" id="contacts" aria-labelledby="contacts-heading">
-      <div class="container">
-        <h2 id="contacts-heading" class="section-title">Контакти</h2>
-        <div class="contacts-grid">
-          <div class="contact-item">
-            <svg class="contact-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.2 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
-            </svg>
+    <!-- ═══ ПІДПИСКА ═══ -->
+    <section class="sub-section" id="subscription" aria-labelledby="sub-heading">
+      <div class="wrap">
+        <div class="sub-inner fade-up">
+          <div class="sub-grid">
             <div>
-              <p class="contact-label">Телефон</p>
-              <a id="contact-phone" href="#" class="contact-value">—</a>
+              <div class="sub-kicker">Підписка на корм</div>
+              <h2 id="sub-heading" class="sub-title">«Щомісячна лапка» —<br>корм сам приходить додому</h2>
+              <p class="sub-desc2">Обираєш корм → вказуєш частоту → Нова Пошта привозить у зручний час. За 3 дні до відправки — нагадування в Telegram.</p>
+              <div class="sub-features">
+                <div class="sub-feat"><span class="check">✓</span> Знижка 7% на весь термін підписки</div>
+                <div class="sub-feat"><span class="check">✓</span> Нагадування за 3 дні до відправки</div>
+                <div class="sub-feat"><span class="check">✓</span> Зміна або пропуск у будь-який момент</div>
+                <div class="sub-feat"><span class="check">✓</span> Скасування без штрафів і дзвінків</div>
+              </div>
+              <a class="btn-lime" style="width:fit-content" id="sub-tg-btn" href="#">Підключити підписку →</a>
             </div>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.718.942z"/>
-            </svg>
-            <div>
-              <p class="contact-label">Telegram</p>
-              <a id="contact-tg" href="#" class="contact-value">—</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-            </svg>
-            <div>
-              <p class="contact-label">Місто / Адреса</p>
-              <p id="contact-address" class="contact-value">—</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-            </svg>
-            <div>
-              <p class="contact-label">Графік роботи</p>
-              <p id="contact-hours" class="contact-value">—</p>
+            <div class="sub-box">
+              <div class="sub-circle"><div class="pct">−7%</div><div class="pct-lbl">знижка<br>назавжди</div></div>
+              <div class="sub-circle-note">на весь термін<br>підписки</div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="contacts-social" id="contacts-social"></div>
+    <!-- ═══ ВІДГУКИ ═══ -->
+    <section class="hp-section" aria-labelledby="reviews-heading">
+      <div class="wrap">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px">
+          <div><p class="sec-kicker">Відгуки клієнтів</p><h2 id="reviews-heading" class="sec-title" style="font-size:clamp(20px,3vw,28px)">Що кажуть про нас</h2></div>
+          <a class="link-more" href="#">Всі відгуки →</a>
+        </div>
+        <div class="reviews-wrap fade-up">
+          <div class="reviews-track" id="reviewsTrack">
+            <div class="review-card"><div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="review-text">«Перевела Барсика з Royal Canin на Farmina — менеджер підібрав корм особисто, розповів як переходити плавно. Кіт їсть із задоволенням, шерсть стала кращою за місяць.»</p><div class="review-author"><div class="review-ava">🐱</div><div><div class="review-name">Оксана В.</div><div class="review-pet">Барсик, британський кіт 5 р.</div></div></div></div>
+            <div class="review-card"><div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="review-text">«Підписка на корм — найкраще рішення. Більше не думаю про замовлення, корм приходить сам. А знижка 7% за рік набігає непогано.»</p><div class="review-author"><div class="review-ava">🐶</div><div><div class="review-name">Михайло Д.</div><div class="review-pet">Рекс, лабрадор 2 р.</div></div></div></div>
+            <div class="review-card"><div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="review-text">«Профіль улюбленця — це геніально. Пишу в Telegram "замовити корм для Мурки" — і одразу надсилають те, що вже брала раніше.»</p><div class="review-author"><div class="review-ava">😺</div><div><div class="review-name">Анна К.</div><div class="review-pet">Мурка, мейн-кун 4 р.</div></div></div></div>
+            <div class="review-card"><div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="review-text">«Дуже швидке обслуговування. Написав увечері — зранку вже прийшла відповідь з рекомендацією і посиланням на товар.»</p><div class="review-author"><div class="review-ava">🐕</div><div><div class="review-name">Ігор С.</div><div class="review-pet">Чарлі, бігль 1 р.</div></div></div></div>
+            <div class="review-card"><div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="review-text">«Замовляю вже пів року. Якість товарів висока, ціни чесні. Нагадування в Telegram рятують — ніколи не залишаюся без корму.»</p><div class="review-author"><div class="review-ava">🐈</div><div><div class="review-name">Марина Л.</div><div class="review-pet">Сіма, перська кішка 6 р.</div></div></div></div>
+          </div>
+        </div>
+        <div class="reviews-controls">
+          <button class="rev-btn" id="revPrev" aria-label="Попередній">←</button>
+          <button class="rev-btn" id="revNext" aria-label="Наступний">→</button>
+          <div class="rev-dots" id="revDots"></div>
+        </div>
+      </div>
+    </section>
 
-        <div class="contacts-cta">
-          <p>Найшвидший спосіб зв'язатись — написати в Telegram</p>
-          <a href="#" id="contacts-tg-btn" class="btn btn-tg btn-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.718.942z"/>
-            </svg>
-            Написати в Telegram
+    <!-- ═══ СОЦМЕРЕЖІ ═══ -->
+    <section class="social-section" id="social" aria-labelledby="social-heading">
+      <div class="wrap">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:0">
+          <div><p class="sec-kicker">Ми в соцмережах</p><h2 id="social-heading" class="sec-title" style="font-size:clamp(20px,3vw,28px)">Слідкуйте за нами</h2></div>
+        </div>
+        <div class="social-grid">
+          <div class="soc-post fade-up"><div class="soc-img">🐱<div class="soc-network">IG</div></div><div class="soc-body"><div class="soc-text">Мурка вже обрала свій улюблений корм 🐾 Farmina N&D без зернових — перший тиждень і результат видно</div><div class="soc-meta">Instagram · 2 дні тому · ❤️ 124</div></div></div>
+          <div class="soc-post fade-up"><div class="soc-img">🦮<div class="soc-network">TK</div></div><div class="soc-body"><div class="soc-text">Як правильно надягати шлею на собаку — відео-інструкція для початківців 🎬</div><div class="soc-meta">TikTok · 4 дні тому · ▶️ 3.2K</div></div></div>
+          <div class="soc-post fade-up"><div class="soc-img">🐶<div class="soc-network">FB</div></div><div class="soc-body"><div class="soc-text">Акція тижня! Farmina N&D Grain Free Adult −15%. Тільки до 25 жовтня 🏷️</div><div class="soc-meta">Facebook · 1 день тому · 👍 87</div></div></div>
+          <div class="soc-post fade-up"><div class="soc-img">🎾<div class="soc-network">IG</div></div><div class="soc-body"><div class="soc-text">Нові іграшки в каталозі! Інтерактивні пазли для котів — тренують мозок та знімають стрес 🧩</div><div class="soc-meta">Instagram · 5 днів тому · ❤️ 201</div></div></div>
+        </div>
+        <div class="social-links">
+          <a class="soc-link" href="https://www.instagram.com/shchaslyvi.lapky" target="_blank" rel="noopener">📸 Instagram</a>
+          <a class="soc-link" href="https://www.facebook.com/share/1BcxUfZoMN/" target="_blank" rel="noopener">👥 Facebook</a>
+          <a class="soc-link" href="https://www.tiktok.com/@shchaslyvi.lapky" target="_blank" rel="noopener">🎵 TikTok</a>
+          <a class="soc-link" href="https://t.me/shchaslyvi_lapky" target="_blank" rel="noopener">✈️ Telegram-канал</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ БЛОГ ═══ -->
+    <section class="hp-section" id="blog" aria-labelledby="blog-heading">
+      <div class="wrap">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:40px">
+          <div><p class="sec-kicker">Блог</p><h2 id="blog-heading" class="sec-title" style="font-size:clamp(20px,3vw,28px)">Корисно для вас і тварин</h2></div>
+          <a class="link-more" href="blog/index.html">Всі статті →</a>
+        </div>
+        <div class="blog-grid">
+          <a class="blog-card fade-up" href="blog/yak-obraty-korm-dlya-sterylizovanykh-kotiv.html"><div class="blog-img big">🐱</div><div class="blog-body"><div class="blog-cat">Корми</div><div class="blog-title">Корм для стерилізованих котів: на що звернути увагу</div><div class="blog-read">Читати →</div><div class="blog-date">Жовтень 2026</div></div></a>
+          <a class="blog-card fade-up" href="blog/vologyy-korm-dlya-kota-koly-i-yak.html"><div class="blog-img sm">🍖</div><div class="blog-body"><div class="blog-cat">Корми</div><div class="blog-title sm">Вологий корм для кота: коли й як давати</div><div class="blog-read">Читати →</div><div class="blog-date">Жовтень 2026</div></div></a>
+          <a class="blog-card fade-up" href="blog/yak-zmenshyty-nudgu-kota.html"><div class="blog-img sm">😺</div><div class="blog-body"><div class="blog-cat">Поведінка</div><div class="blog-title sm">Як зменшити нудьгу кота, коли день стає коротшим</div><div class="blog-read">Читати →</div><div class="blog-date">25 вересня 2026</div></div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="cta-section" id="contacts" aria-labelledby="cta-heading">
+      <div class="wrap cta-inner fade-up">
+        <h2 id="cta-heading" class="cta-title">Готові познайомитись<br>з <span class="hi">вашим улюбленцем?</span></h2>
+        <p class="cta-sub">Напишіть нам у Telegram — скажіть хто у вас живе, і ми підберемо все необхідне. Без скриптів, без спаму.</p>
+        <div class="cta-btns">
+          <a class="btn-tg-cta" href="#" id="contacts-tg-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.607c-.15.668-.543.83-1.1.517l-3.033-2.234-1.463 1.41c-.162.162-.297.297-.608.297l.216-3.072 5.593-5.052c.243-.216-.054-.336-.378-.12L7.093 14.82l-2.993-.935c-.65-.203-.663-.65.135-.963l11.684-4.502c.54-.199 1.011.127.843.828z"/></svg>
+            Написати у Telegram
           </a>
+          <a class="btn-outline2" href="#catalog">Переглянути каталог</a>
         </div>
+        <p class="cta-note" id="contact-tg-note">@shchaslyvi_lapky · відповідаємо протягом 15 хвилин</p>
+        <div style="display:flex;gap:20px;justify-content:center;margin-top:32px;flex-wrap:wrap">
+          <div style="font-size:13px;color:var(--fg2)">📞 <a id="contact-phone" href="#" style="color:var(--fg2)">—</a></div>
+          <div style="font-size:13px;color:var(--fg2)">📍 <span id="contact-address">—</span></div>
+          <div style="font-size:13px;color:var(--fg2)">🕐 <span id="contact-hours">—</span></div>
+        </div>
+        <div class="contacts-social" id="contacts-social"></div>
       </div>
     </section>
 
   </main>
 
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <!-- ═══ FOOTER ═══ -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-logo">
-        <span aria-hidden="true">🐾</span>
-        <span id="footer-shop-name">Зоомагазин</span>
+    <div class="wrap footer-inner">
+      <div>
+        <div class="footer-logo-wrap"><span id="footer-shop-name">Щасливі<span>.</span>лапки</span></div>
+        <div class="footer-tagline">Зоомагазин у Дніпрі · з душею</div>
       </div>
-      <p class="footer-copy">Замовлення через Telegram · Оплата за домовленістю</p>
-      <div class="footer-social" id="footer-social"></div>
-      <p class="footer-note">Сайт не списує залишки автоматично. Актуальну наявність уточнюйте у продавця.</p>
+      <nav class="footer-links-nav" aria-label="Посилання">
+        <a href="#catalog">Каталог</a>
+        <a href="#pet-profile">Профіль</a>
+        <a href="#subscription">Підписка</a>
+        <a href="blog/index.html">Блог</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
+      <div class="footer-right">
+        <div class="footer-socials" id="footer-social">
+          <a class="footer-social-icon" href="https://www.instagram.com/shchaslyvi.lapky" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+          <a class="footer-social-icon" href="https://www.facebook.com/share/1BcxUfZoMN/" target="_blank" rel="noopener" aria-label="Facebook">👥</a>
+          <a class="footer-social-icon" href="https://www.tiktok.com/@shchaslyvi.lapky" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+          <a class="footer-social-icon" href="https://t.me/shchaslyvi_lapky" target="_blank" rel="noopener" aria-label="Telegram">✈️</a>
+        </div>
+        <div class="footer-copy">© 2026 Щасливі лапки</div>
+      </div>
     </div>
   </footer>
 
-  <!-- Кнопка "Вгору" -->
-  <button class="scroll-top" id="scroll-top-btn" aria-label="Повернутися вгору" hidden>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-      <path d="M18 15l-6-6-6 6"/>
-    </svg>
-  </button>
+  <button class="scroll-top" id="scroll-top-btn" aria-label="Повернутися вгору" hidden>↑</button>
 
   <!-- Шаблон картки товару (використовується в script.js) -->
   <template id="product-card-template">
@@ -395,5 +719,110 @@
 
   <script src="config.js"></script>
   <script src="script.js"></script>
+
+  <script>
+  /* ── ТЕМА ── */
+  const themeBtn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  if (localStorage.getItem('theme') === 'light') root.classList.add('light');
+  themeBtn.addEventListener('click', () => {
+    root.classList.toggle('light');
+    localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+  });
+
+  /* ── PROMO BAR ── */
+  (function() {
+    const bar = document.getElementById('promo-bar');
+    const cfg = typeof SHOP_CONFIG !== 'undefined' && SHOP_CONFIG.promoBanner;
+    if (!cfg || !cfg.text) { bar.remove(); return; }
+    bar.innerHTML = cfg.text
+      + (cfg.linkText ? ' &nbsp;·&nbsp; <a href="' + (cfg.linkHref || '#catalog') + '">' + cfg.linkText + '</a>' : '')
+      + ' <button id="promo-close" aria-label="Закрити">×</button>';
+    document.getElementById('promo-close').addEventListener('click', () => bar.remove());
+  })();
+
+  /* ── SUBSCRIPTION TELEGRAM BUTTON ── */
+  (function() {
+    const btn = document.getElementById('sub-tg-btn');
+    if (!btn) return;
+    const tg = typeof SHOP_CONFIG !== 'undefined' ? (SHOP_CONFIG.telegramUsername || '').replace('@','') : '';
+    if (tg) {
+      const msg = encodeURIComponent('Привіт! Хочу підключити щомісячну підписку на корм 🐾');
+      btn.href = 'https://t.me/' + tg + '?text=' + msg;
+      btn.target = '_blank';
+      btn.rel = 'noopener';
+    }
+  })();
+
+  /* ── BURGER MENU ── */
+  const burgerBtn = document.getElementById('burger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burgerBtn.addEventListener('click', () => {
+    const open = mobileMenu.hasAttribute('hidden');
+    if (open) { mobileMenu.removeAttribute('hidden'); burgerBtn.setAttribute('aria-expanded','true'); }
+    else { mobileMenu.setAttribute('hidden',''); burgerBtn.setAttribute('aria-expanded','false'); }
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.setAttribute('hidden',''); burgerBtn.setAttribute('aria-expanded','false');
+  }));
+
+  /* ── SCROLL ANIMATIONS ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── SCROLL TO TOP ── */
+  const scrollBtn = document.getElementById('scroll-top-btn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) scrollBtn.removeAttribute('hidden');
+    else scrollBtn.setAttribute('hidden','');
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+  /* ── ВІДГУКИ КАРУСЕЛЬ ── */
+  const track = document.getElementById('reviewsTrack');
+  const dotsWrap = document.getElementById('revDots');
+  const cards = track.querySelectorAll('.review-card');
+  let cur = 0;
+  function getVisible() {
+    const w = track.parentElement.offsetWidth;
+    if (w < 600) return 1;
+    if (w < 900) return 2;
+    return 3;
+  }
+  function updateCarousel() {
+    const vis = getVisible();
+    const total = Math.ceil(cards.length / vis);
+    const maxIdx = Math.max(0, cards.length - vis);
+    cur = Math.min(cur, maxIdx);
+    const cardW = cards[0].offsetWidth + 16;
+    track.style.transform = `translateX(-${cur * cardW}px)`;
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'rev-dot' + (i === Math.floor(cur / vis) ? ' active' : '');
+      d.onclick = () => { cur = i * vis; updateCarousel(); };
+      dotsWrap.appendChild(d);
+    }
+  }
+  document.getElementById('revPrev').onclick = () => { const vis = getVisible(); cur = Math.max(0, cur - vis); updateCarousel(); };
+  document.getElementById('revNext').onclick = () => { const vis = getVisible(); cur = Math.min(cards.length - getVisible(), cur + getVisible()); updateCarousel(); };
+  window.addEventListener('resize', updateCarousel);
+  updateCarousel();
+
+  /* ── КАТЕГОРІЇ → ФІЛЬТР КАТАЛОГУ ── */
+  document.querySelectorAll('.cat-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const name = card.querySelector('.cat-name').textContent;
+      const sel = document.getElementById('category-filter');
+      if (sel) {
+        const opt = Array.from(sel.options).find(o => o.text === name);
+        if (opt) { sel.value = opt.value; sel.dispatchEvent(new Event('change')); }
+      }
+      document.getElementById('catalog').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  </script>
 </body>
 </html>
