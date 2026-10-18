@@ -117,6 +117,18 @@
     .btn-outline{background:transparent;border:1.5px solid var(--border2);color:var(--fg2);width:100%;margin-top:8px}
     .btn-outline:hover{border-color:var(--fg2);color:var(--fg)}
 
+    /* ── BANK DETAILS ── */
+    .bank-account{padding:16px;border:1.5px solid var(--border2);border-radius:12px;margin-bottom:12px}
+    .bank-account:last-child{margin-bottom:0}
+    .bank-account__label{font-size:13px;font-weight:700;color:var(--lime);margin-bottom:10px}
+    .bank-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;font-size:13px}
+    .bank-row:last-child{margin-bottom:0}
+    .bank-row__key{color:var(--fg2);flex-shrink:0}
+    .bank-row__val{color:var(--fg);font-weight:600;text-align:right;word-break:break-all}
+    .bank-copy-btn{background:none;border:1px solid var(--border2);border-radius:6px;padding:2px 8px;font-size:11px;color:var(--fg2);cursor:pointer;margin-left:6px;transition:.15s;flex-shrink:0}
+    .bank-copy-btn:hover{border-color:var(--lime);color:var(--lime)}
+    .bank-note{font-size:12px;color:var(--fg2);margin-top:12px;line-height:1.5;padding-top:12px;border-top:1px solid var(--border)}
+
     /* ── SUCCESS STATE ── */
     .success-screen{display:none;text-align:center;padding:48px 24px}
     .success-screen.visible{display:block}
@@ -239,6 +251,12 @@
             <div class="payment-label">Замовити в Telegram</div>
           </label>
         </div>
+      </div>
+
+      <!-- 3b. Реквізити для переказу (показуються при виборі "Переказ на карту") -->
+      <div class="section-card" id="bank-details-card" hidden>
+        <h2 class="section-title">💳 Реквізити для переказу</h2>
+        <div id="bank-accounts-list"></div>
       </div>
 
       <!-- 4. Коментар -->
@@ -481,7 +499,7 @@
     if (payment === 'card_prepay') {
       descEl.textContent = 'Вікно Telegram відкрито — підтвердіть замовлення. Реквізити для оплати надішлемо після підтвердження.';
     } else if (payment === 'transfer') {
-      descEl.textContent = 'Вікно Telegram відкрито. Реквізити для переказу надішлемо після підтвердження замовлення.';
+      descEl.textContent = 'Вікно Telegram відкрито. Після переказу надішліть скріншот квитанції — менеджер підтвердить замовлення.';
     } else {
       descEl.textContent = 'Вікно Telegram відкрито — підтвердіть замовлення. Ми зв\'яжемось з вами найближчим часом.';
     }
@@ -490,9 +508,51 @@
     document.getElementById('form-col').style.display = 'none';
   }
 
+  /* ── РЕКВІЗИТИ ── */
+  function renderBankDetails() {
+    const card = document.getElementById('bank-details-card');
+    const list = document.getElementById('bank-accounts-list');
+    const isTransfer = document.querySelector('input[name="payment"]:checked')?.value === 'transfer';
+    if (!card) return;
+    card.hidden = !isTransfer;
+    if (!isTransfer || !list) return;
+
+    const accounts = (window.SHOP_CONFIG && window.SHOP_CONFIG.bankAccounts) || [];
+    if (accounts.length === 0) {
+      list.innerHTML = '<p style="color:var(--fg2);font-size:13px">Реквізити уточнюйте у менеджера.</p>';
+      return;
+    }
+    list.innerHTML = accounts.map((acc, i) => `
+      <div class="bank-account">
+        <div class="bank-account__label">${esc(acc.label || 'Картка ' + (i+1))}</div>
+        <div class="bank-row"><span class="bank-row__key">Отримувач</span><span class="bank-row__val">${esc(acc.recipient)}</span></div>
+        <div class="bank-row">
+          <span class="bank-row__key">IBAN</span>
+          <span style="display:flex;align-items:center;gap:4px;justify-content:flex-end;flex-wrap:wrap">
+            <span class="bank-row__val" style="font-family:monospace;font-size:12px">${esc(acc.iban)}</span>
+            <button class="bank-copy-btn" onclick="copyText('${esc(acc.iban)}',this)">Копіювати</button>
+          </span>
+        </div>
+        <div class="bank-row"><span class="bank-row__key">РНОКПП</span><span class="bank-row__val">${esc(acc.taxId)}</span></div>
+        <div class="bank-row"><span class="bank-row__key">Призначення</span><span class="bank-row__val">${esc(acc.purpose)}</span></div>
+      </div>`).join('') + `<p class="bank-note">Після оплати надішліть скріншот квитанції в Telegram — менеджер підтвердить замовлення.</p>`;
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Скопійовано!';
+      btn.style.color = 'var(--lime)';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+    });
+  }
+
+  document.querySelectorAll('input[name="payment"]').forEach(r => r.addEventListener('change', renderBankDetails));
+
   /* ── INIT ── */
   renderSummary();
   updateDeliveryCost();
+  renderBankDetails();
 
   // Якщо кошик порожній — показуємо порожній стан
   if (checkoutCart.length === 0) {
