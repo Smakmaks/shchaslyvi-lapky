@@ -209,11 +209,29 @@ function renderCard(product) {
     skuEl.hidden = true;
   }
 
-  // Кнопка замовлення
+  // Кнопка замовлення / кошик
   const btn = clone.querySelector('.btn-order');
-  btn.textContent = avail.btnText;
-  btn.href = tgUrl;
-  if (avail.btnCls) btn.classList.add(avail.btnCls);
+  const canAddToCart = product.availability === 'in_stock' || product.availability === 'preorder';
+
+  if (canAddToCart && product.price > 0) {
+    btn.textContent = '🛒 У кошик';
+    btn.removeAttribute('href');
+    btn.classList.add('btn-add-cart');
+    btn.addEventListener('click', () => {
+      if (window.Cart) {
+        window.Cart.add({
+          id: String(product.id),
+          name: product.name,
+          price: product.price,
+          image: product.image || 'images/product-placeholder.jpg'
+        });
+      }
+    });
+  } else {
+    btn.textContent = avail.btnText;
+    btn.href = tgUrl;
+    if (avail.btnCls) btn.classList.add(avail.btnCls);
+  }
 
   return clone;
 }
@@ -663,5 +681,6 @@ document.addEventListener('DOMContentLoaded', () => {
   try { initAnnouncements(); } catch(e) { console.warn('initAnnouncements:', e); }
   try { initBanners(); } catch(e) { console.warn('initBanners:', e); }
   try { bindEvents(); } catch(e) { console.warn('bindEvents:', e); }
+  try { initCart(); } catch(e) { console.warn('initCart:', e); }
   loadProducts();
 });
