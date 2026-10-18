@@ -612,10 +612,11 @@ function initAnnouncements() {
   const btnPrev = document.getElementById('announce-prev');
   const btnNext = document.getElementById('announce-next');
 
+  if (!bar || !track || !dots) return;
   if (!slides.length) { bar.hidden = true; return; }
   if (slides.length === 1) {
-    btnPrev.hidden = true;
-    btnNext.hidden = true;
+    if (btnPrev) btnPrev.hidden = true;
+    if (btnNext) btnNext.hidden = true;
   }
 
   let current = 0;
