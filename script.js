@@ -659,9 +659,9 @@ function initAnnouncements() {
 
 // ─── Старт ────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  applyConfig();
-  initAnnouncements();
-  initBanners();
-  bindEvents();
+  try { applyConfig(); } catch(e) { console.warn('applyConfig:', e); }
+  try { initAnnouncements(); } catch(e) { console.warn('initAnnouncements:', e); }
+  try { initBanners(); } catch(e) { console.warn('initBanners:', e); }
+  try { bindEvents(); } catch(e) { console.warn('bindEvents:', e); }
   loadProducts();
 });
