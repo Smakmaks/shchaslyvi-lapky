@@ -133,9 +133,6 @@
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--lime);border-radius:12px;padding:12px 24px;font-size:14px;font-weight:600;color:var(--fg);box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:1000;transition:transform .3s ease;white-space:nowrap}
     .toast.show{transform:translateX(-50%) translateY(0)}
 
-    /* ── RO APP BANNER ── */
-    .ro-banner{background:color-mix(in srgb,var(--lime) 5%,transparent);border:1px solid color-mix(in srgb,var(--lime) 25%,transparent);border-radius:12px;padding:16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--fg2)}
-    .ro-banner strong{color:var(--fg)}
   </style>
 </head>
 <body>
@@ -168,11 +165,6 @@
 
     <!-- ══════ TAB: ПИТОМЕЦЬ ══════ -->
     <div class="tab-panel active" id="tab-pet">
-
-      <div class="ro-banner">
-        <span style="font-size:20px;flex-shrink:0">🔗</span>
-        <div><strong>Синхронізація з RO App — незабаром.</strong><br>Поки що зберігаємо профіль локально на вашому пристрої. Надалі дані автоматично підтягнуться з бази магазину.</div>
-      </div>
 
       <!-- Немає питомця -->
       <div id="no-pet-block" class="card" hidden>
@@ -305,10 +297,6 @@
 
     <!-- ══════ TAB: ЗАМОВЛЕННЯ ══════ -->
     <div class="tab-panel" id="tab-orders">
-      <div class="ro-banner">
-        <span style="font-size:20px;flex-shrink:0">🔗</span>
-        <div><strong>RO App — незабаром.</strong> Поки що відображаємо замовлення, оформлені через цей сайт.</div>
-      </div>
       <div id="orders-list"></div>
       <div id="orders-empty" class="card" hidden>
         <div class="empty-state">
@@ -363,10 +351,6 @@
 
     <!-- ══════ TAB: МОЇ ДАНІ ══════ -->
     <div class="tab-panel" id="tab-profile">
-      <div class="ro-banner">
-        <span style="font-size:20px;flex-shrink:0">🔗</span>
-        <div><strong>Синхронізація з RO App — незабаром.</strong> Після підключення ваші дані підтягнуться автоматично.</div>
-      </div>
       <div class="card">
         <div class="card-title">Контактні дані</div>
         <div class="form-grid">
@@ -392,13 +376,6 @@
         <button class="btn btn-lime" id="save-profile-btn" style="margin-top:18px">💾 Зберегти</button>
       </div>
 
-      <div class="card">
-        <div class="card-title">Дані з RO App</div>
-        <div class="info-row"><span class="info-label">Бонусні бали</span><span class="info-val" style="color:var(--lime)">—</span></div>
-        <div class="info-row"><span class="info-label">Рівень лояльності</span><span class="info-val">—</span></div>
-        <div class="info-row"><span class="info-label">Всього покупок</span><span class="info-val">—</span></div>
-        <p style="font-size:12px;color:var(--fg3);margin-top:12px">🔗 Буде доступно після підключення синхронізації з RO App</p>
-      </div>
 
       <div class="card" style="border-color:rgba(224,82,82,.2)">
         <div class="card-title" style="color:var(--fg2)">Небезпечна зона</div>
