@@ -319,9 +319,8 @@
 
   /* ── КОШИК → ІНІЦІАЛІЗАЦІЯ ── */
   // На checkout.html панель кошика не потрібна, тільки дані
-  const CART_KEY = 'cart_v1';
   let checkoutCart = [];
-  try { checkoutCart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch {}
+  try { checkoutCart = JSON.parse(localStorage.getItem('cart_v1')) || []; } catch {}
 
   /* ── РЕНДЕР SUMMARY ── */
   function renderSummary() {
