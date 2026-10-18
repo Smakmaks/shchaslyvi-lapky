@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оформлення замовлення — Щасливі лапки</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0A0A0A;--bg2:#141414;--bg3:#1C1C1C;
+      --card:#181818;--fg:#F0F0F0;--fg2:#A0A0A0;--fg3:#606060;
+      --lime:#BFFF00;--lime2:#D4FF3D;
+      --border:#2A2A2A;--border2:#383838;
+      --f-body:'Inter',sans-serif;--f-head:'Montserrat',sans-serif;
+    }
+    :root.light {
+      --bg:#F8FAFB;--bg2:#FFFFFF;--bg3:#F0F2F5;
+      --card:#FFFFFF;--fg:#111111;--fg2:#555555;--fg3:#999999;
+      --lime:#7BC60F;--lime2:#6BB00D;
+      --border:#E0E4EB;--border2:#C8CDD8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--f-body);background:var(--bg);color:var(--fg);min-height:100dvh;font-size:16px;line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
+    [hidden]{display:none!important}
+
+    /* ── HEADER ── */
+    .site-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:10}
+    .logo{font-family:var(--f-head);font-size:18px;font-weight:900;color:var(--fg)}
+    .logo .dot{color:var(--lime)}
+    .header-actions{display:flex;align-items:center;gap:12px}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--fg2);transition:.15s;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border2)}
+    .back-link:hover{color:var(--fg);border-color:var(--fg2)}
+    .theme-toggle{background:none;border:none;cursor:pointer;color:var(--fg2);padding:8px;border-radius:8px;font-size:18px;min-width:36px;min-height:36px}
+    .theme-icon-light{display:none}
+    :root.light .theme-icon-dark{display:none}
+    :root.light .theme-icon-light{display:inline}
+
+    /* ── LAYOUT ── */
+    .page-wrap{max-width:960px;margin-inline:auto;padding:32px 16px 64px;display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start}
+    @media(max-width:768px){.page-wrap{grid-template-columns:1fr}}
+
+    /* ── SECTION CARD ── */
+    .section-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px}
+    .section-title{font-size:16px;font-weight:700;color:var(--fg);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+    .section-num{width:24px;height:24px;background:var(--lime);color:#0A0A0A;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+    /* ── FORM ── */
+    .form-grid{display:grid;gap:16px}
+    .form-grid-2{grid-template-columns:1fr 1fr}
+    @media(max-width:480px){.form-grid-2{grid-template-columns:1fr}}
+    .field label{display:block;font-size:13px;font-weight:600;color:var(--fg2);margin-bottom:6px}
+    .field input,.field select,.field textarea{
+      width:100%;padding:12px 14px;border-radius:10px;
+      border:1.5px solid var(--border2);background:var(--bg2);
+      color:var(--fg);font-size:15px;font-family:inherit;
+      transition:border-color .18s,box-shadow .18s;outline:none;
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:var(--lime);
+      box-shadow:0 0 0 3px color-mix(in srgb,var(--lime) 15%,transparent);
+    }
+    .field input.error,.field select.error{border-color:#E05252}
+    .field-error{font-size:12px;color:#E05252;margin-top:4px;display:none}
+    .field.has-error .field-error{display:block}
+    .field.has-error input,.field.has-error select{border-color:#E05252}
+    .field textarea{resize:vertical;min-height:80px}
+
+    /* ── DELIVERY OPTIONS ── */
+    .delivery-options{display:flex;flex-direction:column;gap:10px}
+    .delivery-option{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1.5px solid var(--border2);border-radius:12px;cursor:pointer;transition:.15s}
+    .delivery-option:has(input:checked){border-color:var(--lime);background:color-mix(in srgb,var(--lime) 6%,transparent)}
+    .delivery-option input[type=radio]{accent-color:var(--lime);width:18px;height:18px;margin-top:2px;flex-shrink:0}
+    .delivery-label{font-size:14px;font-weight:600;color:var(--fg)}
+    .delivery-desc{font-size:12px;color:var(--fg2);margin-top:2px}
+
+    /* ── PAYMENT OPTIONS ── */
+    .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:400px){.payment-options{grid-template-columns:1fr}}
+    .payment-option{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border:1.5px solid var(--border2);border-radius:12px;cursor:pointer;text-align:center;transition:.15s}
+    .payment-option:has(input:checked){border-color:var(--lime);background:color-mix(in srgb,var(--lime) 6%,transparent)}
+    .payment-option input[type=radio]{accent-color:var(--lime);margin:0}
+    .payment-icon{font-size:24px}
+    .payment-label{font-size:13px;font-weight:600;color:var(--fg)}
+
+    /* ── ORDER SUMMARY ── */
+    .order-summary{position:sticky;top:80px}
+    .summary-items{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+    .summary-item{display:flex;gap:10px;align-items:center}
+    .summary-item__img{width:48px;height:48px;object-fit:cover;border-radius:8px;flex-shrink:0;background:var(--bg3)}
+    .summary-item__info{flex:1;min-width:0}
+    .summary-item__name{font-size:13px;color:var(--fg);line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+    .summary-item__qty{font-size:12px;color:var(--fg2);margin-top:2px}
+    .summary-item__price{font-size:14px;font-weight:700;color:var(--fg);flex-shrink:0}
+    .summary-divider{border:none;border-top:1px solid var(--border);margin:12px 0}
+    .summary-row{display:flex;justify-content:space-between;font-size:14px;color:var(--fg2);margin-bottom:8px}
+    .summary-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .summary-total span{font-size:15px;font-weight:600;color:var(--fg)}
+    .summary-total strong{font-size:22px;font-weight:800;color:var(--lime)}
+
+    /* ── EMPTY CART ── */
+    .empty-cart{text-align:center;padding:48px 24px;color:var(--fg2)}
+    .empty-cart__icon{font-size:56px;margin-bottom:16px}
+    .empty-cart p{margin-bottom:20px}
+
+    /* ── SUBMIT BUTTON ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:.18s;min-height:48px}
+    .btn-primary{background:var(--lime);color:#0A0A0A;width:100%;margin-top:16px}
+    .btn-primary:hover{background:var(--lime2)}
+    .btn-primary:active{transform:scale(.98)}
+    .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .btn-outline{background:transparent;border:1.5px solid var(--border2);color:var(--fg2);width:100%;margin-top:8px}
+    .btn-outline:hover{border-color:var(--fg2);color:var(--fg)}
+
+    /* ── SUCCESS STATE ── */
+    .success-screen{display:none;text-align:center;padding:48px 24px}
+    .success-screen.visible{display:block}
+    .success-icon{font-size:64px;margin-bottom:16px}
+    .success-title{font-size:24px;font-weight:800;color:var(--fg);margin-bottom:8px}
+    .success-desc{color:var(--fg2);font-size:15px;line-height:1.6;margin-bottom:24px}
+    .success-order-num{display:inline-block;padding:8px 20px;background:color-mix(in srgb,var(--lime) 10%,transparent);border:1px solid var(--lime);border-radius:100px;font-size:14px;font-weight:700;color:var(--lime);margin-bottom:24px}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html" class="logo">Щасливі<span class="dot">.</span>лапки</a>
+    <div class="header-actions">
+      <a href="index.html" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        До каталогу
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Перемкнути тему">
+        <span class="theme-icon-dark">🌙</span>
+        <span class="theme-icon-light">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="page-wrap" id="checkout-wrap">
+
+    <!-- LEFT: FORM -->
+    <div id="form-col">
+
+      <!-- 1. Контактні дані -->
+      <div class="section-card">
+        <h2 class="section-title"><span class="section-num">1</span> Ваші контакти</h2>
+        <form id="checkout-form" novalidate>
+          <div class="form-grid">
+            <div class="form-grid form-grid-2">
+              <div class="field" id="field-name">
+                <label for="inp-name">Ім'я *</label>
+                <input type="text" id="inp-name" name="name" placeholder="Олександр" autocomplete="given-name" required>
+                <div class="field-error">Введіть ваше ім'я</div>
+              </div>
+              <div class="field" id="field-phone">
+                <label for="inp-phone">Телефон *</label>
+                <input type="tel" id="inp-phone" name="phone" placeholder="+380XXXXXXXXX" autocomplete="tel" required>
+                <div class="field-error">Введіть номер телефону</div>
+              </div>
+            </div>
+            <div class="field" id="field-email">
+              <label for="inp-email">Email <span style="color:var(--fg3);font-weight:400">(необов'язково)</span></label>
+              <input type="email" id="inp-email" name="email" placeholder="example@gmail.com" autocomplete="email">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- 2. Доставка -->
+      <div class="section-card">
+        <h2 class="section-title"><span class="section-num">2</span> Спосіб доставки</h2>
+        <div class="delivery-options">
+          <label class="delivery-option">
+            <input type="radio" name="delivery" value="nova_poshta" checked>
+            <div>
+              <div class="delivery-label">📦 Нова Пошта</div>
+              <div class="delivery-desc">До відділення або поштомату по всій Україні</div>
+            </div>
+          </label>
+          <label class="delivery-option">
+            <input type="radio" name="delivery" value="nova_poshta_courier">
+            <div>
+              <div class="delivery-label">🚚 Нова Пошта — кур'єр</div>
+              <div class="delivery-desc">Доставка до дверей (доступно у великих містах)</div>
+            </div>
+          </label>
+          <label class="delivery-option">
+            <input type="radio" name="delivery" value="pickup">
+            <div>
+              <div class="delivery-label">🏪 Самовивіз</div>
+              <div class="delivery-desc">Дніпро, Запорізьке шосе 32М, прим. 351</div>
+            </div>
+          </label>
+        </div>
+
+        <div id="np-city-wrap" style="margin-top:16px" class="form-grid">
+          <div class="field" id="field-city">
+            <label for="inp-city">Місто *</label>
+            <input type="text" id="inp-city" name="city" placeholder="Наприклад: Київ" autocomplete="address-level2">
+            <div class="field-error">Введіть місто доставки</div>
+          </div>
+          <div class="field">
+            <label for="inp-np-branch">Відділення / поштомат *</label>
+            <input type="text" id="inp-np-branch" name="np_branch" placeholder="Наприклад: №5">
+            <div class="field-error">Вкажіть відділення</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Оплата -->
+      <div class="section-card">
+        <h2 class="section-title"><span class="section-num">3</span> Спосіб оплати</h2>
+        <div class="payment-options">
+          <label class="payment-option">
+            <input type="radio" name="payment" value="card_prepay" checked>
+            <div class="payment-icon">💳</div>
+            <div class="payment-label">Карткою онлайн</div>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="cash_on_delivery">
+            <div class="payment-icon">💵</div>
+            <div class="payment-label">Накладений платіж</div>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="transfer">
+            <div class="payment-icon">📲</div>
+            <div class="payment-label">Переказ на карту</div>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="telegram">
+            <div class="payment-icon">💬</div>
+            <div class="payment-label">Замовити в Telegram</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 4. Коментар -->
+      <div class="section-card">
+        <h2 class="section-title"><span class="section-num">4</span> Коментар до замовлення</h2>
+        <div class="field">
+          <label for="inp-comment">Побажання, уточнення (необов'язково)</label>
+          <textarea id="inp-comment" name="comment" placeholder="Наприклад: зручний час доставки, уточнення по товару..."></textarea>
+        </div>
+      </div>
+
+    </div><!-- /form-col -->
+
+    <!-- RIGHT: ORDER SUMMARY -->
+    <aside class="order-summary">
+      <div class="section-card">
+        <h2 class="section-title">Ваше замовлення</h2>
+        <div id="summary-empty" class="empty-cart" hidden>
+          <div class="empty-cart__icon">🛒</div>
+          <p>Кошик порожній</p>
+          <a href="index.html" class="btn btn-outline">До каталогу</a>
+        </div>
+        <div id="summary-items" class="summary-items"></div>
+        <hr class="summary-divider">
+        <div class="summary-row"><span>Товарів:</span><span id="summary-count">0</span></div>
+        <div class="summary-row"><span>Доставка:</span><span id="summary-delivery-cost">за тарифами НП</span></div>
+        <div class="summary-total">
+          <span>До сплати:</span>
+          <strong id="summary-total">0 грн</strong>
+        </div>
+        <button class="btn btn-primary" id="submit-btn">Підтвердити замовлення →</button>
+        <a href="index.html" class="btn btn-outline">← Продовжити покупки</a>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="section-card success-screen" id="success-screen">
+        <div class="success-icon">🎉</div>
+        <h2 class="success-title">Замовлення прийнято!</h2>
+        <div id="success-order-num" class="success-order-num"></div>
+        <p class="success-desc" id="success-desc">Ми зв'яжемось з вами найближчим часом для підтвердження.</p>
+        <a href="index.html" class="btn btn-primary">До каталогу</a>
+      </div>
+
+    </aside>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="cart.js?v=1"></script>
+  <script>
+  'use strict';
+
+  /* ── ТЕМА ── */
+  const themeBtn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  if (localStorage.getItem('theme') === 'light') root.classList.add('light');
+  themeBtn.addEventListener('click', () => {
+    root.classList.toggle('light');
+    localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+  });
+
+  /* ── КОШИК → ІНІЦІАЛІЗАЦІЯ ── */
+  // На checkout.html панель кошика не потрібна, тільки дані
+  const CART_KEY = 'cart_v1';
+  let checkoutCart = [];
+  try { checkoutCart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch {}
+
+  /* ── РЕНДЕР SUMMARY ── */
+  function renderSummary() {
+    const itemsEl = document.getElementById('summary-items');
+    const emptyEl = document.getElementById('summary-empty');
+    const countEl = document.getElementById('summary-count');
+    const totalEl = document.getElementById('summary-total');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (checkoutCart.length === 0) {
+      emptyEl.removeAttribute('hidden');
+      itemsEl.innerHTML = '';
+      if (submitBtn) submitBtn.disabled = true;
+      return;
+    }
+
+    emptyEl.setAttribute('hidden', '');
+    itemsEl.innerHTML = '';
+    let total = 0;
+    let count = 0;
+
+    checkoutCart.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'summary-item';
+      div.innerHTML = `
+        <img class="summary-item__img" src="${esc(item.image)}" alt="${esc(item.name)}" onerror="this.src='images/product-placeholder.jpg'">
+        <div class="summary-item__info">
+          <div class="summary-item__name">${esc(item.name)}</div>
+          <div class="summary-item__qty">${item.qty} шт. × ${item.price.toLocaleString('uk-UA')} грн</div>
+        </div>
+        <div class="summary-item__price">${(item.price * item.qty).toLocaleString('uk-UA')} грн</div>`;
+      itemsEl.appendChild(div);
+      total += item.price * item.qty;
+      count += item.qty;
+    });
+
+    countEl.textContent = count + ' шт.';
+    totalEl.textContent = total.toLocaleString('uk-UA') + ' грн';
+  }
+
+  function esc(str) {
+    return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ── ДОСТАВКА TOGGLE ── */
+  const npCityWrap = document.getElementById('np-city-wrap');
+  document.querySelectorAll('input[name="delivery"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const isPickup = r.value === 'pickup';
+      npCityWrap.style.display = isPickup ? 'none' : '';
+    });
+  });
+
+  /* ── ОНОВЛЕННЯ ВАРТОСТІ ДОСТАВКИ ── */
+  function updateDeliveryCost() {
+    const val = document.querySelector('input[name="delivery"]:checked')?.value;
+    const el = document.getElementById('summary-delivery-cost');
+    if (!el) return;
+    if (val === 'pickup') el.textContent = 'Безкоштовно';
+    else if (val === 'nova_poshta_courier') el.textContent = 'за тарифами НП';
+    else el.textContent = 'за тарифами НП';
+  }
+  document.querySelectorAll('input[name="delivery"]').forEach(r => r.addEventListener('change', updateDeliveryCost));
+
+  /* ── ФОРМА: ВАЛІДАЦІЯ ── */
+  function validate() {
+    let ok = true;
+
+    function checkField(id, condition) {
+      const wrapper = document.getElementById('field-' + id);
+      if (!wrapper) return;
+      if (!condition) { wrapper.classList.add('has-error'); ok = false; }
+      else wrapper.classList.remove('has-error');
+    }
+
+    const name = document.getElementById('inp-name').value.trim();
+    const phone = document.getElementById('inp-phone').value.trim();
+    const delivery = document.querySelector('input[name="delivery"]:checked')?.value;
+    const city = document.getElementById('inp-city').value.trim();
+    const branch = document.getElementById('inp-np-branch').value.trim();
+
+    checkField('name', name.length >= 2);
+    checkField('phone', /^[\+]?[\d\s\-\(\)]{9,}$/.test(phone));
+
+    if (delivery !== 'pickup') {
+      checkField('city', city.length >= 2);
+    }
+
+    return ok;
+  }
+
+  /* ── SUBMIT ── */
+  document.getElementById('submit-btn').addEventListener('click', async () => {
+    if (checkoutCart.length === 0) return;
+    if (!validate()) return;
+
+    const payment = document.querySelector('input[name="payment"]:checked')?.value;
+    const delivery = document.querySelector('input[name="delivery"]:checked')?.value;
+
+    // Telegram-замовлення
+    if (payment === 'telegram') {
+      sendViaTelegram();
+      return;
+    }
+
+    // Для онлайн-оплати — тимчасово теж відправляємо через Telegram
+    // (WayForPay інтеграція — наступний етап)
+    sendViaTelegram();
+  });
+
+  function sendViaTelegram() {
+    const name = document.getElementById('inp-name').value.trim();
+    const phone = document.getElementById('inp-phone').value.trim();
+    const email = document.getElementById('inp-email').value.trim();
+    const delivery = document.querySelector('input[name="delivery"]:checked')?.value;
+    const payment = document.querySelector('input[name="payment"]:checked')?.value;
+    const city = document.getElementById('inp-city').value.trim();
+    const branch = document.getElementById('inp-np-branch').value.trim();
+    const comment = document.getElementById('inp-comment').value.trim();
+
+    const deliveryLabels = {
+      nova_poshta: 'Нова Пошта (відділення)',
+      nova_poshta_courier: 'Нова Пошта (кур\'єр)',
+      pickup: 'Самовивіз (Дніпро)'
+    };
+    const paymentLabels = {
+      card_prepay: 'Карткою онлайн',
+      cash_on_delivery: 'Накладений платіж',
+      transfer: 'Переказ на карту',
+      telegram: 'Обговорити в Telegram'
+    };
+
+    let msg = '🛒 *Нове замовлення*\n\n';
+    msg += `👤 *Ім'я:* ${name}\n`;
+    msg += `📱 *Телефон:* ${phone}\n`;
+    if (email) msg += `📧 *Email:* ${email}\n`;
+    msg += `\n📦 *Доставка:* ${deliveryLabels[delivery] || delivery}\n`;
+    if (delivery !== 'pickup') {
+      if (city) msg += `🏙️ *Місто:* ${city}\n`;
+      if (branch) msg += `🏪 *Відділення:* ${branch}\n`;
+    }
+    msg += `💳 *Оплата:* ${paymentLabels[payment] || payment}\n`;
+    msg += '\n---\n*Товари:*\n';
+
+    let total = 0;
+    checkoutCart.forEach(item => {
+      msg += `• ${item.name} × ${item.qty} = ${(item.price * item.qty).toLocaleString('uk-UA')} грн\n`;
+      total += item.price * item.qty;
+    });
+    msg += `\n💰 *Сума:* ${total.toLocaleString('uk-UA')} грн`;
+    if (comment) msg += `\n\n💬 *Коментар:* ${comment}`;
+
+    // Генеруємо номер замовлення
+    const orderNum = 'ЩЛ-' + Date.now().toString(36).toUpperCase().slice(-6);
+
+    const tg = (window.SHOP_CONFIG && window.SHOP_CONFIG.telegramUsername || '').replace('@','');
+    const url = 'https://t.me/' + tg + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank', 'noopener');
+
+    // Очищаємо кошик
+    try { localStorage.removeItem('cart_v1'); } catch {}
+
+    // Показуємо success
+    showSuccess(orderNum);
+  }
+
+  function showSuccess(orderNum) {
+    document.getElementById('checkout-wrap').style.display = 'none';
+
+    const screen = document.getElementById('success-screen');
+    document.getElementById('success-order-num').textContent = '# ' + orderNum;
+
+    const payment = document.querySelector('input[name="payment"]:checked')?.value;
+    const descEl = document.getElementById('success-desc');
+    if (payment === 'card_prepay') {
+      descEl.textContent = 'Вікно Telegram відкрито — підтвердіть замовлення. Реквізити для оплати надішлемо після підтвердження.';
+    } else if (payment === 'transfer') {
+      descEl.textContent = 'Вікно Telegram відкрито. Реквізити для переказу надішлемо після підтвердження замовлення.';
+    } else {
+      descEl.textContent = 'Вікно Telegram відкрито — підтвердіть замовлення. Ми зв\'яжемось з вами найближчим часом.';
+    }
+
+    screen.classList.add('visible');
+    document.getElementById('form-col').style.display = 'none';
+  }
+
+  /* ── INIT ── */
+  renderSummary();
+  updateDeliveryCost();
+
+  // Якщо кошик порожній — показуємо порожній стан
+  if (checkoutCart.length === 0) {
+    document.getElementById('submit-btn').disabled = true;
+  }
+  </script>
+</body>
+</html>
