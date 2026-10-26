@@ -33,6 +33,8 @@ var SHOP_CONFIG = {
   // Розміри:
   //   Desktop : 1440 × 480 px
   //   Mobile  :  900 × 400 px
+  banners: [], // ТИМЧАСОВО ВИМКНЕНО. Щоб повернути — розкоментуйте блок нижче і приберіть цей рядок
+  /*
   banners: [
     { image: "images/banners/banner1.jpeg", imageMobile: "images/banners/mobile/banner1.jpeg", title: "Щасливі лапки", link: "#catalog" },
     { image: "images/banners/banner2.jpeg", imageMobile: "images/banners/mobile/banner2.jpeg", title: "Якісні корми", link: "#catalog" },
@@ -42,13 +44,17 @@ var SHOP_CONFIG = {
     { image: "images/banners/banner6.jpeg", imageMobile: "images/banners/mobile/banner6.jpeg", title: "Смакмакс", link: "https://www.smakmaks.ua/product-category/sumishi-dlya-domashnih-desertiv-b2c/" },
     { image: "images/banners/banner7.png", imageMobile: "images/banners/mobile/banner7.png", title: "", link: "https://www.smakmaks.ua/product-category/profesiyni-sumishi-dlya-kyurtosh-kalacha-horeca/" },
   ],
+  */
 
   // Промо-банер зверху сторінки (встанови порожнім "" щоб сховати)
+  promoBanner: null, // ТИМЧАСОВО ВИМКНЕНО. Щоб повернути — розкоментуйте блок нижче і приберіть цей рядок
+  /*
   promoBanner: {
     text: "🎁 Акція тижня: корм Farmina N&D −15% до 25 жовтня",
     linkText: "Переглянути →",
     linkHref: "#catalog"
   },
+  */
 
   // Рекламні оголошення у верхньому слайдері
   announcements: [
