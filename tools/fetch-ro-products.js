@@ -12,6 +12,7 @@ require('dotenv').config();
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
+const { annotateVariants } = require('./group-variants');
 
 // ─── Константи ────────────────────────────────────────────────────────────────
 
@@ -397,6 +398,10 @@ async function main() {
     console.warn('   • Фільтри або статус товарів приховують їх.');
     console.warn('   products.json буде створений із порожнім масивом.');
   }
+
+  // ── Групування розмірів однієї моделі (див. tools/group-variants.js) ───────
+  const grouped = annotateVariants(products);
+  console.log(`  🧩 Груп розмірів: ${grouped.groups} (товарів у них: ${grouped.items})`);
 
   // ── Збереження products.json ───────────────────────────────────────────────
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(products, null, 2), 'utf-8');

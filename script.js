@@ -158,32 +158,52 @@ function safeText(el, value) {
   el.textContent = value || '';
 }
 
+// ─── Групування розмірів однієї моделі ───────────────
+// У products.json товари однієї моделі мають спільний group, а також size і baseName
+// (їх проставляє tools/group-variants.js). Тут вони зводяться в одну картку.
+function groupVariants(products) {
+  const groups = new Map();
+  const result = [];
+  for (const p of products) {
+    if (!p.group) { result.push(p); continue; }
+    let g = groups.get(p.group);
+    if (!g) {
+      g = { ...p, name: p.baseName || p.name, variants: [] };
+      groups.set(p.group, g);
+      result.push(g);
+    }
+    g.variants.push(p);
+  }
+  for (const g of groups.values()) {
+    g.variants.sort((a, b) => (a.sizeOrder || 0) - (b.sizeOrder || 0));
+    const prices = g.variants.map(v => v.price).filter(v => v > 0);
+    g.price = prices.length ? Math.min(...prices) : 0;
+    g.searchText = g.variants.map(v => `${v.name} ${v.sku || ''}`).join(' ').toLowerCase();
+  }
+  return result;
+}
+
 // ─── Рендер картки товару ─────────────────────────────
 function renderCard(product) {
   const clone = $template.content.cloneNode(true);
-  const card  = clone.querySelector('.product-card');
 
-  const avail = getAvailability(product.availability);
-  const tgUrl = buildTelegramUrl(product);
+  const variants = product.variants || null;
+  let current = variants ? variants[0] : product;
+  const fullName = v => (variants ? `${product.name}, розмір ${v.size}` : v.name);
+  const hasPhoto = v => v.image && !v.image.includes('placeholder');
+  const groupPhoto = variants ? (variants.find(hasPhoto) || {}).image : null;
 
-  // Зображення
-  const img = clone.querySelector('.product-img');
-  img.src = product.image || 'images/product-placeholder.jpg';
-  img.alt = product.name  || 'Фото товару';
+  const img     = clone.querySelector('.product-img');
+  const badge   = clone.querySelector('.product-badge');
+  const priceEl = clone.querySelector('.product-price');
+  const skuEl   = clone.querySelector('.product-sku');
+  const btn     = clone.querySelector('.btn-order');
+
   img.onerror = () => { img.src = 'images/product-placeholder.jpg'; };
 
-  // Бейдж наявності
-  const badge = clone.querySelector('.product-badge');
-  badge.textContent = avail.label;
-  badge.classList.add(avail.cls);
-
-  // Категорія
+  // Категорія, назва, опис — спільні для всіх розмірів
   safeText(clone.querySelector('.product-category'), product.category || '');
-
-  // Назва
   safeText(clone.querySelector('.product-name'), product.name || 'Без назви');
-
-  // Опис
   const descEl = clone.querySelector('.product-desc');
   if (product.description) {
     safeText(descEl, product.description);
@@ -191,48 +211,77 @@ function renderCard(product) {
     descEl.hidden = true;
   }
 
-  // Ціна
-  const priceEl = clone.querySelector('.product-price');
-  if (product.price && product.price > 0) {
-    const currency = product.currency || 'грн';
-    priceEl.textContent = `${product.price.toLocaleString('uk-UA')} ${currency}`;
-  } else {
-    priceEl.textContent = 'Ціна за запитом';
-    priceEl.classList.add('product-price--free');
+  // Частини картки, які залежать від вибраного розміру
+  function refresh() {
+    const v = current;
+    const avail = getAvailability(v.availability);
+
+    img.src = hasPhoto(v) ? v.image : (groupPhoto || 'images/product-placeholder.jpg');
+    img.alt = fullName(v) || 'Фото товару';
+
+    badge.textContent = avail.label;
+    badge.className = `product-badge ${avail.cls}`;
+
+    if (v.price && v.price > 0) {
+      priceEl.textContent = `${v.price.toLocaleString('uk-UA')} ${v.currency || 'грн'}`;
+      priceEl.classList.remove('product-price--free');
+    } else {
+      priceEl.textContent = 'Ціна за запитом';
+      priceEl.classList.add('product-price--free');
+    }
+
+    if (v.sku && v.sku !== v.id) {
+      skuEl.textContent = `Арт: ${v.sku}`;
+      skuEl.hidden = false;
+    } else {
+      skuEl.hidden = true;
+    }
+
+    const canAddToCart = (v.availability === 'in_stock' || v.availability === 'preorder') && v.price > 0;
+    btn.className = 'btn btn-order';
+    if (canAddToCart) {
+      btn.textContent = '🛒 У кошик';
+      btn.removeAttribute('href');
+      btn.classList.add('btn-add-cart');
+    } else {
+      btn.textContent = avail.btnText;
+      btn.href = buildTelegramUrl({ ...v, name: fullName(v) });
+      if (avail.btnCls) btn.classList.add(avail.btnCls);
+    }
   }
 
-  // Артикул
-  const skuEl = clone.querySelector('.product-sku');
-  if (product.sku && product.sku !== product.id) {
-    skuEl.textContent = `Арт: ${product.sku}`;
-  } else {
-    skuEl.hidden = true;
-  }
-
-  // Кнопка замовлення / кошик
-  const btn = clone.querySelector('.btn-order');
-  const canAddToCart = product.availability === 'in_stock' || product.availability === 'preorder';
-
-  if (canAddToCart && product.price > 0) {
-    btn.textContent = '🛒 У кошик';
-    btn.removeAttribute('href');
-    btn.classList.add('btn-add-cart');
-    btn.addEventListener('click', () => {
-      if (window.Cart) {
-        window.Cart.add({
-          id: String(product.id),
-          name: product.name,
-          price: product.price,
-          image: product.image || 'images/product-placeholder.jpg'
-        });
-      }
+  btn.addEventListener('click', () => {
+    if (!btn.classList.contains('btn-add-cart') || !window.Cart) return;
+    window.Cart.add({
+      id: String(current.id),
+      name: fullName(current),
+      price: current.price,
+      image: hasPhoto(current) ? current.image : (groupPhoto || 'images/product-placeholder.jpg')
     });
-  } else {
-    btn.textContent = avail.btnText;
-    btn.href = tgUrl;
-    if (avail.btnCls) btn.classList.add(avail.btnCls);
+  });
+
+  // Вибір розміру
+  if (variants) {
+    const sizesEl = clone.querySelector('.product-sizes');
+    sizesEl.hidden = false;
+    const chips = variants.map(v => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'size-chip';
+      chip.textContent = v.size;
+      chip.addEventListener('click', () => {
+        current = v;
+        chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+        refresh();
+      });
+      sizesEl.appendChild(chip);
+      return chip;
+    });
+    chips[0].setAttribute('aria-pressed', 'true');
+    chips.slice(1).forEach(c => c.setAttribute('aria-pressed', 'false'));
   }
 
+  refresh();
   return clone;
 }
 
@@ -332,7 +381,7 @@ function applyFilters() {
   // Пошук
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
-    result = result.filter(p => (p.name || '').toLowerCase().includes(q));
+    result = result.filter(p => (p.searchText || (p.name || '').toLowerCase()).includes(q));
   }
 
   // Категорія
@@ -405,16 +454,17 @@ async function loadProducts() {
     }
 
     const hidden = (window.SHOP_CONFIG && window.SHOP_CONFIG.hiddenCategories) || [];
-    allProducts = hidden.length
+    const visibleProducts = hidden.length
       ? data.filter(p => !hidden.includes(p.category))
       : data;
+    allProducts = groupVariants(visibleProducts);
 
     if (allProducts.length === 0) {
       showState('empty');
       return;
     }
 
-    document.querySelectorAll('.js-product-count').forEach(el => { el.textContent = allProducts.length; });
+    document.querySelectorAll('.js-product-count').forEach(el => { el.textContent = visibleProducts.length; });
 
     populateCategories();
     filteredProducts = [...allProducts];
