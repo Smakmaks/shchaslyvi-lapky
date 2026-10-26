@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Панель менеджера — Щасливі лапки</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0A0A0A;--bg2:#141414;--bg3:#1C1C1C;
+      --card:#181818;--fg:#F0F0F0;--fg2:#A0A0A0;--fg3:#606060;
+      --lime:#BFFF00;--lime2:#D4FF3D;
+      --amber:#F59E0B;--red:#E05252;--blue:#60A5FA;
+      --border:#2A2A2A;--border2:#383838;
+      --f-body:'Inter',sans-serif;--f-head:'Montserrat',sans-serif;
+    }
+    :root.light {
+      --bg:#F8FAFB;--bg2:#FFFFFF;--bg3:#F0F2F5;
+      --card:#FFFFFF;--fg:#111111;--fg2:#555555;--fg3:#999999;
+      --lime:#7BC60F;--lime2:#6BB00D;
+      --amber:#C27803;--blue:#2563EB;
+      --border:#E0E4EB;--border2:#C8CDD8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f-body);background:var(--bg);color:var(--fg);min-height:100dvh;font-size:15px;line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
+    [hidden]{display:none!important}
+    button{font-family:inherit;cursor:pointer}
+
+    /* ── HEADER ── */
+    .site-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:20}
+    .logo{font-family:var(--f-head);font-size:17px;font-weight:900;color:var(--fg);white-space:nowrap}
+    .logo .dot{color:var(--lime)}
+    .logo small{font-family:var(--f-body);font-size:12px;font-weight:600;color:var(--fg2);margin-left:6px}
+    .header-right{display:flex;align-items:center;gap:8px;min-width:0}
+    .me{font-size:12px;color:var(--fg2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+    @media(max-width:640px){.me,.logo small{display:none}}
+    .icon-btn{position:relative;background:none;border:1.5px solid var(--border2);color:var(--fg);border-radius:10px;min-width:38px;height:38px;font-size:16px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px}
+    .icon-btn:hover{border-color:var(--fg2)}
+    .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;border-radius:9px;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
+    .theme-icon-light{display:none}
+    :root.light .theme-icon-dark{display:none}
+    :root.light .theme-icon-light{display:inline}
+
+    /* ── LAYOUT ── */
+    .page{max-width:1120px;margin-inline:auto;padding:24px 16px 64px}
+    .tabs{display:flex;gap:2px;border-bottom:2px solid var(--border);margin-bottom:20px;overflow-x:auto}
+    .tab-btn{padding:10px 14px;font-size:14px;font-weight:600;color:var(--fg2);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+    .tab-btn:hover{color:var(--fg)}
+    .tab-btn.active{color:var(--lime);border-bottom-color:var(--lime)}
+    .tab-count{font-size:11px;background:var(--red);color:#fff;border-radius:9px;padding:0 6px;min-width:18px;text-align:center}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+    @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+    .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;min-width:0;text-align:left;color:inherit;font:inherit}
+    button.stat{cursor:pointer}
+    button.stat:hover{border-color:var(--border2)}
+    .stat-label{font-size:11px;font-weight:600;color:var(--fg2);text-transform:uppercase;letter-spacing:.3px}
+    .stat-val{font-family:var(--f-head);font-size:22px;font-weight:800}
+    .stat-sub{font-size:12px;color:var(--fg2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+    .toolbar .grow{flex:1;min-width:180px}
+    .toolbar input,.toolbar select{padding:9px 12px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--fg);font-size:14px;font-family:inherit;outline:none}
+    .toolbar input:focus,.toolbar select:focus{border-color:var(--lime)}
+    .seg{display:inline-flex;border:1.5px solid var(--border2);border-radius:10px;overflow:hidden}
+    .seg button{background:none;border:none;color:var(--fg2);padding:8px 12px;font-size:13px;font-weight:600}
+    .seg button.on{background:var(--lime);color:#0A0A0A}
+    .check{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--fg2);cursor:pointer}
+
+    /* ── CARDS ── */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px}
+    .card-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+    .muted{color:var(--fg2)}
+    .small{font-size:13px}
+    .hint{font-size:12px;color:var(--fg3)}
+    .sec-label{font-size:12px;font-weight:600;color:var(--fg2);text-transform:uppercase;letter-spacing:.4px;margin:16px 0 8px}
+    .empty{text-align:center;padding:36px 16px;color:var(--fg2)}
+    .empty div{font-size:40px;margin-bottom:8px}
+    .list{display:flex;flex-direction:column;gap:10px}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:600;border:none;transition:.15s;min-height:36px;color:inherit;background:none;white-space:nowrap}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn-lime{background:var(--lime);color:#0A0A0A}
+    .btn-lime:hover:not(:disabled){background:var(--lime2)}
+    .btn-ghost{color:var(--fg2);border:1.5px solid var(--border2)}
+    .btn-ghost:hover:not(:disabled){border-color:var(--fg2);color:var(--fg)}
+    .btn-danger{color:var(--red);border:1.5px solid rgba(224,82,82,.3)}
+    .btn-danger:hover{background:rgba(224,82,82,.1)}
+    .btn-sm{padding:6px 11px;font-size:12px;min-height:30px}
+    .btn-row{display:flex;gap:6px;flex-wrap:wrap}
+    .link{color:var(--lime);font-weight:600;background:none;border:none;padding:0;font-size:inherit}
+
+    /* ── CHIPS ── */
+    .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid transparent}
+    .chip-active{background:color-mix(in srgb,var(--lime) 12%,transparent);color:var(--lime);border-color:color-mix(in srgb,var(--lime) 40%,transparent)}
+    .chip-paused,.chip-pending{background:color-mix(in srgb,var(--amber) 12%,transparent);color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+    .chip-cancelled{background:var(--bg3);color:var(--fg3);border-color:var(--border2)}
+    .chip-info{background:color-mix(in srgb,var(--blue) 12%,transparent);color:var(--blue);border-color:color-mix(in srgb,var(--blue) 35%,transparent)}
+    .tag{display:inline-flex;padding:2px 9px;background:var(--bg3);border:1px solid var(--border2);border-radius:100px;font-size:11px;color:var(--fg2)}
+    .tag-red{color:var(--red);border-color:rgba(224,82,82,.35)}
+
+    /* ── EVENTS ── */
+    .event{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+    .event.is-open{border-color:color-mix(in srgb,var(--amber) 45%,transparent);background:color-mix(in srgb,var(--amber) 4%,var(--card))}
+    .event.is-new{animation:flash 1.6s ease}
+    @keyframes flash{0%{box-shadow:0 0 0 3px var(--lime)}100%{box-shadow:0 0 0 0 transparent}}
+    .event__icon{font-size:22px;line-height:1.2}
+    .event__body{flex:1;min-width:0}
+    .event__title{font-weight:600}
+    .event__meta{font-size:12px;color:var(--fg2);margin-top:2px}
+    .event__details{font-size:13px;color:var(--fg2);margin-top:6px;white-space:pre-line}
+    .event .btn-row{margin-top:10px}
+
+    /* ── SUB / ROW CARDS ── */
+    .row-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .row-card.is-pending{border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
+    .row-card.is-cancelled{opacity:.65}
+    .row-head{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+    .row-head .grow{flex:1;min-width:180px}
+    .row-title{font-weight:700;font-size:15px}
+    .row-sub{font-size:12px;color:var(--fg2)}
+    .items{font-size:13px;color:var(--fg2);line-height:1.7;margin-bottom:10px}
+    .items b{color:var(--fg)}
+    .kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px 16px;font-size:13px;margin-bottom:12px}
+    .kv span{display:block;font-size:11px;color:var(--fg3);text-transform:uppercase;letter-spacing:.3px}
+    .note-mgr{font-size:13px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--lime) 8%,transparent);margin-bottom:10px}
+    .date-head{font-family:var(--f-head);font-size:16px;font-weight:800;margin:20px 0 10px;display:flex;align-items:center;gap:10px}
+    .date-head:first-child{margin-top:0}
+    .date-head small{font-family:var(--f-body);font-size:12px;font-weight:600;color:var(--fg2)}
+    .date-head.overdue{color:var(--red)}
+
+    /* ── GRID (pets) ── */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+    .pet-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .15s}
+    .pet-card:hover{border-color:var(--lime)}
+    .pet-head{display:flex;align-items:center;gap:12px}
+    .avatar{width:48px;height:48px;border-radius:50%;background:var(--bg3);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;flex-shrink:0}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    .avatar.lg{width:80px;height:80px;font-size:34px}
+    .tags{display:flex;flex-wrap:wrap;gap:4px}
+
+    /* ── TABLE (clients, staff) ── */
+    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+    th{font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--fg2);font-weight:600;white-space:nowrap}
+    tr:last-child td{border-bottom:none}
+    tbody tr.clickable{cursor:pointer}
+    tbody tr.clickable:hover{background:var(--bg3)}
+    td input[type=text],td select{min-width:120px;padding:6px 8px;border-radius:8px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--fg);font-size:13px;font-family:inherit;width:100%;min-width:110px}
+
+    /* ── FORM ── */
+    .form-grid{display:grid;gap:12px}
+    .form-row-2{grid-template-columns:1fr 1fr}
+    .form-row-3{grid-template-columns:1fr 1fr 1fr}
+    @media(max-width:560px){.form-row-2,.form-row-3{grid-template-columns:1fr}}
+    .field label{display:block;font-size:11px;font-weight:600;color:var(--fg2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+    .field input,.field select,.field textarea{width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--fg);font-size:14px;font-family:inherit;outline:none}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--lime)}
+    .field textarea{resize:vertical;min-height:64px}
+
+    /* ── MODAL ── */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow-y:auto}
+    .modal{background:var(--card);border:1px solid var(--border2);border-radius:18px;width:100%;max-width:760px;padding:24px;position:relative;margin:auto 0}
+    .modal.narrow{max-width:440px}
+    @media(max-width:540px){.modal{padding:16px}}
+    .modal h3{font-size:18px;font-weight:700;margin-bottom:16px;padding-right:40px}
+    .modal-close{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--fg2);font-size:24px;line-height:1;width:36px;height:36px;border-radius:8px}
+    .modal-close:hover{background:var(--bg3);color:var(--fg)}
+    .modal-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+
+    .notes{display:flex;flex-direction:column;gap:8px}
+    .note{background:var(--bg3);border-radius:10px;padding:10px 12px;font-size:13px}
+    .note small{display:flex;justify-content:space-between;gap:8px;color:var(--fg3);margin-top:4px}
+    .note-form{display:flex;gap:8px;margin-top:8px}
+    .note-form input{flex:1;min-width:0;padding:9px 12px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--fg);font-size:14px;font-family:inherit;outline:none}
+
+    /* ── AUTH ── */
+    .center-card{max-width:440px;margin:40px auto}
+    .center-card h2{font-family:var(--f-head);font-size:22px;font-weight:800;margin-bottom:6px}
+    .center-card .btn{width:100%;margin-top:12px;min-height:42px;font-size:14px}
+    .auth-err{color:var(--red);font-size:13px;margin-top:8px}
+    .code-input{letter-spacing:6px;font-size:22px!important;text-align:center;font-weight:700}
+    .loading{text-align:center;padding:60px 20px;color:var(--fg2)}
+
+    /* ── TOAST ── */
+    .toasts{position:fixed;bottom:20px;right:20px;z-index:1000;display:flex;flex-direction:column;gap:8px;max-width:min(380px,calc(100vw - 40px))}
+    .toast{background:var(--card);border:1px solid var(--lime);border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,.35);animation:toastIn .25s ease;cursor:pointer}
+    .toast small{display:block;font-weight:400;color:var(--fg2);margin-top:2px}
+    @keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="manager.html" class="logo">Щасливі<span class="dot">.</span>лапки<small>панель менеджера</small></a>
+    <div class="header-right">
+      <span class="me" id="me-label"></span>
+      <button class="icon-btn" id="bell-btn" title="Сповіщення" hidden>🔔<span class="badge" id="bell-badge" hidden>0</span></button>
+      <button class="icon-btn" id="themeBtn" aria-label="Тема"><span class="theme-icon-dark">🌙</span><span class="theme-icon-light">☀️</span></button>
+      <button class="icon-btn" id="logout-btn" title="Вийти" hidden style="font-size:13px;font-weight:600">Вийти</button>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <div class="loading" id="loading-view">Завантаження…</div>
+
+    <!-- Сервер не налаштовано -->
+    <div class="card center-card" id="setup-view" hidden>
+      <h2>Підключіть сервер</h2>
+      <p class="small muted">Панель менеджера працює з базою даних Supabase. Заповніть <code>backend</code> у файлі <code>config.js</code> — покрокова інструкція в <code>docs/SETUP-SUPABASE.md</code>.</p>
+    </div>
+
+    <!-- Вхід -->
+    <div class="card center-card" id="auth-view" hidden>
+      <h2>Вхід для менеджерів</h2>
+      <p class="small muted" style="margin-bottom:16px">Введіть робочий email — надішлемо код. Доступ мають лише адреси, додані адміністратором у «Команду».</p>
+      <div id="auth-step-email">
+        <div class="field">
+          <label for="auth-email">Email</label>
+          <input type="email" id="auth-email" placeholder="manager@gmail.com" autocomplete="email">
+        </div>
+        <button class="btn btn-lime" id="auth-send-btn">Отримати код</button>
+      </div>
+      <div id="auth-step-code" hidden>
+        <p class="small" style="margin-bottom:10px">Код надіслано на <b id="auth-email-shown"></b>.</p>
+        <div class="field">
+          <label for="auth-code">Код з листа</label>
+          <input type="text" id="auth-code" class="code-input" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="••••••">
+        </div>
+        <button class="btn btn-lime" id="auth-verify-btn">Увійти</button>
+        <div class="btn-row" style="justify-content:space-between;margin-top:10px">
+          <button class="link small" id="auth-back-btn">← Інший email</button>
+          <button class="link small" id="auth-resend-btn">Надіслати ще раз</button>
+        </div>
+      </div>
+      <div class="auth-err" id="auth-err" hidden></div>
+    </div>
+
+    <!-- Немає доступу -->
+    <div class="card center-card" id="denied-view" hidden>
+      <h2>Немає доступу</h2>
+      <p class="small muted" style="margin-bottom:6px">Адреса <b id="denied-email"></b> не додана до команди магазину.</p>
+      <p class="small muted">Попросіть адміністратора додати її в розділі «Команда», а потім оновіть сторінку.</p>
+      <button class="btn btn-ghost" id="denied-logout">Увійти з іншою адресою</button>
+    </div>
+
+    <!-- ══════ ПАНЕЛЬ ══════ -->
+    <div id="app" hidden>
+      <div class="stats">
+        <button class="stat" data-goto="events"><div class="stat-label">Нові сповіщення</div><div class="stat-val" id="st-events">0</div><div class="stat-sub" id="st-events-sub">—</div></button>
+        <button class="stat" data-goto="ship"><div class="stat-label">Відправки на 7 днів</div><div class="stat-val" id="st-ship">0</div><div class="stat-sub" id="st-ship-sub">—</div></button>
+        <button class="stat" data-goto="subs"><div class="stat-label">Активні автодоставки</div><div class="stat-val" id="st-subs">0</div><div class="stat-sub" id="st-subs-sub">—</div></button>
+        <button class="stat" data-goto="clients"><div class="stat-label">Клієнти / улюбленці</div><div class="stat-val" id="st-clients">0</div><div class="stat-sub" id="st-clients-sub">—</div></button>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="events">🔔 Сповіщення <span class="tab-count" id="tab-count-events" hidden>0</span></button>
+        <button class="tab-btn" data-tab="ship">🚚 Відправки <span class="tab-count" id="tab-count-ship" hidden>0</span></button>
+        <button class="tab-btn" data-tab="subs">🔁 Автодоставки</button>
+        <button class="tab-btn" data-tab="pets">🐾 Улюбленці</button>
+        <button class="tab-btn" data-tab="clients">👥 Клієнти</button>
+        <button class="tab-btn" data-tab="orders">🛒 Замовлення</button>
+        <button class="tab-btn" data-tab="team" id="team-tab-btn" hidden>⚙️ Команда</button>
+      </div>
+
+      <!-- СПОВІЩЕННЯ -->
+      <div class="tab-panel active" id="tab-events">
+        <div class="toolbar">
+          <div class="seg" id="ev-seg">
+            <button data-v="open" class="on">Нові</button>
+            <button data-v="all">Усі</button>
+          </div>
+          <select id="ev-kind">
+            <option value="">Усі типи</option>
+            <option value="subscription">🔁 Автодоставки</option>
+            <option value="pet">🐾 Улюбленці</option>
+            <option value="order">🛒 Замовлення</option>
+            <option value="client">👤 Нові клієнти</option>
+          </select>
+          <span class="grow"></span>
+          <button class="btn btn-ghost btn-sm" id="push-btn" hidden>🔔 Сповіщення в браузері</button>
+          <button class="btn btn-ghost btn-sm" id="ev-all-btn">✓ Позначити всі опрацьованими</button>
+        </div>
+        <div class="list" id="events-list"></div>
+      </div>
+
+      <!-- ВІДПРАВКИ -->
+      <div class="tab-panel" id="tab-ship">
+        <div class="toolbar">
+          <div class="seg" id="ship-seg">
+            <button data-v="7" class="on">7 днів</button>
+            <button data-v="14">14 днів</button>
+            <button data-v="30">30 днів</button>
+          </div>
+          <span class="grow hint">Позначте «Відправлено» — дата наступної доставки зсунеться автоматично, клієнт побачить це в кабінеті.</span>
+        </div>
+        <div id="ship-list"></div>
+      </div>
+
+      <!-- АВТОДОСТАВКИ -->
+      <div class="tab-panel" id="tab-subs">
+        <div class="toolbar">
+          <input type="search" class="grow" id="subs-q" placeholder="Пошук: клієнт, телефон, улюбленець, корм, АД-…">
+          <select id="subs-status">
+            <option value="live">Активні та на паузі</option>
+            <option value="active">Лише активні</option>
+            <option value="paused">На паузі</option>
+            <option value="cancelled">Скасовані</option>
+            <option value="all">Усі</option>
+          </select>
+          <label class="check"><input type="checkbox" id="subs-pending"> Чекають підтвердження</label>
+        </div>
+        <div class="list" id="subs-list"></div>
+      </div>
+
+      <!-- УЛЮБЛЕНЦІ -->
+      <div class="tab-panel" id="tab-pets">
+        <div class="toolbar">
+          <input type="search" class="grow" id="pets-q" placeholder="Пошук: кличка, порода, власник, алергія…">
+          <select id="pets-species">
+            <option value="">Усі види</option>
+            <option value="cat">🐱 Коти</option>
+            <option value="dog">🐶 Собаки</option>
+            <option value="rabbit">🐰 Кролики</option>
+            <option value="rodent">🐹 Гризуни</option>
+            <option value="bird">🦜 Птахи</option>
+            <option value="fish">🐠 Риби</option>
+            <option value="other">Інше</option>
+          </select>
+          <label class="check"><input type="checkbox" id="pets-nosub"> Без автодоставки</label>
+        </div>
+        <div class="grid" id="pets-grid"></div>
+      </div>
+
+      <!-- КЛІЄНТИ -->
+      <div class="tab-panel" id="tab-clients">
+        <div class="toolbar">
+          <input type="search" class="grow" id="clients-q" placeholder="Пошук: ім'я, email, телефон, місто…">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Клієнт</th><th>Телефон</th><th>Місто</th><th>Улюбленці</th><th>Автодоставки</th><th>З нами з</th></tr></thead>
+            <tbody id="clients-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ЗАМОВЛЕННЯ -->
+      <div class="tab-panel" id="tab-orders">
+        <div class="toolbar">
+          <input type="search" class="grow" id="orders-q" placeholder="Пошук: номер, клієнт, товар…">
+          <select id="orders-status">
+            <option value="">Усі статуси</option>
+            <option value="pending">Очікує</option>
+            <option value="confirmed">Підтверджено</option>
+            <option value="sent">Відправлено</option>
+            <option value="done">Виконано</option>
+            <option value="cancelled">Скасовано</option>
+          </select>
+        </div>
+        <div class="list" id="orders-list"></div>
+      </div>
+
+      <!-- КОМАНДА (адміністратор) -->
+      <div class="tab-panel" id="tab-team">
+        <div class="card">
+          <div class="card-title">Менеджери та адміністратори</div>
+          <div class="table-wrap" style="margin-bottom:14px">
+            <table>
+              <thead><tr><th>Email</th><th>Ім'я</th><th>Роль</th><th>Telegram chat ID</th><th>Сповіщення</th><th>Активний</th><th></th></tr></thead>
+              <tbody id="staff-body"></tbody>
+            </table>
+          </div>
+          <div class="sec-label">Додати менеджера</div>
+          <div class="form-grid form-row-3">
+            <div class="field"><label for="ns-email">Email</label><input type="email" id="ns-email" placeholder="manager@gmail.com"></div>
+            <div class="field"><label for="ns-name">Ім'я</label><input type="text" id="ns-name" placeholder="Марія"></div>
+            <div class="field"><label for="ns-role">Роль</label>
+              <select id="ns-role"><option value="manager">Менеджер</option><option value="admin">Адміністратор</option></select>
+            </div>
+          </div>
+          <button class="btn btn-lime" id="ns-add-btn" style="margin-top:12px">+ Додати</button>
+          <p class="hint" style="margin-top:10px">Менеджер відкриває <b id="mgr-url-hint"></b>, вводить цей email і код із листа. Адміністратор, крім того, керує командою й налаштуваннями.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Сповіщення в Telegram</div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="set-token">Токен бота</label>
+              <input type="password" id="set-token" placeholder="123456:ABC-DEF… (від @BotFather)" autocomplete="off">
+              <div class="hint" style="margin-top:4px" id="set-token-hint"></div>
+            </div>
+            <div class="form-grid form-row-2">
+              <div class="field">
+                <label for="set-group">Груповий чат (необов'язково)</label>
+                <input type="text" id="set-group" placeholder="-1001234567890">
+              </div>
+              <div class="field">
+                <label for="set-url">Посилання на панель у повідомленні</label>
+                <input type="text" id="set-url" placeholder="https://…/manager.html">
+              </div>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:14px">
+            <button class="btn btn-lime" id="set-save-btn">💾 Зберегти</button>
+            <button class="btn btn-ghost" id="set-test-btn">📨 Надіслати тестове</button>
+          </div>
+          <div class="hint" style="margin-top:12px;line-height:1.7">
+            1. Бот: можна використати того ж, що публікує пости в канал (токен — у GitHub Secrets <code>TELEGRAM_BOT_TOKEN</code>), або створити нового в @BotFather.<br>
+            2. Кожен менеджер пише боту <b>/start</b>, потім дізнається свій chat ID у @userinfobot і вписує його в таблицю вище.<br>
+            3. Або додайте бота в спільну групу менеджерів і вкажіть ID групи.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ MODALS ══════ -->
+  <div class="modal-overlay" id="client-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" data-close aria-label="Закрити">×</button>
+      <div id="client-modal-body"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="pet-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" data-close aria-label="Закрити">×</button>
+      <div id="pet-modal-body"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="sub-modal" hidden>
+    <div class="modal narrow" role="dialog" aria-modal="true" aria-labelledby="sub-modal-title">
+      <button class="modal-close" data-close aria-label="Закрити">×</button>
+      <h3 id="sub-modal-title">Автодоставка</h3>
+      <div class="form-grid">
+        <div class="form-grid form-row-2">
+          <div class="field">
+            <label for="sm-status">Статус</label>
+            <select id="sm-status">
+              <option value="active">Активна</option>
+              <option value="paused">На паузі</option>
+              <option value="cancelled">Скасована</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sm-freq">Частота, днів</label>
+            <input type="number" id="sm-freq" min="7" max="180" step="1">
+          </div>
+        </div>
+        <div class="form-grid form-row-2">
+          <div class="field" id="sm-next-wrap">
+            <label for="sm-next">Наступна відправка</label>
+            <input type="date" id="sm-next">
+          </div>
+          <div class="field" id="sm-paused-wrap">
+            <label for="sm-paused">Пауза до (порожньо — безстроково)</label>
+            <input type="date" id="sm-paused">
+          </div>
+        </div>
+        <div class="form-grid form-row-2">
+          <div class="field">
+            <label for="sm-delivery">Доставка</label>
+            <select id="sm-delivery">
+              <option value="nova_poshta">Нова Пошта (відділення)</option>
+              <option value="nova_poshta_courier">Нова Пошта (кур'єр)</option>
+              <option value="pickup">Самовивіз</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sm-address">Адреса / відділення</label>
+            <input type="text" id="sm-address">
+          </div>
+        </div>
+        <div class="field">
+          <label for="sm-comment">Коментар для клієнта (видно в кабінеті)</label>
+          <textarea id="sm-comment" placeholder="Напр.: Підтверджено, відправимо 3 листопада. Корм є в наявності."></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" data-close>Скасувати</button>
+        <button class="btn btn-lime" id="sm-save-btn">Зберегти й підтвердити</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+
+  <script src="config.js?v=4"></script>
+  <script src="api.js?v=1"></script>
+  <script src="manager.js?v=1"></script>
+</body>
+</html>

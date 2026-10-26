@@ -1,8 +1,12 @@
 /* ═══════════════════════════════════════════════════════
    cabinet.js — Кабінет клієнта Щасливих лапок
-   Етап 2: кілька улюбленців + керування автодоставкою корму.
-   Усе зберігається в localStorage цього браузера; зміни
-   автодоставки передаються менеджеру через Telegram.
+   Кілька улюбленців + керування автодоставкою корму.
+
+   Два режими:
+   • сервер (у config.js заповнено backend) — вхід кодом на email,
+     дані в базі, менеджер одразу отримує сповіщення (див. api.js);
+   • локальний — усе в localStorage, зміни автодоставки клієнт
+     надсилає менеджеру в Telegram готовим повідомленням.
    ═══════════════════════════════════════════════════════ */
 'use strict';
 
@@ -43,8 +47,13 @@ function esc(str) {
 }
 
 function uid() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 3 | 8)).toString(16);
+  });
 }
+const isUuid = s => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(s));
 
 function read(key, fallback) {
   try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; }
@@ -162,6 +171,20 @@ function fmtWeight(g) {
 ══════════════════════════════ */
 let pets = [];
 let subs = [];
+let remote = false;          // true — дані на сервері, false — у localStorage
+let currentUser = null;
+let serverOrders = [];
+let profileCache = null;
+
+/* Запити до сервера виконуємо по черзі, щоб зміни не обганяли одна одну */
+let saveQueue = Promise.resolve();
+function enqueue(fn) {
+  saveQueue = saveQueue.then(fn).catch(err => {
+    console.error(err);
+    showToast('⚠️ Не вдалося зберегти на сервері. Перевірте інтернет і оновіть сторінку');
+  });
+  return saveQueue;
+}
 
 function loadAll() {
   pets = read(KEY_PETS, null);
@@ -179,6 +202,27 @@ function loadAll() {
 function savePets() { return write(KEY_PETS, pets); }
 function saveSubs() { return write(KEY_SUBS, subs); }
 
+function persistPet(pet) {
+  if (!remote) return savePets();
+  enqueue(() => Api.savePet(pet));
+  return true;
+}
+function persistSub(sub) {
+  if (!remote) return saveSubs();
+  enqueue(() => Api.saveSub(sub).then(row => {
+    sub.managerStatus = row.managerStatus;
+    sub.managerComment = row.managerComment;
+    renderOverview();
+  }));
+  return true;
+}
+function removeSubData(id) {
+  subs = subs.filter(s => s.id !== id);
+  if (!remote) return saveSubs();
+  enqueue(() => Api.deleteSub(id));
+  return true;
+}
+
 function getPet(id) { return pets.find(p => p.id === id) || null; }
 function getSub(id) { return subs.find(s => s.id === id) || null; }
 function petSubs(petId) { return subs.filter(s => s.petId === petId); }
@@ -187,21 +231,22 @@ function petSubs(petId) { return subs.filter(s => s.petId === petId); }
    пауза закінчилась — автодоставка відновлюється. */
 function advanceSchedules() {
   const t = today();
-  let changed = false;
+  const changed = new Set();
   subs.forEach(s => {
     if (s.status === 'paused' && s.pausedUntil && s.pausedUntil <= t) {
       s.status = 'active';
       s.nextDate = s.pausedUntil;
       delete s.pausedUntil;
       logHistory(s, 'Пауза завершилась, автодоставку відновлено');
-      changed = true;
+      changed.add(s);
     }
     if (s.status === 'active' && s.nextDate && s.nextDate < t) {
       while (s.nextDate < t) s.nextDate = addDays(s.nextDate, s.freq);
-      changed = true;
+      changed.add(s);
     }
   });
-  if (changed) saveSubs();
+  if (!changed.size) return;
+  if (remote) changed.forEach(persistSub); else saveSubs();
 }
 
 function logHistory(sub, text) {
@@ -210,7 +255,7 @@ function logHistory(sub, text) {
   if (sub.history.length > 30) sub.history = sub.history.slice(-30);
 }
 
-function loadProfile() { return read(KEY_PROFILE, {}) || {}; }
+function loadProfile() { return remote ? (profileCache || {}) : (read(KEY_PROFILE, {}) || {}); }
 
 /* ── Розрахунки автодоставки ── */
 function subTotals(sub) {
@@ -262,15 +307,17 @@ function loadCatalog() {
 function refreshSubPrices() {
   if (!catalog || !catalog.length) return;
   const byId = new Map(catalog.map(p => [p.id, p]));
-  let changed = false;
+  const changed = new Set();
   subs.forEach(s => (s.items || []).forEach(i => {
     const p = byId.get(i.id);
     if (p && (p.price !== i.price || p.name !== i.name)) {
       i.price = p.price; i.name = p.name; i.image = p.image || i.image;
-      changed = true;
+      changed.add(s);
     }
   }));
-  if (changed) { saveSubs(); renderAll(); }
+  if (!changed.size) return;
+  if (remote) changed.forEach(persistSub); else saveSubs();
+  renderAll();
 }
 
 function searchCatalog(query) {
@@ -336,6 +383,14 @@ function renderOverview() {
     $('ov-next-sub').textContent = 'Немає запланованих';
   }
 
+  if (remote) {
+    const pending = subs.filter(s => s.managerStatus === 'pending');
+    $('sync-alert').hidden = pending.length === 0;
+    $('sync-alert-text').textContent = pending.length === 1
+      ? 'Зміни в автодоставці очікують підтвердження менеджера.'
+      : pending.length + ' автодоставки очікують підтвердження менеджера.';
+    return;
+  }
   const unsynced = subs.filter(s => !s.synced);
   $('sync-alert').hidden = unsynced.length === 0;
   $('sync-alert-text').textContent = unsynced.length === 1
@@ -490,20 +545,25 @@ $('detail-delete-btn').addEventListener('click', () => {
     ? `\n\nУ ${pet.name} є ${live.length} ${plural(live.length, 'активна автодоставка', 'активні автодоставки', 'активних автодоставок')} — їх буде позначено як скасовані, і ми запропонуємо повідомити менеджера.`
     : '';
   if (!confirm(`Видалити профіль ${pet.name}?${warn}`)) return;
+  // Автодоставки лишаються в історії, але без прив'язки до улюбленця
+  const own = petSubs(pet.id);
+  own.forEach(s => { s.petId = null; s.petName = pet.name; });
   live.forEach(s => {
     s.status = 'cancelled';
     delete s.pausedUntil;
     markChanged(s, 'Скасовано (профіль улюбленця видалено)');
   });
-  const removedSubs = live.slice();
   pets = pets.filter(p => p.id !== pet.id);
-  // Скасовані автодоставки лишаються в історії, але без прив'язки до улюбленця
-  subs.forEach(s => { if (s.petId === pet.id) { s.petId = null; s.petName = pet.name; } });
-  savePets(); saveSubs();
+  if (remote) {
+    own.forEach(persistSub);
+    enqueue(() => Api.deletePet(pet.id));
+  } else {
+    savePets(); saveSubs();
+  }
   showPetsList();
   renderAll();
   showToast('Профіль видалено');
-  if (removedSubs.length) openSyncModal(removedSubs[0].id);
+  if (live.length && !remote) openSyncModal(live[0].id);
 });
 
 /* ── Форма улюбленця ── */
@@ -625,7 +685,7 @@ $('save-pet-btn').addEventListener('click', () => {
     photo:      formPhoto,
   };
   if (existing) pets[pets.indexOf(existing)] = pet; else pets.push(pet);
-  if (!savePets()) return;
+  if (!persistPet(pet)) return;
   renderAll();
   openPetDetail(pet.id);
   showToast(existing ? '✅ Профіль оновлено' : `✅ ${name} тепер у кабінеті!`);
@@ -691,11 +751,21 @@ function subCard(sub, compact) {
     }
   }
 
-  const sync = !sub.synced ? `
+  let sync = '';
+  if (remote) {
+    if (sub.managerStatus === 'pending') sync = `
+    <div class="sub-sync"><span>⏳ ${esc(sub.lastAction || 'Зміни')} — менеджер отримав сповіщення і скоро підтвердить</span></div>`;
+    if (sub.managerComment) sync += `
+    <div class="sub-sync" style="background:color-mix(in srgb,var(--lime) 8%,transparent)"><span>💬 Менеджер: ${esc(sub.managerComment)}</span></div>`;
+  } else if (!sub.synced) {
+    sync = `
     <div class="sub-sync">
       <span>⏳ ${esc(sub.lastAction || 'Зміни')} — ще не надіслано менеджеру</span>
       <button class="btn btn-amber btn-sm" data-act="sync">Надіслати в Telegram</button>
-    </div>` : '';
+    </div>`;
+  }
+  const confirmed = remote && sub.managerStatus === 'confirmed' && sub.status !== 'cancelled'
+    ? ' · <span style="color:var(--lime)">✓ підтверджено магазином</span>' : '';
 
   let actions = '';
   if (sub.status === 'active') {
@@ -725,7 +795,7 @@ function subCard(sub, compact) {
       ${compact ? '' : `<div class="pet-avatar xs">${avatarHtml(pet)}</div>`}
       <div class="sub-card__title">
         <b>${compact ? 'Автодоставка' : 'Для ' + esc(petName)}</b>
-        <div>${esc(sub.num || '')}${sub.delivery ? ' · ' + esc(deliveryLabel[sub.delivery] || '') : ''}</div>
+        <div>${esc(sub.num || '')}${sub.delivery ? ' · ' + esc(deliveryLabel[sub.delivery] || '') : ''}${confirmed}</div>
       </div>
       ${chip}
     </div>
@@ -759,16 +829,21 @@ function renderSubs() {
 function markChanged(sub, action) {
   sub.synced = false;
   sub.lastAction = action;
-  sub.updatedAt = new Date().toISOString();
+  sub.actionAt = sub.updatedAt = new Date().toISOString();
+  if (remote) sub.managerStatus = 'pending';
   logHistory(sub, action);
 }
 
 function commit(sub, action, toast) {
   markChanged(sub, action);
-  saveSubs();
+  persistSub(sub);
   renderAll();
-  showToast(toast || '✅ Збережено');
-  openSyncModal(sub.id);
+  if (remote) {
+    showToast((toast || '✅ Збережено') + ' · менеджер отримав сповіщення');
+  } else {
+    showToast(toast || '✅ Збережено');
+    openSyncModal(sub.id);
+  }
 }
 
 function handleSubAction(id, act) {
@@ -856,8 +931,7 @@ function handleSubAction(id, act) {
 
     case 'remove':
       if (!confirm('Прибрати цю скасовану автодоставку з історії?')) return;
-      subs = subs.filter(s => s.id !== id);
-      saveSubs();
+      removeSubData(id);
       renderAll();
       break;
   }
@@ -1205,7 +1279,7 @@ $('ed-save-btn').addEventListener('click', () => {
     const changes = describeChanges(existing, data);
     Object.assign(sub, data);
     closeModal('sub-modal');
-    if (!changes) { saveSubs(); renderAll(); showToast('Змін немає'); return; }
+    if (!changes) { persistSub(sub); renderAll(); showToast('Змін немає'); return; }
     commit(sub, 'Змінено: ' + changes, '✅ Автодоставку оновлено');
   } else {
     sub = {
@@ -1239,8 +1313,17 @@ function describeChanges(a, b) {
 /* ══════════════════════════════
    ЗАМОВЛЕННЯ
 ══════════════════════════════ */
+function allOrders() {
+  const local = read(KEY_ORDERS, []);
+  const list = Array.isArray(local) ? local : [];
+  if (!remote) return list;
+  const nums = new Set(serverOrders.map(o => o.num));
+  return [...serverOrders, ...list.filter(o => !nums.has(o.num))]
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+}
+
 function renderOrders() {
-  const orders = read(KEY_ORDERS, []);
+  const orders = allOrders();
   const list  = $('orders-list');
   const empty = $('orders-empty');
   list.innerHTML = '';
@@ -1310,6 +1393,12 @@ $('save-profile-btn').addEventListener('click', () => {
     branch:   $('client-branch').value.trim(),
     delivery: $('client-delivery').value,
   };
+  if (remote) {
+    profileCache = { ...profileCache, ...p };
+    write(KEY_PROFILE, p);   // для підстановки на сторінці оформлення
+    enqueue(() => Api.saveProfile(currentUser.id, p).then(() => showToast('✅ Дані збережено')));
+    return;
+  }
   if (write(KEY_PROFILE, p)) showToast('✅ Дані збережено');
 });
 
@@ -1372,15 +1461,185 @@ function renderAll() {
   if (!$('pet-detail-view').hidden && currentPetId) openPetDetail(currentPetId);
 }
 
-loadAll();
-fillProfile();
-showView('list');
-renderAll();
-loadCatalog();
+/* ══════════════════════════════
+   ВХІД І ЗАПУСК
+══════════════════════════════ */
+let authEmail = '';
+let entering = false;
+
+function authError(msg) {
+  $('auth-err').hidden = !msg;
+  $('auth-err').textContent = msg || '';
+}
+function friendlyAuthError(e) {
+  const m = String((e && e.message) || e || '').toLowerCase();
+  if (m.includes('rate') || m.includes('second') || m.includes('too many')) return 'Забагато спроб. Зачекайте хвилину й спробуйте знову.';
+  if (m.includes('expired') || m.includes('invalid') || m.includes('token')) return 'Код невірний або застарів. Запросіть новий.';
+  if (m.includes('fetch') || m.includes('network')) return "Немає зв'язку з сервером. Перевірте інтернет.";
+  return 'Помилка: ' + ((e && e.message) || e);
+}
+function showAuth() {
+  $('loading-view').hidden = true;
+  $('cabinet-main').hidden = true;
+  $('auth-view').hidden = false;
+  $('auth-step-email').hidden = false;
+  $('auth-step-code').hidden = true;
+  const p = read(KEY_PROFILE, {}) || {};
+  if (p.email && !$('auth-email').value) $('auth-email').value = p.email;
+  $('auth-email').focus();
+}
+
+async function sendCode() {
+  const email = $('auth-email').value.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { authError('Введіть коректний email'); $('auth-email').focus(); return; }
+  authError('');
+  const btn = $('auth-send-btn');
+  btn.disabled = true; btn.textContent = 'Надсилаємо…';
+  try {
+    await Api.sendCode(email);
+    authEmail = email;
+    $('auth-email-shown').textContent = email;
+    $('auth-step-email').hidden = true;
+    $('auth-step-code').hidden = false;
+    $('auth-code').value = '';
+    $('auth-code').focus();
+  } catch (e) {
+    authError(friendlyAuthError(e));
+  } finally {
+    btn.disabled = false; btn.textContent = 'Отримати код';
+  }
+}
+
+async function verifyCode() {
+  const code = $('auth-code').value.replace(/\D/g, '');
+  if (code.length < 6) { authError('Введіть код із листа'); $('auth-code').focus(); return; }
+  authError('');
+  const btn = $('auth-verify-btn');
+  btn.disabled = true; btn.textContent = 'Перевіряємо…';
+  try {
+    const s = await Api.verifyCode(authEmail, code);
+    await enterRemote(s.user);
+  } catch (e) {
+    authError(friendlyAuthError(e));
+  } finally {
+    btn.disabled = false; btn.textContent = 'Увійти';
+  }
+}
+
+$('auth-send-btn').addEventListener('click', sendCode);
+$('auth-email').addEventListener('keydown', e => { if (e.key === 'Enter') sendCode(); });
+$('auth-verify-btn').addEventListener('click', verifyCode);
+$('auth-code').addEventListener('keydown', e => { if (e.key === 'Enter') verifyCode(); });
+$('auth-resend-btn').addEventListener('click', () => { $('auth-email').value = authEmail; sendCode(); });
+$('auth-back-btn').addEventListener('click', () => { authError(''); $('auth-step-code').hidden = true; $('auth-step-email').hidden = false; });
+$('logout-btn').addEventListener('click', async () => {
+  try { localStorage.removeItem(KEY_PROFILE); } catch {}
+  await Api.signOut();
+  location.reload();
+});
+
+/* Улюбленці й автодоставки, створені до входу (на цьому пристрої), переносимо на сервер */
+async function migrateLocalToServer(user) {
+  loadAll();   // читає локальні дані в pets / subs (і мігрує найстаріший формат)
+  const localProfile = read(KEY_PROFILE, {}) || {};
+  if (localStorage.getItem('cabinet_uploaded_to') === user.id || (!pets.length && !subs.length)) return 0;
+
+  const idMap = {};
+  for (const p of pets) {
+    const id = isUuid(p.id) ? p.id : uid();
+    idMap[p.id] = id;
+    await Api.savePet({ ...p, id });
+  }
+  let moved = 0;
+  for (const s of subs) {
+    if (s.status === 'cancelled') continue;
+    const action = 'Перенесено з кабінету на пристрої клієнта';
+    await Api.saveSub({
+      ...s,
+      id: isUuid(s.id) ? s.id : uid(),
+      petId: idMap[s.petId] || null,
+      lastAction: action,
+      actionAt: new Date().toISOString(),
+      history: [...(s.history || []), { at: new Date().toISOString(), text: action }]
+    });
+    moved++;
+  }
+  if (!profileCache.name && !profileCache.phone && (localProfile.name || localProfile.phone)) {
+    const merged = { ...localProfile, email: profileCache.email || user.email };
+    await Api.saveProfile(user.id, merged);
+    profileCache = { ...profileCache, ...merged };
+  }
+  localStorage.setItem('cabinet_uploaded_to', user.id);
+  [KEY_PETS, KEY_SUBS, KEY_PET_V1, KEY_SUB_V1].forEach(k => localStorage.removeItem(k));
+  return pets.length + moved;
+}
+
+async function enterRemote(user) {
+  if (entering || currentUser) return;
+  entering = true;
+  $('auth-view').hidden = true;
+  $('loading-view').hidden = false;
+  $('loading-view').textContent = 'Завантажуємо ваш кабінет…';
+  try {
+    profileCache = await Api.ensureProfile(user);
+    const migrated = await migrateLocalToServer(user);
+    const data = await Api.loadMine(user.id);
+    remote = true;
+    currentUser = user;
+    pets = data.pets;
+    subs = data.subs;
+    serverOrders = data.orders;
+    write(KEY_PROFILE, { ...profileCache, email: profileCache.email || user.email });
+    advanceSchedules();
+    if (migrated) setTimeout(() => showToast('☁️ Дані з цього пристрою перенесено у ваш кабінет'), 400);
+  } catch (e) {
+    console.error(e);
+    entering = false;
+    $('loading-view').textContent = "⚠️ Не вдалося завантажити кабінет. Перевірте інтернет і оновіть сторінку.";
+    return;
+  }
+  entering = false;
+  $('account-email').textContent = user.email;
+  $('account-bar').hidden = false;
+  document.querySelectorAll('[data-local-only]').forEach(el => { el.hidden = true; });
+  bootUI();
+}
+
+function bootUI() {
+  $('loading-view').hidden = true;
+  $('auth-view').hidden = true;
+  $('cabinet-main').hidden = false;
+  fillProfile();
+  showView('list');
+  renderAll();
+  loadCatalog();
+  initFromHash();
+  window.addEventListener('hashchange', initFromHash);
+}
+
+async function start() {
+  if (!window.Api || !Api.enabled) {
+    loadAll();
+    bootUI();
+    return;
+  }
+  try {
+    await Api.ready;
+    Api.onAuth((evt, session) => {
+      if (evt === 'SIGNED_IN' && session && !currentUser) enterRemote(session.user);
+    });
+    const s = await Api.session();
+    if (s) await enterRemote(s.user); else showAuth();
+  } catch (e) {
+    console.error(e);
+    $('loading-view').textContent = "⚠️ Немає зв'язку з сервером магазину. Перевірте інтернет і оновіть сторінку.";
+  }
+}
 
 /* Хеш: #pets, #subs, #orders, #profile, #new-sub (з головної сторінки) */
 function initFromHash() {
   const h = location.hash.replace('#', '');
+  if ($('cabinet-main').hidden) return;
   if (h === 'new-sub') {
     switchTab('subs');
     if (pets.length) openSubEditor(null);
@@ -1390,5 +1649,4 @@ function initFromHash() {
     if (h === 'pets') showPetsList();
   }
 }
-initFromHash();
-window.addEventListener('hashchange', initFromHash);
+start();

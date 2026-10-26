@@ -303,7 +303,8 @@
     </aside>
   </div>
 
-  <script src="config.js"></script>
+  <script src="config.js?v=4"></script>
+  <script src="api.js?v=1"></script>
   <script src="cart.js?v=1"></script>
   <script>
   'use strict';
@@ -492,6 +493,15 @@
       });
       localStorage.setItem('cart_orders_v1', JSON.stringify(orders.slice(-50)));
     } catch {}
+
+    // Якщо клієнт увійшов у кабінет — замовлення бачить менеджер у своїй панелі
+    if (window.Api && Api.enabled) {
+      Api.addOrder({
+        num: orderNum, delivery, payment, comment,
+        contact: { name, phone, email, city, branch },
+        items: checkoutCart.map(i => ({ id: i.id, name: i.name, price: i.price, image: i.image, qty: i.qty }))
+      }).catch(err => console.error('Order sync failed', err));
+    }
 
     // Очищаємо кошик
     try { localStorage.removeItem('cart_v1'); } catch {}

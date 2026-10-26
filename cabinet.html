@@ -234,6 +234,15 @@
     .ed-summary{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:14px}
     .ed-summary b{color:var(--lime)}
 
+    /* ── ВХІД ── */
+    .auth-card{max-width:440px;margin:24px auto}
+    .auth-card h2{font-family:var(--f-head);font-size:22px;font-weight:800;margin-bottom:6px}
+    .auth-card .btn{width:100%;margin-top:12px}
+    .auth-err{color:var(--red);font-size:13px;margin-top:8px}
+    .code-input{letter-spacing:6px;font-size:22px!important;text-align:center;font-weight:700}
+    .account-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--fg2);margin:-8px 0 18px}
+    .loading{text-align:center;padding:60px 20px;color:var(--fg2)}
+
     /* ── TOAST ── */
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--card);border:1px solid var(--lime);border-radius:12px;padding:12px 24px;font-size:14px;font-weight:600;color:var(--fg);box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:1000;transition:transform .3s ease,opacity .3s;opacity:0;max-width:calc(100vw - 32px);text-align:center}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -258,6 +267,41 @@
 
   <div class="page">
     <h1 class="page-title">Мій <span>кабінет</span></h1>
+
+    <div class="loading" id="loading-view">Завантаження…</div>
+
+    <!-- ══════ ВХІД (коли підключено сервер) ══════ -->
+    <div class="card auth-card" id="auth-view" hidden>
+      <h2>Вхід у кабінет</h2>
+      <p class="small muted" style="margin-bottom:16px">Ваші улюбленці та автодоставки зберігаються в магазині й доступні з будь-якого пристрою. Пароль не потрібен — надішлемо код на пошту.</p>
+      <div id="auth-step-email">
+        <div class="field">
+          <label for="auth-email">Email</label>
+          <input type="email" id="auth-email" placeholder="example@gmail.com" autocomplete="email">
+        </div>
+        <button class="btn btn-lime" id="auth-send-btn">Отримати код</button>
+      </div>
+      <div id="auth-step-code" hidden>
+        <p class="small" style="margin-bottom:10px">Код надіслано на <b id="auth-email-shown"></b>. Перевірте також «Спам».</p>
+        <div class="field">
+          <label for="auth-code">Код з листа</label>
+          <input type="text" id="auth-code" class="code-input" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="••••••">
+        </div>
+        <button class="btn btn-lime" id="auth-verify-btn">Увійти</button>
+        <div class="btn-row" style="justify-content:space-between;margin-top:10px">
+          <button class="link-btn small" id="auth-back-btn">← Інший email</button>
+          <button class="link-btn small" id="auth-resend-btn">Надіслати код ще раз</button>
+        </div>
+        <p class="hint" style="margin-top:12px">Або просто натисніть посилання в листі — кабінет відкриється сам.</p>
+      </div>
+      <div class="auth-err" id="auth-err" hidden></div>
+    </div>
+
+    <div id="cabinet-main" hidden>
+    <div class="account-bar" id="account-bar" hidden>
+      <span>👤 <span id="account-email"></span> · дані синхронізуються з магазином</span>
+      <button class="link-btn small" id="logout-btn">Вийти</button>
+    </div>
 
     <!-- ОГЛЯД -->
     <div class="overview">
@@ -462,9 +506,9 @@
         <div class="card-title">Як це працює</div>
         <div class="small muted" style="display:flex;flex-direction:column;gap:6px">
           <div>1. Оформлюєте автодоставку тут: улюбленець, корм, частота, дата першої відправки.</div>
-          <div>2. Надсилаєте її менеджеру в Telegram одним натиском — ми підтверджуємо.</div>
+          <div>2. Менеджер отримує сповіщення і підтверджує автодоставку.</div>
           <div>3. За 3 дні до кожної відправки нагадуємо в Telegram. Знижка −7% діє на кожну доставку.</div>
-          <div>4. Паузу, пропуск, перенесення чи скасування робите тут же — і так само надсилаєте нам.</div>
+          <div>4. Паузу, пропуск, перенесення чи скасування робите тут же — менеджер побачить зміни.</div>
         </div>
       </div>
     </div>
@@ -529,23 +573,24 @@
         <button class="btn btn-lime" id="save-profile-btn" style="margin-top:16px">💾 Зберегти</button>
       </div>
 
-      <div class="card">
+      <div class="card" id="backup-card">
         <div class="card-title">Резервна копія</div>
         <p class="small muted" style="margin-bottom:14px">Дані кабінету зберігаються лише в цьому браузері. Збережіть копію у файл, щоб перенести їх на інший пристрій або не втратити при очищенні браузера.</p>
         <div class="btn-row">
           <button class="btn btn-ghost btn-sm" id="export-btn">⬇️ Зберегти у файл</button>
-          <button class="btn btn-ghost btn-sm" id="import-btn">⬆️ Відновити з файлу</button>
+          <button class="btn btn-ghost btn-sm" id="import-btn" data-local-only>⬆️ Відновити з файлу</button>
           <input type="file" id="import-input" accept="application/json,.json" hidden>
         </div>
       </div>
 
-      <div class="card" style="border-color:rgba(224,82,82,.2)">
+      <div class="card" style="border-color:rgba(224,82,82,.2)" data-local-only>
         <div class="card-title" style="color:var(--fg2)">Небезпечна зона</div>
         <p class="small muted" style="margin-bottom:14px">Це видалить усі дані кабінету в цьому браузері: улюбленців, автодоставки, замовлення, контакти. Автодоставки, вже підтверджені менеджером, це не скасує.</p>
         <button class="btn btn-danger" id="clear-all-btn">🗑️ Видалити всі дані</button>
       </div>
     </div>
 
+    </div><!-- /cabinet-main -->
   </div><!-- /page -->
 
   <!-- ══════ MODAL: РЕДАКТОР АВТОДОСТАВКИ ══════ -->
@@ -656,7 +701,8 @@
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <script src="config.js"></script>
-  <script src="cabinet.js?v=2"></script>
+  <script src="config.js?v=4"></script>
+  <script src="api.js?v=1"></script>
+  <script src="cabinet.js?v=3"></script>
 </body>
 </html>
