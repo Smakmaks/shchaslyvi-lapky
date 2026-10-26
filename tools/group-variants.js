@@ -15,6 +15,13 @@
  * Група створюється лише якщо в одній категорії є щонайменше два товари
  * з однаковою назвою (без варіанту) і різними значеннями варіанту.
  *
+ * Другий рівень — колір. Картки (окремі товари або групи розмірів/ваги), що
+ * відрізняються лише кольором у назві, зводяться в одну картку з вибором кольору.
+ * Для них додаються поля:
+ *   colorGroup    — спільний ключ групи кольорів
+ *   color         — назва кольору ("Рожева", "Чорний" тощо)
+ *   colorBaseName — назва без кольору (для картки)
+ *
  * Захист від хибних цін. Якщо товар у RO App продається на вагу (одиниця виміру
  * не «шт», поле unit ≠ 1), його ціна — за кілограм, а не за мішок, тож у групу
  * він не потрапляє. Так само відкидається варіант, який за вагою/кількістю більший,
@@ -133,6 +140,77 @@ const DIMENSIONS = [
 
 // ─── Групування ───────────────────────────────────────────────────────────────
 
+// ─── Колір ────────────────────────────────────────────────────────────────────
+
+const COLOR_WORD =
+  '(?:(?:[а-яіїє]{3,}[оє]-)?(?:' +
+  'чорн(?:ий|а|е|і|ого|ої)|біл(?:ий|а|е|і|ого|ої)|рожев(?:ий|а|е|і|ого|ої)|' +
+  'зелен(?:ий|а|е|і|ого|ої)|жовт(?:ий|а|е|і|ого|ої)|червон(?:ий|а|е|і|ого|ої)|' +
+  'фіолетов(?:ий|а|е|і|ого|ої)|помаранчев(?:ий|а|е|і|ого|ої)|бузков(?:ий|а|е|і|ого|ої)|' +
+  'блакитн(?:ий|а|е|і|ого|ої)|сал[аа]тов(?:ий|а|е|і|ого|ої)|бірюзов(?:ий|а|е|і|ого|ої)|' +
+  'коралов(?:ий|а|е|і|ого|ої)|корич?нев(?:ий|а|е|і|ого|ої)|бордов(?:ий|а|е|і|ого|ої)|' +
+  'малинов(?:ий|а|е|і|ого|ої)|кремов(?:ий|а|е|і|ого|ої)|персиков(?:ий|а|е|і|ого|ої)|' +
+  'лавандов(?:ий|а|е|і|ого|ої)|оливков(?:ий|а|е|і|ого|ої)|пудров(?:ий|а|е|і|ого|ої)|' +
+  'графітов(?:ий|а|е|і|ого|ої)|срібляст(?:ий|а|е|і|ого|ої)|золотист(?:ий|а|е|і|ого|ої)|' +
+  'м[\'’ʼ]?ятн(?:ий|а|е|і|ого|ої)|сін(?:ій|я|є|і)|син(?:ій|я|є|і)|сір(?:ий|а|е|і|ого|ої)|' +
+  'беж(?:ев(?:ий|а|е|і|ого|ої))?|хакі|какао|лаванда|оливка|пудра|шоколад|карамель|гірчиця|мікс' +
+  '))';
+const COLOR_RE = new RegExp(`(?<![${ALNUM}])(${COLOR_WORD})(?![${ALNUM}])`, 'giu');
+
+function colorStem(label) {
+  return label.toLowerCase().replace(/(?:ий|ій|а|я|е|є|і|ого|ої)$/u, '');
+}
+
+/** Якщо в назві є рівно один колір (або один і той самий кілька разів) — повертає { base, label } */
+function splitColor(name) {
+  const matches = [...name.matchAll(COLOR_RE)];
+  if (!matches.length) return null;
+  const stems = new Set(matches.map(m => colorStem(m[1])));
+  if (stems.size !== 1) return null;
+  let base = name;
+  for (const m of [...matches].reverse()) {
+    base = `${base.slice(0, m.index)} ${base.slice(m.index + m[0].length)}`;
+  }
+  const first = matches[0][1];
+  return { base: tidy(base).replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim(), label: first[0].toUpperCase() + first.slice(1).toLowerCase(), stem: [...stems][0] };
+}
+
+function annotateColors(products, stats) {
+  // Картка = група розмірів/ваги або окремий товар
+  const cards = new Map();
+  for (const p of products) {
+    const key = p.group || `#${p.id}`;
+    if (!cards.has(key)) cards.set(key, []);
+    cards.get(key).push(p);
+  }
+
+  const buckets = new Map();
+  for (const members of cards.values()) {
+    const first = members[0];
+    const name = first.baseName || first.name;
+    const parts = splitColor(name);
+    if (!parts || !parts.base) continue;
+    // усі товари картки повинні мати один і той самий колір
+    const key = `${first.category}|color|${normalizeKey(parts.base)}`;
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key).push({ members, ...parts });
+  }
+
+  for (const [key, cardsInBucket] of buckets) {
+    const stems = new Set(cardsInBucket.map(c => c.stem));
+    if (stems.size < 2 || stems.size !== cardsInBucket.length) continue;
+    for (const c of cardsInBucket) {
+      for (const p of c.members) {
+        p.colorGroup = key;
+        p.color = c.label;
+        p.colorBaseName = c.base;
+      }
+    }
+    stats.colorGroups = (stats.colorGroups || 0) + 1;
+    stats.colorItems = (stats.colorItems || 0) + cardsInBucket.reduce((n, c) => n + c.members.length, 0);
+  }
+}
+
 /**
  * Додає group/size/baseName/sizeOrder. Повертає статистику та список товарів,
  * які не потрапили до груп через підозрілу ціну.
@@ -143,6 +221,9 @@ function annotateVariants(products) {
     delete p.size;
     delete p.baseName;
     delete p.sizeOrder;
+    delete p.colorGroup;
+    delete p.color;
+    delete p.colorBaseName;
   }
 
   const stats = { groups: 0, items: 0, byType: {}, suspicious: [] };
@@ -197,6 +278,7 @@ function annotateVariants(products) {
       stats.byType[dim.name] = (stats.byType[dim.name] || 0) + 1;
     }
   }
+  annotateColors(products, stats);
   return stats;
 }
 
@@ -204,9 +286,10 @@ module.exports = { annotateVariants };
 
 if (require.main === module) {
   const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE, 'utf-8'));
-  const { groups, items, byType, suspicious } = annotateVariants(products);
+  const { groups, items, byType, suspicious, colorGroups = 0, colorItems = 0 } = annotateVariants(products);
   fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2), 'utf-8');
   console.log(`✅ Груп варіантів: ${groups}, товарів у групах: ${items}`, byType);
+  console.log(`🎨 Груп кольорів: ${colorGroups}, товарів у них: ${colorItems}`);
   if (suspicious.length) {
     console.log(`⚠️  Не об'єднано через підозрілу ціну (${suspicious.length}):`);
     suspicious.forEach(s => console.log(`   • ${s.name} — ${s.price} грн (${s.why})`));

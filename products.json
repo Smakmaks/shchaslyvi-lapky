@@ -9675,7 +9675,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/cc877899f3bd43cd90298da59e07243b_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Аксесуари|color|trixie миска керамічна 0,4л/13см",
+    "color": "Білий",
+    "colorBaseName": "Trixie миска керамічна 0,4л/13см"
   },
   {
     "id": "61627507",
@@ -9688,7 +9691,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/ffd30448ee6f4266a453b1f402740d8e_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Аксесуари|color|trixie миска керамічна 0,4л/13см",
+    "color": "Чорний",
+    "colorBaseName": "Trixie миска керамічна 0,4л/13см"
   },
   {
     "id": "61627145",
@@ -10367,7 +10373,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/c2952a83738f4c438964f7469e8dc655_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|trixie нашийник що світиться \" flash\" usb xs-s 35 см",
+    "color": "Помаранчевий",
+    "colorBaseName": "Trixie нашийник що світиться \" Flash\" USB XS-S 35 см"
   },
   {
     "id": "61626188",
@@ -10380,7 +10389,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/655b8b7a83514c1ba478609d9ed685a9_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|trixie нашийник що світиться \" flash\" usb xs-s 35 см",
+    "color": "Рожевий",
+    "colorBaseName": "Trixie нашийник що світиться \" Flash\" USB XS-S 35 см"
   },
   {
     "id": "61626422",
@@ -12091,7 +12103,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/d38ef24655a64738809f2ef75d40dad4_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Аксесуари|color|бантики для собак 2 шт",
+    "color": "Рожеві",
+    "colorBaseName": "Бантики для собак 2 шт"
   },
   {
     "id": "66109504",
@@ -12104,7 +12119,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "images/product-placeholder.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Аксесуари|color|бантики для собак 2 шт",
+    "color": "Червоні",
+    "colorBaseName": "Бантики для собак 2 шт"
   },
   {
     "id": "63726669",
@@ -12342,7 +12360,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu рожевий",
     "size": "L",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu рожевий",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Рожевий",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521932",
@@ -12359,7 +12380,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu чорний",
     "size": "L",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu чорний",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Чорний",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521861",
@@ -12376,7 +12400,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu рожевий",
     "size": "M",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu рожевий",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Рожевий",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521921",
@@ -12393,7 +12420,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu чорний",
     "size": "M",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu чорний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Чорний",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521851",
@@ -12410,7 +12440,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu рожевий",
     "size": "S",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu рожевий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Рожевий",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521884",
@@ -12427,7 +12460,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu рожевий",
     "size": "XL",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu рожевий",
-    "sizeOrder": 4
+    "sizeOrder": 4,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Рожевий",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521945",
@@ -12444,7 +12480,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu чорний",
     "size": "XL",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu чорний",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Чорний",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521837",
@@ -12461,7 +12500,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu рожевий",
     "size": "XS",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu рожевий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Рожевий",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "66521899",
@@ -12478,7 +12520,10 @@
     "group": "Під реалізацію|size|в'заний светр з вишеньками для собак miumiu чорний",
     "size": "XS",
     "baseName": "В'заний светр з вишеньками для собак MiuMiu чорний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|в'заний светр з вишеньками для собак miumiu",
+    "color": "Чорний",
+    "colorBaseName": "В'заний светр з вишеньками для собак MiuMiu"
   },
   {
     "id": "67872042",
@@ -13469,7 +13514,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/0e6358bfa93548a7ae73e206cc85565f_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Драпаки|color|драпак на підставці з лапками \"пухнастики\" (джгут) 30/55 см",
+    "color": "Бежева",
+    "colorBaseName": "Драпак на підставці з лапками \"Пухнастики\" (джгут) 30/55 см"
   },
   {
     "id": "60391697",
@@ -13482,7 +13530,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/2b279412228d4f36b482ee6b97f67e48_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Драпаки|color|драпак на підставці з лапками \"пухнастики\" (джгут) 30/55 см",
+    "color": "Сіра",
+    "colorBaseName": "Драпак на підставці з лапками \"Пухнастики\" (джгут) 30/55 см"
   },
   {
     "id": "60391190",
@@ -13508,7 +13559,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/d50426c2b3584c38aa1d696b9d1cb51d_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Драпаки|color|драпак \"пухнастики\" з полицею (джгут) з лапками 30/30/50 см",
+    "color": "Бежева",
+    "colorBaseName": "Драпак \"Пухнастики\" з полицею (джгут) з лапками 30/30/50 см"
   },
   {
     "id": "66109033",
@@ -13521,7 +13575,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/aa22d02c6467479284eb863b3870c140_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Драпаки|color|драпак \"пухнастики\" з полицею (джгут) з лапками 30/30/50 см",
+    "color": "Сіра",
+    "colorBaseName": "Драпак \"Пухнастики\" з полицею (джгут) з лапками 30/30/50 см"
   },
   {
     "id": "66109106",
@@ -13560,7 +13617,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/5ab4cce86a284423bf22c65d1f2359ab_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Драпаки|color|драпак-стовпчик \"пухнастики\" на підставці (джгут) 30/55 см",
+    "color": "Бежева",
+    "colorBaseName": "Драпак-стовпчик \"Пухнастики\" на підставці (джгут) 30/55 см"
   },
   {
     "id": "60391226",
@@ -13573,7 +13633,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/b97875b81e654b78839d6012f2472a2e_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Драпаки|color|драпак-стовпчик \"пухнастики\" на підставці (джгут) 30/55 см",
+    "color": "Сіра",
+    "colorBaseName": "Драпак-стовпчик \"Пухнастики\" на підставці (джгут) 30/55 см"
   },
   {
     "id": "63915875",
@@ -13676,7 +13739,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - блакитний",
     "size": "L",
     "baseName": "Жилетка для собак HipiDog - блакитний",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Блакитний",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521490",
@@ -13693,7 +13759,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - рожевий",
     "size": "L",
     "baseName": "Жилетка для собак HipiDog - рожевий",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Рожевий",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521476",
@@ -13710,7 +13779,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - рожевий",
     "size": "M",
     "baseName": "Жилетка для собак HipiDog - рожевий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Рожевий",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521429",
@@ -13727,7 +13799,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - блакитний",
     "size": "S",
     "baseName": "Жилетка для собак HipiDog - блакитний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Блакитний",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521467",
@@ -13744,7 +13819,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - рожевий",
     "size": "S",
     "baseName": "Жилетка для собак HipiDog - рожевий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Рожевий",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521461",
@@ -13761,7 +13839,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - блакитний",
     "size": "XL",
     "baseName": "Жилетка для собак HipiDog - блакитний",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Блакитний",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521506",
@@ -13778,7 +13859,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - рожевий",
     "size": "XL",
     "baseName": "Жилетка для собак HipiDog - рожевий",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Рожевий",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "66521446",
@@ -13795,7 +13879,10 @@
     "group": "Під реалізацію|size|жилетка для собак hipidog - блакитний",
     "size": "M",
     "baseName": "Жилетка для собак HipiDog - блакитний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|жилетка для собак hipidog",
+    "color": "Блакитний",
+    "colorBaseName": "Жилетка для собак HipiDog"
   },
   {
     "id": "67872159",
@@ -13965,7 +14052,10 @@
     "group": "Під реалізацію|size|жилетка для собак з капюшоном louis vuitton бежевий",
     "size": "L",
     "baseName": "Жилетка для собак з капюшоном Louis Vuitton бежевий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|жилетка для собак з капюшоном louis vuitton",
+    "color": "Бежевий",
+    "colorBaseName": "Жилетка для собак з капюшоном Louis Vuitton"
   },
   {
     "id": "66521817",
@@ -13982,7 +14072,10 @@
     "group": "Під реалізацію|size|жилетка для собак з капюшоном louis vuitton сірий",
     "size": "L",
     "baseName": "Жилетка для собак з капюшоном Louis Vuitton сірий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|жилетка для собак з капюшоном louis vuitton",
+    "color": "Сірий",
+    "colorBaseName": "Жилетка для собак з капюшоном Louis Vuitton"
   },
   {
     "id": "66521809",
@@ -13999,7 +14092,10 @@
     "group": "Під реалізацію|size|жилетка для собак з капюшоном louis vuitton сірий",
     "size": "M",
     "baseName": "Жилетка для собак з капюшоном Louis Vuitton сірий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|жилетка для собак з капюшоном louis vuitton",
+    "color": "Сірий",
+    "colorBaseName": "Жилетка для собак з капюшоном Louis Vuitton"
   },
   {
     "id": "66521777",
@@ -14016,7 +14112,10 @@
     "group": "Під реалізацію|size|жилетка для собак з капюшоном louis vuitton бежевий",
     "size": "S",
     "baseName": "Жилетка для собак з капюшоном Louis Vuitton бежевий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|жилетка для собак з капюшоном louis vuitton",
+    "color": "Бежевий",
+    "colorBaseName": "Жилетка для собак з капюшоном Louis Vuitton"
   },
   {
     "id": "66521800",
@@ -14033,7 +14132,10 @@
     "group": "Під реалізацію|size|жилетка для собак з капюшоном louis vuitton бежевий",
     "size": "XL",
     "baseName": "Жилетка для собак з капюшоном Louis Vuitton бежевий",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|жилетка для собак з капюшоном louis vuitton",
+    "color": "Бежевий",
+    "colorBaseName": "Жилетка для собак з капюшоном Louis Vuitton"
   },
   {
     "id": "66521824",
@@ -14050,7 +14152,10 @@
     "group": "Під реалізацію|size|жилетка для собак з капюшоном louis vuitton сірий",
     "size": "XL",
     "baseName": "Жилетка для собак з капюшоном Louis Vuitton сірий",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|жилетка для собак з капюшоном louis vuitton",
+    "color": "Сірий",
+    "colorBaseName": "Жилетка для собак з капюшоном Louis Vuitton"
   },
   {
     "id": "67901986",
@@ -14167,7 +14272,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/4dbc06d4c6d041bab1668b8074757b5e_default.jpeg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|іграшка qmonster \" монстр\"",
+    "color": "Блакитний",
+    "colorBaseName": "Іграшка Qmonster \" монстр\""
   },
   {
     "id": "63790795",
@@ -14180,7 +14288,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/da3dbf4bb2b34eee86098ca773b53d1d_default.jpeg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|іграшка qmonster \" монстр\"",
+    "color": "Помаранчевий",
+    "colorBaseName": "Іграшка Qmonster \" монстр\""
   },
   {
     "id": "68041606",
@@ -15613,7 +15724,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/1627d922dd314f67a655b320b444325e_default.jpeg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|іграшка монстрик qqmonster",
+    "color": "Зелений",
+    "colorBaseName": "Іграшка монстрик QQmonster"
   },
   {
     "id": "64896832",
@@ -15626,7 +15740,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/c63c0b3cb600444396cb388d841e3330_default.jpeg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|іграшка монстрик qqmonster",
+    "color": "Червоний",
+    "colorBaseName": "Іграшка монстрик QQmonster"
   },
   {
     "id": "63916034",
@@ -16041,7 +16158,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті сріблястий",
     "size": "L",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті сріблястий",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Сріблястий",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872833",
@@ -16058,7 +16178,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті сріблястий",
     "size": "M",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті сріблястий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Сріблястий",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872786",
@@ -16075,7 +16198,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті сріблястий",
     "size": "S",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті сріблястий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Сріблястий",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872894",
@@ -16092,7 +16218,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті сріблястий",
     "size": "XL",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті сріблястий",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Сріблястий",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872947",
@@ -16109,7 +16238,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті чорний",
     "size": "L",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті чорний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Чорний",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872929",
@@ -16126,7 +16258,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті чорний",
     "size": "S",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті чорний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Чорний",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872967",
@@ -16143,7 +16278,10 @@
     "group": "Під реалізацію|size|комбінезон для собак dadagou з підкладкою із шерсті чорний",
     "size": "XL",
     "baseName": "Комбінезон для собак DadaGou з підкладкою із шерсті чорний",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак dadagou з підкладкою із шерсті",
+    "color": "Чорний",
+    "colorBaseName": "Комбінезон для собак DadaGou з підкладкою із шерсті"
   },
   {
     "id": "67872326",
@@ -16173,7 +16311,10 @@
     "group": "Під реалізацію|size|комбінезон для собак \"moncheri softtouch” пудра",
     "size": "L",
     "baseName": "Комбінезон для собак \"Moncheri Softtouch” пудра",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак \"moncheri softtouch”",
+    "color": "Пудра",
+    "colorBaseName": "Комбінезон для собак \"Moncheri Softtouch”"
   },
   {
     "id": "67872234",
@@ -16190,7 +16331,10 @@
     "group": "Під реалізацію|size|комбінезон для собак \"moncheri softtouch” пудра",
     "size": "M",
     "baseName": "Комбінезон для собак \"Moncheri Softtouch” пудра",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак \"moncheri softtouch”",
+    "color": "Пудра",
+    "colorBaseName": "Комбінезон для собак \"Moncheri Softtouch”"
   },
   {
     "id": "67872292",
@@ -16207,7 +16351,10 @@
     "group": "Під реалізацію|size|комбінезон для собак \"moncheri softtouch” чорний",
     "size": "L",
     "baseName": "Комбінезон для собак \"Moncheri Softtouch” чорний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак \"moncheri softtouch”",
+    "color": "Чорний",
+    "colorBaseName": "Комбінезон для собак \"Moncheri Softtouch”"
   },
   {
     "id": "67872274",
@@ -16224,7 +16371,10 @@
     "group": "Під реалізацію|size|комбінезон для собак \"moncheri softtouch” чорний",
     "size": "M",
     "baseName": "Комбінезон для собак \"Moncheri Softtouch” чорний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|комбінезон для собак \"moncheri softtouch”",
+    "color": "Чорний",
+    "colorBaseName": "Комбінезон для собак \"Moncheri Softtouch”"
   },
   {
     "id": "67872358",
@@ -16349,7 +16499,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/6a01421c7b2547468156fa862adaaf33_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|комплект амуніції для собак анатомічна шлейка + повідець 1м \"янголятко\" м",
+    "color": "Блакитний",
+    "colorBaseName": "Комплект амуніції для собак анатомічна шлейка + повідець 1м \"Янголятко\" М"
   },
   {
     "id": "63790788",
@@ -16362,7 +16515,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/44a4cfeb1934439da47b51d283df8259_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|комплект амуніції для собак анатомічна шлейка + повідець 1м \"янголятко\" м",
+    "color": "Рожевий",
+    "colorBaseName": "Комплект амуніції для собак анатомічна шлейка + повідець 1м \"Янголятко\" М"
   },
   {
     "id": "63790796",
@@ -16688,7 +16844,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/d2077a7a37854606821a61d41cc0e938_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см",
+    "color": "Зелений",
+    "colorBaseName": "Контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см"
   },
   {
     "id": "63789844",
@@ -16701,7 +16860,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/002178412df347e7a4fef04885ba45e5_default.jpeg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см",
+    "color": "Рожевий",
+    "colorBaseName": "Контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см"
   },
   {
     "id": "63789840",
@@ -16714,7 +16876,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/be590954eb9046ddb274f5abdacfb700_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см",
+    "color": "Синій",
+    "colorBaseName": "Контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см"
   },
   {
     "id": "63789855",
@@ -16727,7 +16892,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/bab58f5c848141c185d82ed239f8f611_default.jpeg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см",
+    "color": "Сірий",
+    "colorBaseName": "Контейнер з пакетами для прибирання за собакою з ліхтариком 4х11 см"
   },
   {
     "id": "64577840",
@@ -19323,7 +19491,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/81c1c0f15f9f40ef90aa73f38ec40b50_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Одяг та лежанки|color|курточка для собак airyvest s30",
+    "color": "Помаранчевий",
+    "colorBaseName": "Курточка для собак AiryVest S30"
   },
   {
     "id": "67804953",
@@ -19336,7 +19507,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/6527f16c415c489c8f26478dab96b492_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Одяг та лежанки|color|курточка для собак airyvest s30",
+    "color": "Салатовий",
+    "colorBaseName": "Курточка для собак AiryVest S30"
   },
   {
     "id": "67804955",
@@ -19349,7 +19523,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/a859e31c41a24c0c88299bc807dd3be3_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Одяг та лежанки|color|курточка для собак airyvest s30",
+    "color": "Фіолетовий",
+    "colorBaseName": "Курточка для собак AiryVest S30"
   },
   {
     "id": "67804945",
@@ -19401,7 +19578,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/821bb770fbfe49d2bc1a888f04888cb6_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Одяг та лежанки|color|курточка для собак airyvest s38",
+    "color": "Рожево-чорна",
+    "colorBaseName": "Курточка для собак AiryVest S38"
   },
   {
     "id": "67804928",
@@ -19465,7 +19645,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/c6e37937bc234843a481e2a261ad6a8a_default.webp",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Одяг та лежанки|color|курточка для собак airyvest s38",
+    "color": "Червоно-чорна",
+    "colorBaseName": "Курточка для собак AiryVest S38"
   },
   {
     "id": "67804948",
@@ -19534,7 +19717,10 @@
     "group": "Під реалізацію|size|курточка для собак з овечої вовни рожева",
     "size": "L",
     "baseName": "Курточка для собак з овечої вовни рожева",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|курточка для собак з овечої вовни",
+    "color": "Рожева",
+    "colorBaseName": "Курточка для собак з овечої вовни"
   },
   {
     "id": "67872660",
@@ -19551,7 +19737,10 @@
     "group": "Під реалізацію|size|курточка для собак з овечої вовни рожева",
     "size": "S",
     "baseName": "Курточка для собак з овечої вовни рожева",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|курточка для собак з овечої вовни",
+    "color": "Рожева",
+    "colorBaseName": "Курточка для собак з овечої вовни"
   },
   {
     "id": "67872646",
@@ -19568,7 +19757,10 @@
     "group": "Під реалізацію|size|курточка для собак з овечої вовни сіра",
     "size": "L",
     "baseName": "Курточка для собак з овечої вовни сіра",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|курточка для собак з овечої вовни",
+    "color": "Сіра",
+    "colorBaseName": "Курточка для собак з овечої вовни"
   },
   {
     "id": "67872626",
@@ -19585,7 +19777,10 @@
     "group": "Під реалізацію|size|курточка для собак з овечої вовни сіра",
     "size": "M",
     "baseName": "Курточка для собак з овечої вовни сіра",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|курточка для собак з овечої вовни",
+    "color": "Сіра",
+    "colorBaseName": "Курточка для собак з овечої вовни"
   },
   {
     "id": "67872632",
@@ -19615,7 +19810,10 @@
     "group": "Під реалізацію|size|курточка для собак з овечої вовни сіра",
     "size": "S",
     "baseName": "Курточка для собак з овечої вовни сіра",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|курточка для собак з овечої вовни",
+    "color": "Сіра",
+    "colorBaseName": "Курточка для собак з овечої вовни"
   },
   {
     "id": "67872596",
@@ -19632,7 +19830,10 @@
     "group": "Під реалізацію|size|курточка для собак з овечої вовни сіра",
     "size": "XS",
     "baseName": "Курточка для собак з овечої вовни сіра",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|курточка для собак з овечої вовни",
+    "color": "Сіра",
+    "colorBaseName": "Курточка для собак з овечої вовни"
   },
   {
     "id": "67872673",
@@ -23144,7 +23345,10 @@
     "group": "Під реалізацію|size|нашийник в стилі louis vuitton із дзвіночком (бежевий)",
     "size": "M",
     "baseName": "Нашийник в стилі Louis Vuitton із дзвіночком (бежевий)",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|нашийник в стилі louis vuitton із дзвіночком",
+    "color": "Бежевий",
+    "colorBaseName": "Нашийник в стилі Louis Vuitton із дзвіночком"
   },
   {
     "id": "63789773",
@@ -23161,7 +23365,10 @@
     "group": "Під реалізацію|size|нашийник в стилі louis vuitton із дзвіночком (коричневий)",
     "size": "M",
     "baseName": "Нашийник в стилі Louis Vuitton із дзвіночком (коричневий)",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|нашийник в стилі louis vuitton із дзвіночком",
+    "color": "Коричневий",
+    "colorBaseName": "Нашийник в стилі Louis Vuitton із дзвіночком"
   },
   {
     "id": "63789781",
@@ -23178,7 +23385,10 @@
     "group": "Під реалізацію|size|нашийник в стилі louis vuitton із дзвіночком (бежевий)",
     "size": "S",
     "baseName": "Нашийник в стилі Louis Vuitton із дзвіночком (бежевий)",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|нашийник в стилі louis vuitton із дзвіночком",
+    "color": "Бежевий",
+    "colorBaseName": "Нашийник в стилі Louis Vuitton із дзвіночком"
   },
   {
     "id": "63789770",
@@ -23195,7 +23405,10 @@
     "group": "Під реалізацію|size|нашийник в стилі louis vuitton із дзвіночком (коричневий)",
     "size": "S",
     "baseName": "Нашийник в стилі Louis Vuitton із дзвіночком (коричневий)",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|нашийник в стилі louis vuitton із дзвіночком",
+    "color": "Коричневий",
+    "colorBaseName": "Нашийник в стилі Louis Vuitton із дзвіночком"
   },
   {
     "id": "63789777",
@@ -23212,7 +23425,10 @@
     "group": "Під реалізацію|size|нашийник в стилі louis vuitton із дзвіночком (бежевий)",
     "size": "XS",
     "baseName": "Нашийник в стилі Louis Vuitton із дзвіночком (бежевий)",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|нашийник в стилі louis vuitton із дзвіночком",
+    "color": "Бежевий",
+    "colorBaseName": "Нашийник в стилі Louis Vuitton із дзвіночком"
   },
   {
     "id": "63789765",
@@ -23229,7 +23445,10 @@
     "group": "Під реалізацію|size|нашийник в стилі louis vuitton із дзвіночком (коричневий)",
     "size": "XS",
     "baseName": "Нашийник в стилі Louis Vuitton із дзвіночком (коричневий)",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|нашийник в стилі louis vuitton із дзвіночком",
+    "color": "Коричневий",
+    "colorBaseName": "Нашийник в стилі Louis Vuitton із дзвіночком"
   },
   {
     "id": "63726631",
@@ -23363,7 +23582,10 @@
     "group": "Під реалізацію|size|нашийник для собак з бантиком - бірюзовий",
     "size": "M",
     "baseName": "Нашийник для собак з бантиком - бірюзовий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|нашийник для собак з бантиком",
+    "color": "Бірюзовий",
+    "colorBaseName": "Нашийник для собак з бантиком"
   },
   {
     "id": "63790823",
@@ -23380,7 +23602,10 @@
     "group": "Під реалізацію|size|нашийник для собак з бантиком - рожевий",
     "size": "M",
     "baseName": "Нашийник для собак з бантиком - рожевий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|нашийник для собак з бантиком",
+    "color": "Рожевий",
+    "colorBaseName": "Нашийник для собак з бантиком"
   },
   {
     "id": "63790820",
@@ -23397,7 +23622,10 @@
     "group": "Під реалізацію|size|нашийник для собак з бантиком - бірюзовий",
     "size": "S",
     "baseName": "Нашийник для собак з бантиком - бірюзовий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|нашийник для собак з бантиком",
+    "color": "Бірюзовий",
+    "colorBaseName": "Нашийник для собак з бантиком"
   },
   {
     "id": "63790822",
@@ -23414,7 +23642,10 @@
     "group": "Під реалізацію|size|нашийник для собак з бантиком - рожевий",
     "size": "S",
     "baseName": "Нашийник для собак з бантиком - рожевий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|нашийник для собак з бантиком",
+    "color": "Рожевий",
+    "colorBaseName": "Нашийник для собак з бантиком"
   },
   {
     "id": "63790817",
@@ -23431,7 +23662,10 @@
     "group": "Під реалізацію|size|нашийник для собак з бантиком - фіолетовий",
     "size": "S",
     "baseName": "Нашийник для собак з бантиком - фіолетовий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|нашийник для собак з бантиком",
+    "color": "Фіолетовий",
+    "colorBaseName": "Нашийник для собак з бантиком"
   },
   {
     "id": "63790819",
@@ -23448,7 +23682,10 @@
     "group": "Під реалізацію|size|нашийник для собак з бантиком - фіолетовий",
     "size": "M",
     "baseName": "Нашийник для собак з бантиком - фіолетовий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|нашийник для собак з бантиком",
+    "color": "Фіолетовий",
+    "colorBaseName": "Нашийник для собак з бантиком"
   },
   {
     "id": "63725911",
@@ -24033,7 +24270,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/38f35250f06c420085e477d080c47a2b_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак l (, 70х55 см)",
+    "color": "Коричневий",
+    "colorBaseName": "Охолоджуючий килим для собак L (, 70х55 см)"
   },
   {
     "id": "63789837",
@@ -24046,7 +24286,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/b60b8e81b7ad43b1a5d0a916817b26a7_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак l (, 70х55 см)",
+    "color": "Рожевий",
+    "colorBaseName": "Охолоджуючий килим для собак L (, 70х55 см)"
   },
   {
     "id": "63789831",
@@ -24059,7 +24302,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/beedffa8026548c1afb7e9db17ba8ca4_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак l (, 70х55 см)",
+    "color": "Сірий",
+    "colorBaseName": "Охолоджуючий килим для собак L (, 70х55 см)"
   },
   {
     "id": "63789822",
@@ -24072,7 +24318,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/3ae748fdf020489599f0775caa5fe9ba_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак m (, 60х50 см)",
+    "color": "Коричневий",
+    "colorBaseName": "Охолоджуючий килим для собак M (, 60х50 см)"
   },
   {
     "id": "63789834",
@@ -24085,7 +24334,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/2414a060c8f549c09f5d406655d5970b_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак m (, 60х50 см)",
+    "color": "Рожевий",
+    "colorBaseName": "Охолоджуючий килим для собак M (, 60х50 см)"
   },
   {
     "id": "63789828",
@@ -24098,7 +24350,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/8e2aac0ff5f44da2b52128ab9370afc9_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак m (, 60х50 см)",
+    "color": "Сірий",
+    "colorBaseName": "Охолоджуючий килим для собак M (, 60х50 см)"
   },
   {
     "id": "63789820",
@@ -24111,7 +24366,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/96cf5d29ad1347898caa4f91076fc851_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак s (, 50х40 см)",
+    "color": "Коричневий",
+    "colorBaseName": "Охолоджуючий килим для собак S (, 50х40 см)"
   },
   {
     "id": "63789833",
@@ -24124,7 +24382,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/473a37b7c2a24c19966b8dc931f5b187_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак s (, 50х40 см)",
+    "color": "Рожевий",
+    "colorBaseName": "Охолоджуючий килим для собак S (, 50х40 см)"
   },
   {
     "id": "63789826",
@@ -24137,7 +24398,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/ebd521cfc39f43b28aab3faebc3e94b5_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|охолоджуючий килим для собак s (, 50х40 см)",
+    "color": "Сірий",
+    "colorBaseName": "Охолоджуючий килим для собак S (, 50х40 см)"
   },
   {
     "id": "63896871",
@@ -24232,7 +24496,10 @@
     "group": "Під реалізацію|size|панамка для собак блакитна",
     "size": "L",
     "baseName": "Панамка для собак блакитна",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Блакитна",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789864",
@@ -24249,7 +24516,10 @@
     "group": "Під реалізацію|size|панамка для собак блакитна",
     "size": "M",
     "baseName": "Панамка для собак блакитна",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Блакитна",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789857",
@@ -24266,7 +24536,10 @@
     "group": "Під реалізацію|size|панамка для собак блакитна",
     "size": "S",
     "baseName": "Панамка для собак блакитна",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Блакитна",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63790828",
@@ -24334,7 +24607,10 @@
     "group": "Під реалізацію|size|панамка для собак зелена",
     "size": "L",
     "baseName": "Панамка для собак зелена",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Зелена",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789867",
@@ -24351,7 +24627,10 @@
     "group": "Під реалізацію|size|панамка для собак зелена",
     "size": "M",
     "baseName": "Панамка для собак зелена",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Зелена",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789859",
@@ -24368,7 +24647,10 @@
     "group": "Під реалізацію|size|панамка для собак зелена",
     "size": "S",
     "baseName": "Панамка для собак зелена",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Зелена",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789874",
@@ -24385,7 +24667,10 @@
     "group": "Під реалізацію|size|панамка для собак рожева",
     "size": "L",
     "baseName": "Панамка для собак рожева",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Рожева",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789869",
@@ -24402,7 +24687,10 @@
     "group": "Під реалізацію|size|панамка для собак рожева",
     "size": "M",
     "baseName": "Панамка для собак рожева",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Рожева",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789860",
@@ -24419,7 +24707,10 @@
     "group": "Під реалізацію|size|панамка для собак рожева",
     "size": "S",
     "baseName": "Панамка для собак рожева",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Рожева",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789876",
@@ -24436,7 +24727,10 @@
     "group": "Під реалізацію|size|панамка для собак темно-сіра",
     "size": "L",
     "baseName": "Панамка для собак темно-сіра",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Темно-сіра",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789870",
@@ -24453,7 +24747,10 @@
     "group": "Під реалізацію|size|панамка для собак темно-сіра",
     "size": "M",
     "baseName": "Панамка для собак темно-сіра",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Темно-сіра",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "63789862",
@@ -24470,7 +24767,10 @@
     "group": "Під реалізацію|size|панамка для собак темно-сіра",
     "size": "S",
     "baseName": "Панамка для собак темно-сіра",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|панамка для собак",
+    "color": "Темно-сіра",
+    "colorBaseName": "Панамка для собак"
   },
   {
     "id": "67907624",
@@ -25029,7 +25329,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/90c9b65f53f2434db41027a5cd5f0459_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|повідець для собак водостійкий waudog waterproof s, д 305 см",
+    "color": "Блакитний",
+    "colorBaseName": "Повідець для собак водостійкий Waudog Waterproof S, Д 305 см"
   },
   {
     "id": "64718566",
@@ -25042,7 +25345,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/618ce1b8b99046d59610d6b0b20bd44a_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|повідець для собак водостійкий waudog waterproof s, д 305 см",
+    "color": "Салатовий",
+    "colorBaseName": "Повідець для собак водостійкий Waudog Waterproof S, Д 305 см"
   },
   {
     "id": "65909723",
@@ -25055,7 +25361,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/f9e0edef0dad460598f638c268b3ad9e_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|повідець для собак водостійкий waudog waterproof s, д 305 см",
+    "color": "Червоний",
+    "colorBaseName": "Повідець для собак водостійкий Waudog Waterproof S, Д 305 см"
   },
   {
     "id": "65909680",
@@ -25068,7 +25377,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/82f5d6a5c923497eb15cb434209b1112_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|повідець для собак водостійкий waudog waterproof s, д 305 см",
+    "color": "Чорний",
+    "colorBaseName": "Повідець для собак водостійкий Waudog Waterproof S, Д 305 см"
   },
   {
     "id": "63725400",
@@ -25409,7 +25721,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/bf341bb4759844e3bf399b68a33980cc_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Аксесуари|color|поїлка-насадка на пляшку waudog silicone",
+    "color": "Блакитна",
+    "colorBaseName": "Поїлка-насадка на пляшку Waudog Silicone"
   },
   {
     "id": "64718646",
@@ -25422,7 +25737,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/8e080ed4223d4080936902b7f2cd28a8_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Аксесуари|color|поїлка-насадка на пляшку waudog silicone",
+    "color": "Рожева",
+    "colorBaseName": "Поїлка-насадка на пляшку Waudog Silicone"
   },
   {
     "id": "63790805",
@@ -25435,7 +25753,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/d2bf15d9bb694bf182fe3d74eb109bd9_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|портативна поїлка для собак 300 мл",
+    "color": "Біла",
+    "colorBaseName": "Портативна поїлка для собак 300 мл"
   },
   {
     "id": "63790806",
@@ -25448,7 +25769,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/47d0a69a9b1646a493526fa456e260cb_default.png",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|портативна поїлка для собак 300 мл",
+    "color": "Рожева",
+    "colorBaseName": "Портативна поїлка для собак 300 мл"
   },
   {
     "id": "63894911",
@@ -25517,7 +25841,10 @@
     "group": "Під реалізацію|size|прозорий дощовик блакитний",
     "size": "L",
     "baseName": "Прозорий дощовик блакитний",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|прозорий дощовик",
+    "color": "Блакитний",
+    "colorBaseName": "Прозорий дощовик"
   },
   {
     "id": "67868491",
@@ -25547,7 +25874,10 @@
     "group": "Під реалізацію|size|прозорий дощовик блакитний",
     "size": "S",
     "baseName": "Прозорий дощовик блакитний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|прозорий дощовик",
+    "color": "Блакитний",
+    "colorBaseName": "Прозорий дощовик"
   },
   {
     "id": "67868452",
@@ -25564,7 +25894,10 @@
     "group": "Під реалізацію|size|прозорий дощовик рожевий",
     "size": "S",
     "baseName": "Прозорий дощовик рожевий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|прозорий дощовик",
+    "color": "Рожевий",
+    "colorBaseName": "Прозорий дощовик"
   },
   {
     "id": "67868400",
@@ -25581,7 +25914,10 @@
     "group": "Під реалізацію|size|прозорий дощовик блакитний",
     "size": "M",
     "baseName": "Прозорий дощовик блакитний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|прозорий дощовик",
+    "color": "Блакитний",
+    "colorBaseName": "Прозорий дощовик"
   },
   {
     "id": "67868471",
@@ -25598,7 +25934,10 @@
     "group": "Під реалізацію|size|прозорий дощовик рожевий",
     "size": "M",
     "baseName": "Прозорий дощовик рожевий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|прозорий дощовик",
+    "color": "Рожевий",
+    "colorBaseName": "Прозорий дощовик"
   },
   {
     "id": "68295776",
@@ -25814,7 +26153,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/1d43fb98ea0140f69cfc11185a8728e5_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|рулетка-повідець \"black design\" м трос -5м/20 кг",
+    "color": "Рожевий",
+    "colorBaseName": "Рулетка-повідець \"Black Design\" М трос -5м/20 кг"
   },
   {
     "id": "61502927",
@@ -25827,7 +26169,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/0f9d40c5da45455c81864cf8e8c6c2ee_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|рулетка-повідець \"black design\" м трос -5м/20 кг",
+    "color": "Сріблястий",
+    "colorBaseName": "Рулетка-повідець \"Black Design\" М трос -5м/20 кг"
   },
   {
     "id": "64577423",
@@ -25944,7 +26289,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/9e938515202b4ac7866466d7a378edbe_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|рулетка-повідець \"new neon\" s стрічка -5м/15кг",
+    "color": "Помаранчевий",
+    "colorBaseName": "Рулетка-повідець \"New Neon\" S стрічка -5м/15кг"
   },
   {
     "id": "61502995",
@@ -25957,7 +26305,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/06c548e4c043461bb974a804aa7f676e_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|рулетка-повідець \"new neon\" s стрічка -5м/15кг",
+    "color": "Рожевий",
+    "colorBaseName": "Рулетка-повідець \"New Neon\" S стрічка -5м/15кг"
   },
   {
     "id": "61503004",
@@ -26128,7 +26479,10 @@
     "group": "Одяг та лежанки|size|светр вʼязаний грибочки беж",
     "size": "2",
     "baseName": "Светр вʼязаний Грибочки беж",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Одяг та лежанки|color|светр вʼязаний грибочки",
+    "color": "Беж",
+    "colorBaseName": "Светр вʼязаний Грибочки"
   },
   {
     "id": "68189378",
@@ -26145,7 +26499,10 @@
     "group": "Одяг та лежанки|size|светр вʼязаний грибочки беж",
     "size": "3",
     "baseName": "Светр вʼязаний Грибочки беж",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Одяг та лежанки|color|светр вʼязаний грибочки",
+    "color": "Беж",
+    "colorBaseName": "Светр вʼязаний Грибочки"
   },
   {
     "id": "68237946",
@@ -26162,7 +26519,10 @@
     "group": "Одяг та лежанки|size|светр вʼязаний грибочки беж",
     "size": "4",
     "baseName": "Светр вʼязаний Грибочки беж",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Одяг та лежанки|color|светр вʼязаний грибочки",
+    "color": "Беж",
+    "colorBaseName": "Светр вʼязаний Грибочки"
   },
   {
     "id": "68242298",
@@ -26192,7 +26552,10 @@
     "group": "Одяг та лежанки|size|светр вʼязаний грибочки шоколад",
     "size": "4",
     "baseName": "Светр вʼязаний Грибочки шоколад",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Одяг та лежанки|color|светр вʼязаний грибочки",
+    "color": "Шоколад",
+    "colorBaseName": "Светр вʼязаний Грибочки"
   },
   {
     "id": "68242732",
@@ -26209,7 +26572,10 @@
     "group": "Одяг та лежанки|size|светр вʼязаний грибочки шоколад",
     "size": "5",
     "baseName": "Светр вʼязаний Грибочки шоколад",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Одяг та лежанки|color|светр вʼязаний грибочки",
+    "color": "Шоколад",
+    "colorBaseName": "Светр вʼязаний Грибочки"
   },
   {
     "id": "68243046",
@@ -26380,7 +26746,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - блакитний",
     "size": "L",
     "baseName": "Светр для собак Chanel - блакитний",
-    "sizeOrder": 3
+    "sizeOrder": 3,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Блакитний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66521740",
@@ -26397,7 +26766,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - червоний",
     "size": "L",
     "baseName": "Светр для собак Chanel - червоний",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Червоний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66521671",
@@ -26414,7 +26786,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - блакитний",
     "size": "S",
     "baseName": "Светр для собак Chanel - блакитний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Блакитний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66521728",
@@ -26431,7 +26806,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - червоний",
     "size": "S",
     "baseName": "Светр для собак Chanel - червоний",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Червоний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66521662",
@@ -26448,7 +26826,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - блакитний",
     "size": "XS",
     "baseName": "Светр для собак Chanel - блакитний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Блакитний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66521723",
@@ -26465,7 +26846,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - червоний",
     "size": "XS",
     "baseName": "Светр для собак Chanel - червоний",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Червоний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66521682",
@@ -26482,7 +26866,10 @@
     "group": "Під реалізацію|size|светр для собак chanel - блакитний",
     "size": "M",
     "baseName": "Светр для собак Chanel - блакитний",
-    "sizeOrder": 2
+    "sizeOrder": 2,
+    "colorGroup": "Під реалізацію|color|светр для собак chanel",
+    "color": "Блакитний",
+    "colorBaseName": "Светр для собак Chanel"
   },
   {
     "id": "66520985",
@@ -26567,7 +26954,10 @@
     "group": "Під реалізацію|size|светр для собак з сердечками (для бульдогів) коричневий",
     "size": "M",
     "baseName": "Светр для собак з сердечками (для бульдогів) коричневий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|светр для собак з сердечками (для бульдогів)",
+    "color": "Коричневий",
+    "colorBaseName": "Светр для собак з сердечками (для бульдогів)"
   },
   {
     "id": "66520958",
@@ -26584,7 +26974,10 @@
     "group": "Під реалізацію|size|светр для собак з сердечками (для бульдогів) рожевий",
     "size": "M",
     "baseName": "Светр для собак з сердечками (для бульдогів) рожевий",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|светр для собак з сердечками (для бульдогів)",
+    "color": "Рожевий",
+    "colorBaseName": "Светр для собак з сердечками (для бульдогів)"
   },
   {
     "id": "66520942",
@@ -26601,7 +26994,10 @@
     "group": "Під реалізацію|size|светр для собак з сердечками (для бульдогів) коричневий",
     "size": "S",
     "baseName": "Светр для собак з сердечками (для бульдогів) коричневий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|светр для собак з сердечками (для бульдогів)",
+    "color": "Коричневий",
+    "colorBaseName": "Светр для собак з сердечками (для бульдогів)"
   },
   {
     "id": "66520954",
@@ -26618,7 +27014,10 @@
     "group": "Під реалізацію|size|светр для собак з сердечками (для бульдогів) рожевий",
     "size": "S",
     "baseName": "Светр для собак з сердечками (для бульдогів) рожевий",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|светр для собак з сердечками (для бульдогів)",
+    "color": "Рожевий",
+    "colorBaseName": "Светр для собак з сердечками (для бульдогів)"
   },
   {
     "id": "66521212",
@@ -29479,7 +29878,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "images/product-placeholder.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|шапка для котів verak nittings",
+    "color": "Жовта",
+    "colorBaseName": "Шапка для котів Verak nittings"
   },
   {
     "id": "67873107",
@@ -29492,7 +29894,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "images/product-placeholder.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Під реалізацію|color|шапка для котів verak nittings",
+    "color": "Сіра",
+    "colorBaseName": "Шапка для котів Verak nittings"
   },
   {
     "id": "68183677",
@@ -29730,7 +30135,10 @@
     "group": "Під реалізацію|size|шлейка-бантик з повідцем 1,2м (рожева)",
     "size": "M",
     "baseName": "Шлейка-бантик з повідцем 1,2м (рожева)",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|шлейка-бантик з повідцем 1,2м",
+    "color": "Рожева",
+    "colorBaseName": "Шлейка-бантик з повідцем 1,2м"
   },
   {
     "id": "63790783",
@@ -29747,7 +30155,10 @@
     "group": "Під реалізацію|size|шлейка-бантик з повідцем 1,2м (сіра)",
     "size": "M",
     "baseName": "Шлейка-бантик з повідцем 1,2м (сіра)",
-    "sizeOrder": 1
+    "sizeOrder": 1,
+    "colorGroup": "Під реалізацію|color|шлейка-бантик з повідцем 1,2м",
+    "color": "Сіра",
+    "colorBaseName": "Шлейка-бантик з повідцем 1,2м"
   },
   {
     "id": "63790785",
@@ -29764,7 +30175,10 @@
     "group": "Під реалізацію|size|шлейка-бантик з повідцем 1,2м (рожева)",
     "size": "S",
     "baseName": "Шлейка-бантик з повідцем 1,2м (рожева)",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|шлейка-бантик з повідцем 1,2м",
+    "color": "Рожева",
+    "colorBaseName": "Шлейка-бантик з повідцем 1,2м"
   },
   {
     "id": "63790782",
@@ -29781,7 +30195,10 @@
     "group": "Під реалізацію|size|шлейка-бантик з повідцем 1,2м (сіра)",
     "size": "S",
     "baseName": "Шлейка-бантик з повідцем 1,2м (сіра)",
-    "sizeOrder": 0
+    "sizeOrder": 0,
+    "colorGroup": "Під реалізацію|color|шлейка-бантик з повідцем 1,2м",
+    "color": "Сіра",
+    "colorBaseName": "Шлейка-бантик з повідцем 1,2м"
   },
   {
     "id": "67906408",
@@ -29885,7 +30302,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/fe7b26f8cd034f2da35bc2ee59b49f19_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|шлея для собак анатомічна н-подібна waudog, градієнт, s",
+    "color": "Блакитний",
+    "colorBaseName": "Шлея для собак анатомічна Н-подібна Waudog, градієнт, S"
   },
   {
     "id": "63725180",
@@ -29898,7 +30318,10 @@
     "stock": 0,
     "availability": "preorder",
     "image": "https://store.roapp.io/media/company-assets/200695/warehouse-product/474ef984d2ec47d3b8094d1250af8921_default.jpg",
-    "unit": 1
+    "unit": 1,
+    "colorGroup": "Амуніція|color|шлея для собак анатомічна н-подібна waudog, градієнт, s",
+    "color": "Салатовий",
+    "colorBaseName": "Шлея для собак анатомічна Н-подібна Waudog, градієнт, S"
   },
   {
     "id": "63725977",

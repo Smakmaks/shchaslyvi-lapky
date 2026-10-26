@@ -158,55 +158,106 @@ function safeText(el, value) {
   el.textContent = value || '';
 }
 
-// ─── Групування розмірів однієї моделі ───────────────
-// У products.json товари однієї моделі мають спільний group, а також size і baseName
-// (їх проставляє tools/group-variants.js). Тут вони зводяться в одну картку.
+// ─── Групування варіантів однієї моделі ───────────────
+// У products.json товари однієї моделі мають спільний group (розмір/вага/об'єм/довжина:
+// поля size, baseName, sizeOrder) та/або colorGroup (колір: поля color, colorBaseName).
+// Їх проставляє tools/group-variants.js. Тут вони зводяться в одну картку.
 function groupVariants(products) {
-  const groups = new Map();
-  const result = [];
+  // 1. Розміри / вага / об'єм / довжина
+  const sizeGroups = new Map();
+  const items = [];
   for (const p of products) {
-    if (!p.group) { result.push(p); continue; }
-    let g = groups.get(p.group);
+    if (!p.group) { items.push(p); continue; }
+    let g = sizeGroups.get(p.group);
     if (!g) {
       g = { ...p, name: p.baseName || p.name, variants: [] };
-      groups.set(p.group, g);
-      result.push(g);
+      sizeGroups.set(p.group, g);
+      items.push(g);
     }
     g.variants.push(p);
   }
-  for (const g of groups.values()) {
+  for (const g of sizeGroups.values()) {
     g.variants.sort((a, b) => (a.sizeOrder || 0) - (b.sizeOrder || 0));
     const prices = g.variants.map(v => v.price).filter(v => v > 0);
     g.price = prices.length ? Math.min(...prices) : 0;
     g.searchText = g.variants.map(v => `${v.name} ${v.sku || ''}`).join(' ').toLowerCase();
   }
+
+  // 2. Кольори: картки, що відрізняються лише кольором
+  const colorGroups = new Map();
+  const result = [];
+  for (const item of items) {
+    if (!item.colorGroup) { result.push(item); continue; }
+    let c = colorGroups.get(item.colorGroup);
+    if (!c) {
+      c = { ...item, variants: undefined, name: item.colorBaseName || item.name, colorOptions: [] };
+      colorGroups.set(item.colorGroup, c);
+      result.push(c);
+    }
+    c.colorOptions.push({ color: item.color, item });
+  }
+  for (const c of colorGroups.values()) {
+    const prices = c.colorOptions.map(o => o.item.price).filter(v => v > 0);
+    c.price = prices.length ? Math.min(...prices) : 0;
+    c.searchText = c.colorOptions
+      .map(o => o.item.searchText || `${o.item.name} ${o.item.sku || ''}`.toLowerCase())
+      .join(' ').toLowerCase();
+  }
   return result;
 }
+
+// Колір крапки біля назви кольору (лише для впізнаваних кольорів)
+const COLOR_DOTS = [
+  [/чорн/i, '#161616'], [/біл|білий/i, '#f2f2f2'], [/рожев|пудр/i, '#f48fb1'],
+  [/червон/i, '#e53935'], [/помаранч/i, '#fb8c00'], [/жовт|гірчиц/i, '#fdd835'],
+  [/салат|зелен|оливк|хакі/i, '#7cb342'], [/бірюз|м.ят/i, '#26c6da'],
+  [/блакит/i, '#64b5f6'], [/син|сін/i, '#1e5bd8'], [/фіолет|бузк|лаванд/i, '#9575cd'],
+  [/сір|графіт/i, '#9e9e9e'], [/срібл/i, '#cfd8dc'], [/золот/i, '#d4af37'],
+  [/беж|какао|карамел/i, '#d7bd96'], [/корич|шоколад/i, '#6d4c41'],
+];
+function colorDot(label) {
+  const hit = COLOR_DOTS.find(([re]) => re.test(label));
+  if (!hit) return null;
+  const dot = document.createElement('span');
+  dot.className = 'color-dot';
+  dot.style.background = hit[1];
+  return dot;
+}
+
+const KIND_LABEL = { size: 'Розмір', weight: 'Вага', volume: "Об'єм", length: 'Довжина', count: 'Кількість' };
+const kindOf = node => (node.group || '').split('|')[1];
 
 // ─── Рендер картки товару ─────────────────────────────
 function renderCard(product) {
   const clone = $template.content.cloneNode(true);
 
-  const variants = product.variants || null;
-  let current = variants ? variants[0] : product;
-  const kind = (product.group || '').split('|')[1];
-  const KIND_LABEL = { size: 'Розмір', weight: 'Вага', volume: "Об'єм", length: 'Довжина', count: 'Кількість' };
-  const fullName = v => {
-    if (!variants) return v.name;
-    return kind === 'size' ? `${product.name}, розмір ${v.size}` : `${product.name}, ${v.size}`;
-  };
-  const hasPhoto = v => v.image && !v.image.includes('placeholder');
-  const groupPhoto = variants ? (variants.find(hasPhoto) || {}).image : null;
+  // Стан картки: вибраний колір → група розмірів (або окремий товар) → вибраний варіант
+  const options = product.colorOptions || null;
+  let option = options ? options[0] : null;
+  let node = option ? option.item : product;
+  let current = node.variants ? node.variants[0] : node;
 
-  const img     = clone.querySelector('.product-img');
-  const badge   = clone.querySelector('.product-badge');
-  const priceEl = clone.querySelector('.product-price');
-  const skuEl   = clone.querySelector('.product-sku');
-  const btn     = clone.querySelector('.btn-order');
+  const hasPhoto = v => v.image && !v.image.includes('placeholder');
+  const groupPhoto = () => (node.variants ? (node.variants.find(hasPhoto) || {}).image : null);
+  const photoOf = v => (hasPhoto(v) ? v.image : (groupPhoto() || 'images/product-placeholder.jpg'));
+  const fullName = v => {
+    const parts = [product.name];
+    if (option) parts.push(option.color);
+    if (node.variants) parts.push(kindOf(node) === 'size' ? `розмір ${v.size}` : v.size);
+    return parts.join(', ');
+  };
+
+  const img      = clone.querySelector('.product-img');
+  const badge    = clone.querySelector('.product-badge');
+  const priceEl  = clone.querySelector('.product-price');
+  const skuEl    = clone.querySelector('.product-sku');
+  const btn      = clone.querySelector('.btn-order');
+  const colorsEl = clone.querySelector('.product-colors');
+  const sizesEl  = clone.querySelector('.product-sizes');
 
   img.onerror = () => { img.src = 'images/product-placeholder.jpg'; };
 
-  // Категорія, назва, опис — спільні для всіх розмірів
+  // Категорія, назва, опис — спільні для всіх варіантів
   safeText(clone.querySelector('.product-category'), product.category || '');
   safeText(clone.querySelector('.product-name'), product.name || 'Без назви');
   const descEl = clone.querySelector('.product-desc');
@@ -216,12 +267,12 @@ function renderCard(product) {
     descEl.hidden = true;
   }
 
-  // Частини картки, які залежать від вибраного розміру
+  // Частини картки, які залежать від вибраного варіанту
   function refresh() {
     const v = current;
     const avail = getAvailability(v.availability);
 
-    img.src = hasPhoto(v) ? v.image : (groupPhoto || 'images/product-placeholder.jpg');
+    img.src = photoOf(v);
     img.alt = fullName(v) || 'Фото товару';
 
     badge.textContent = avail.label;
@@ -261,20 +312,22 @@ function renderCard(product) {
       id: String(current.id),
       name: fullName(current),
       price: current.price,
-      image: hasPhoto(current) ? current.image : (groupPhoto || 'images/product-placeholder.jpg')
+      image: photoOf(current)
     });
   });
 
-  // Вибір розміру
-  if (variants) {
-    const sizesEl = clone.querySelector('.product-sizes');
+  // Рядок розмірів/ваги: перебудовується при зміні кольору
+  function renderSizes() {
+    sizesEl.replaceChildren();
+    if (!node.variants) { sizesEl.hidden = true; return; }
     sizesEl.hidden = false;
-    sizesEl.setAttribute('aria-label', KIND_LABEL[kind] || 'Варіант');
-    const chips = variants.map(v => {
+    sizesEl.setAttribute('aria-label', KIND_LABEL[kindOf(node)] || 'Варіант');
+    const chips = node.variants.map(v => {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'size-chip';
       chip.textContent = v.size;
+      chip.setAttribute('aria-pressed', String(v === current));
       chip.addEventListener('click', () => {
         current = v;
         chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
@@ -283,10 +336,34 @@ function renderCard(product) {
       sizesEl.appendChild(chip);
       return chip;
     });
-    chips[0].setAttribute('aria-pressed', 'true');
-    chips.slice(1).forEach(c => c.setAttribute('aria-pressed', 'false'));
   }
 
+  // Рядок кольорів
+  if (options) {
+    colorsEl.hidden = false;
+    const chips = options.map(o => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'size-chip color-chip';
+      const dot = colorDot(o.color);
+      if (dot) chip.appendChild(dot);
+      chip.appendChild(document.createTextNode(o.color));
+      chip.setAttribute('aria-pressed', String(o === option));
+      chip.addEventListener('click', () => {
+        const prevSize = current.size;
+        option = o;
+        node = o.item;
+        current = node.variants ? (node.variants.find(v => v.size === prevSize) || node.variants[0]) : node;
+        chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+        renderSizes();
+        refresh();
+      });
+      colorsEl.appendChild(chip);
+      return chip;
+    });
+  }
+
+  renderSizes();
   refresh();
   return clone;
 }
