@@ -392,7 +392,7 @@ async function loadProducts() {
   showState('loading');
 
   try {
-    const response = await fetch('products.json');
+    const response = await fetch('products.json', { cache: 'no-cache' });
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status} — не вдалося завантажити products.json`);
