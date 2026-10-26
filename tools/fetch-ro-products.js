@@ -349,6 +349,8 @@ function normalizeProduct(raw, categoryMap) {
     stock,
     availability,
     image,
+    // Одиниця виміру в RO App: 1 — штука, інше — продаж на вагу (ціна за кг). Потрібна для групування варіантів.
+    unit: raw.uom_id ?? 1,
   };
 }
 

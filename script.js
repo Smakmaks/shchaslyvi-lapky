@@ -189,7 +189,12 @@ function renderCard(product) {
 
   const variants = product.variants || null;
   let current = variants ? variants[0] : product;
-  const fullName = v => (variants ? `${product.name}, розмір ${v.size}` : v.name);
+  const kind = (product.group || '').split('|')[1];
+  const KIND_LABEL = { size: 'Розмір', weight: 'Вага', volume: "Об'єм", length: 'Довжина', count: 'Кількість' };
+  const fullName = v => {
+    if (!variants) return v.name;
+    return kind === 'size' ? `${product.name}, розмір ${v.size}` : `${product.name}, ${v.size}`;
+  };
   const hasPhoto = v => v.image && !v.image.includes('placeholder');
   const groupPhoto = variants ? (variants.find(hasPhoto) || {}).image : null;
 
@@ -264,6 +269,7 @@ function renderCard(product) {
   if (variants) {
     const sizesEl = clone.querySelector('.product-sizes');
     sizesEl.hidden = false;
+    sizesEl.setAttribute('aria-label', KIND_LABEL[kind] || 'Варіант');
     const chips = variants.map(v => {
       const chip = document.createElement('button');
       chip.type = 'button';
