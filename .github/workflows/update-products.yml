@@ -1,0 +1,72 @@
+name: Оновлення товарів із RO App
+
+on:
+  schedule:
+    # Щодня о 05:47 UTC = 07:47 за Києвом узимку (08:47 влітку)
+    - cron: "47 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-products
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+
+      - name: Встановити залежності імпорту
+        run: npm install --no-save --no-package-lock dotenv@16 node-fetch@2
+
+      - name: Зберегти поточний каталог для порівняння
+        run: cp products.json /tmp/products-old.json
+
+      - name: Імпорт товарів із RO App
+        env:
+          RO_APP_API_KEY: ${{ secrets.RO_APP_API_KEY }}
+        run: |
+          if [ -z "$RO_APP_API_KEY" ]; then
+            echo "::error::Не задано секрет RO_APP_API_KEY (Settings → Secrets and variables → Actions)"
+            exit 1
+          fi
+          node tools/fetch-ro-products.js
+
+      - name: Перевірити результат і підготувати опис змін
+        id: diff
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          old = {p["id"]: p for p in json.load(open("/tmp/products-old.json", encoding="utf-8"))}
+          new = {p["id"]: p for p in json.load(open("products.json", encoding="utf-8"))}
+          # Захист: якщо API повернуло підозріло мало товарів — не перезаписуємо каталог
+          if len(new) < max(100, len(old) * 0.7):
+              print(f"::error::Отримано лише {len(new)} товарів (було {len(old)}). Каталог не оновлено.")
+              raise SystemExit(1)
+          added = len(new.keys() - old.keys())
+          removed = len(old.keys() - new.keys())
+          prices = sum(1 for k in new.keys() & old.keys() if new[k].get("price") != old[k].get("price"))
+          msg = f"Update products: {len(new)} items (+{added} new, -{removed} removed, {prices} price changes)"
+          print(msg)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"message={msg}\n")
+          EOF
+
+      - name: Зберегти зміни
+        run: |
+          if git diff --quiet -- products.json; then
+            echo "Каталог не змінився."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add products.json
+          git commit -m "${{ steps.diff.outputs.message }}"
+          git push

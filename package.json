@@ -1,0 +1,12 @@
+{
+  "name": "shchaslyvi-lapky",
+  "private": true,
+  "description": "Статичний сайт зоомагазину «Щасливі лапки»",
+  "scripts": {
+    "fetch:products": "node tools/fetch-ro-products.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-fetch": "^2.7.0"
+  }
+}
