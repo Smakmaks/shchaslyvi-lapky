@@ -453,7 +453,10 @@
       telegram: 'Обговорити в Telegram'
     };
 
-    let msg = '🛒 *Нове замовлення*\n\n';
+    // Генеруємо номер замовлення
+    const orderNum = 'ЩЛ-' + Date.now().toString(36).toUpperCase().slice(-6);
+
+    let msg = `🛒 *Нове замовлення ${orderNum}*\n\n`;
     msg += `👤 *Ім'я:* ${name}\n`;
     msg += `📱 *Телефон:* ${phone}\n`;
     if (email) msg += `📧 *Email:* ${email}\n`;
@@ -473,12 +476,22 @@
     msg += `\n💰 *Сума:* ${total.toLocaleString('uk-UA')} грн`;
     if (comment) msg += `\n\n💬 *Коментар:* ${comment}`;
 
-    // Генеруємо номер замовлення
-    const orderNum = 'ЩЛ-' + Date.now().toString(36).toUpperCase().slice(-6);
-
     const tg = (window.SHOP_CONFIG && window.SHOP_CONFIG.telegramUsername || '').replace('@','');
     const url = 'https://t.me/' + tg + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank', 'noopener');
+
+    // Зберігаємо в історію замовлень кабінету
+    try {
+      const orders = JSON.parse(localStorage.getItem('cart_orders_v1')) || [];
+      orders.push({
+        num: orderNum,
+        date: new Date().toISOString(),
+        status: 'pending',
+        delivery, payment,
+        items: checkoutCart.map(i => ({ id: i.id, name: i.name, price: i.price, image: i.image, qty: i.qty }))
+      });
+      localStorage.setItem('cart_orders_v1', JSON.stringify(orders.slice(-50)));
+    } catch {}
 
     // Очищаємо кошик
     try { localStorage.removeItem('cart_v1'); } catch {}
@@ -547,6 +560,20 @@
   }
 
   document.querySelectorAll('input[name="payment"]').forEach(r => r.addEventListener('change', renderBankDetails));
+
+  /* ── ПІДСТАНОВКА ДАНИХ З КАБІНЕТУ ── */
+  (function prefillFromCabinet() {
+    let p = {};
+    try { p = JSON.parse(localStorage.getItem('cabinet_profile_v1')) || {}; } catch {}
+    const fill = (id, val) => { const el = document.getElementById(id); if (el && val && !el.value) el.value = val; };
+    fill('inp-name', p.name);
+    fill('inp-phone', p.phone);
+    fill('inp-email', p.email);
+    fill('inp-city', p.city);
+    fill('inp-np-branch', p.branch);
+    const radio = p.delivery && document.querySelector(`input[name="delivery"][value="${p.delivery}"]`);
+    if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+  })();
 
   /* ── INIT ── */
   renderSummary();
