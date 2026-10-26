@@ -414,6 +414,8 @@ async function loadProducts() {
       return;
     }
 
+    document.querySelectorAll('.js-product-count').forEach(el => { el.textContent = allProducts.length; });
+
     populateCategories();
     filteredProducts = [...allProducts];
 
